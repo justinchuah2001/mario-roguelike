@@ -1,0 +1,38 @@
+REQ 7
+
+1)
+ResetManager
+
+private static boolean allowReset;
+
+public void run(GameMap map){
+        for(Resettable item: resettableList){
+            item.resetInstance(map);
+        }
+    }
+
+2)
+create Action ResetAction
+
+3)
+World
+processActorTurn()
+if (ResetManager.isAllowReset()){
+			actions.add(new ResetAction("r"));
+		}
+3)
+registerInstance() in constructor of Coin, Enemy, Player and Trees
+implements resetInstance()
+Add location to Coins & Trees
+
+Coin
+Location.itemRemove(item)
+
+Enemy
+map.removeActor()
+
+Player
+max hp, ....
+
+Trees
+map.at(x,y).setGround()
