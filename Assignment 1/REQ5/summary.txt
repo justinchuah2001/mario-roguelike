@@ -1,0 +1,11 @@
+REQ 5
+New Action BuyItemAction
+
+New Status BUY_FROM_TOAD
+give Actor with this capability Action BuyItemAction
+
+New Weapon Wrench
+
+If Actor has the capability to buy item from Toad,
+create different Action for different items,
+based on the Actor status.
