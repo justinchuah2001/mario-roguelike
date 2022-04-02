@@ -1,0 +1,10 @@
+REQ 6
+New Class Toad
+with inventory
+
+New class TalkToToadAction
+Random return a description based on Actor status.
+
+
+New Status TALK_TO_TOAD
+give Actor with this capability Action TalkToToadAction
