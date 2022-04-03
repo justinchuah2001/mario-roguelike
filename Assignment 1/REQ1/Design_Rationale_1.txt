@@ -1,0 +1,26 @@
+Updating Tree class:
+
+We decided to add an age attribute to the Tree class. Age will be an integer and will increase by one every game tick.
+This is to help facilitate the growing of the Tree, where there will be a method that updates its display character, and
+conditionals to direct it to its appropriate function, as a tree does different things at its sprout, sapling and mature stage.
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+New abstract class, Enemy:
+
+We decided to create an abstract class, Enemy, that extends from Actor. Goomba and the new Koopa class will extend from Enemy.
+This is because both Goomba and Koopa are similar in function, that they share many of the same behaviours and functions, so
+it would be simpler to implement now that they extend from a parent class. This also helps facilitate future extensions to 
+the code if we need to add enemy varieties, or help separate any non hostile Actors.
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+New Coin class and player attribute, wallet:
+
+The coin class will extend from the abstract class item. This is because a sapling needs to be able to spawn coins and place
+them on the ground for the player to pick up. The coin class will also carry an integer attribute, its value. This is so that 
+we can track how much a coin is worth, and easily access that information to add to the player's wallet. The wallet will be an
+integer attribute added to the Player class to keep track of how many coins the Player has at any given time, and so that
+mathematical operations can be performed on it whenever the player picks up coins or buys items, spending them.
+
+---------------------------------------------------------------------------------------------------------------------------------
