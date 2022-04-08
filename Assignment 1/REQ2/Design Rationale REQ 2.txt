@@ -1,0 +1,7 @@
+REQ 2 
+
+New class, JumpAction:
+
+The JumpAction class will extend from the abstract class Actions. The plan is that if Player wants to move to a high ground, wall or tree,
+it will generate a random number and based on requirement specifications, decide if the player will move to said high ground by calling 
+MoveActorAction() or fail, deduct the player’s health points and call DoNothingAction() instead.
