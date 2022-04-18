@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Goomba;
 import game.actors.Player;
+import game.ground.Dirt;
 import game.ground.Sprout;
 import game.ground.Wall;
 

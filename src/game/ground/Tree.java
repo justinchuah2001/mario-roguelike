@@ -22,7 +22,6 @@ public class Tree extends Ground {
     @Override
     public void tick(Location location){
         super.tick(location);
-
         age++;
         if (age == 10){
             location.setGround(new Sapling());
