@@ -7,8 +7,11 @@ public class Tree extends Ground {
     /**
      * Constructor.
      *
+     * @param displayChar character to display for this type of terrain
      */
-    public Tree() {
-        super('+');
+    public Tree(char displayChar) {
+        super(displayChar);
     }
 }
+
+
