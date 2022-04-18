@@ -1,14 +1,19 @@
 package game.ground;
 
-public class Mature extends Tree{
+import edu.monash.fit2099.engine.positions.Location;
 
-    char displayChar = 'T';
+public class Mature extends Tree{
 
     /**
      * Constructor.
-     *
      */
     public Mature() {
         super('T');
+        this.age = 20;
+    }
+
+    @Override
+    public void tick(Location location){
+        super.tick(location);
     }
 }
