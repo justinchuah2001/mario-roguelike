@@ -3,9 +3,12 @@ package game.ground;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 
+import java.util.Random;
+
 public class Tree extends Ground {
 
     public int age;
+    public Random r = new Random();
 
     /**
      * Constructor.

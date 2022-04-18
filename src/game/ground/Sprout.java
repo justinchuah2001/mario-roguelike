@@ -1,6 +1,7 @@
 package game.ground;
 
 import edu.monash.fit2099.engine.positions.Location;
+import game.actors.Goomba;
 
 public class Sprout extends Tree {
 
@@ -15,5 +16,9 @@ public class Sprout extends Tree {
     @Override
     public void tick(Location location){
         super.tick(location);
+
+        if(r.nextInt(10) == 0 && !location.containsAnActor()){
+            location.addActor(new Goomba());
+        }
     }
 }
