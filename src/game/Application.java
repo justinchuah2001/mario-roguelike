@@ -8,6 +8,11 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.Goomba;
+import game.actors.Player;
+import game.ground.Dirt;
+import game.ground.Sprout;
+import game.ground.Wall;
 
 /**
  * The main class for the Mario World game.
@@ -19,7 +24,7 @@ public class Application {
 
 			World world = new World(new Display());
 
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree());
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout());
 
 			List<String> map = Arrays.asList(
 				"..........................................##..........+.........................",
