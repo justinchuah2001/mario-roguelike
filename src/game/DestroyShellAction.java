@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.Weapon;
 
 public class DestroyShellAction extends Action {
     protected Actor target;
@@ -19,9 +18,8 @@ public class DestroyShellAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
 
-        Weapon weapon = actor.getWeapon().Wrench();
 
-        if (!target.isConscious()) {
+        if (target.hasCapability(Status.DORMANT)) {
             ActionList dropActions = new ActionList();
             // drop all items
             for (Item item : target.getInventory())
@@ -30,10 +28,10 @@ public class DestroyShellAction extends Action {
                 drop.execute(target, map);
             // remove actor
             map.removeActor(target);
-            result += System.lineSeparator() + target + " is killed.";
+            return actor + "has destroyed " + target +"shell.";
         }
 
-        return result;
+        return "Can only destroy Koopa shell!";
     }
 
     @Override

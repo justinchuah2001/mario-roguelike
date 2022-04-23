@@ -6,53 +6,50 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.AttackAction;
-import game.Behaviour;
-import game.Status;
-import game.WanderBehaviour;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.*;
+import game.items.SuperMushroom;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Koopa extends Enemy {
-    private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
+    protected final Map<Integer, Behaviour> behaviours = new HashMap<>();
 
-    /**
-     * Constructor.
-     */
-    public Koopa() {
+    public Koopa(){
         super("Koopa", 'K', 100);
-        this.behaviours.put(10, new WanderBehaviour());
+        addItemToInventory(new SuperMushroom());
+        this.behaviours.put(1, new WanderBehaviour());
+    }
+    @Override
+    protected IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(30, "punches");
     }
 
-    /**
-     * At the moment, we only make it can be attacked by Player.
-     * You can do something else with this method.
-     *
-     * @param otherActor the Actor that might perform an action.
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return list of actions
-     * @see Status#HOSTILE_TO_ENEMY
-     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            actions.add(new AttackAction(this, direction));
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            if(this.hasCapability(Status.DORMANT) && otherActor.hasCapability(Status.HAS_WRENCH)){
+                actions.add(new DestroyShellAction(this, direction));
+                this.behaviours.clear();
+            }
+            else{
+            actions.add(new AttackAction(this,direction));
+            this.behaviours.put(2, new AttackBehaviour(otherActor, direction));
+            this.behaviours.put(3, new FollowBehaviour(otherActor));
+            }
         }
         return actions;
     }
-
-    /**
-     * Figure out what to do next.
-     *
-     * @see Actor#playTurn(ActionList, Action, GameMap, Display)
-     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Behaviour Behaviour : behaviours.values()) {
+        if (this.hasCapability(Status.DORMANT)){
+            this.setDisplayChar('D');
+            return new DoNothingAction();
+        }
+        for(Behaviour Behaviour : behaviours.values()) {
             Action action = Behaviour.getAction(this, map);
             if (action != null)
                 return action;

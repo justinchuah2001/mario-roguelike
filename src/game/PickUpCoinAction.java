@@ -4,10 +4,11 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.items.Coin;
 
 public class PickUpCoinAction extends Action {
     private  Item item;
-    private  Coin coin;
+    private Coin coin;
 
     public PickUpCoinAction(Item item) {
         this.item = item;
