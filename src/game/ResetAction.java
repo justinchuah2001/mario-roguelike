@@ -17,4 +17,9 @@ public class ResetAction extends Action {
   public String menuDescription(Actor actor) {
     return actor + " reset the game. ";
   }
+
+  @Override
+  public String hotkey(){
+    return "r";
+  }
 }

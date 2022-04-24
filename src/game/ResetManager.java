@@ -22,6 +22,8 @@ public class ResetManager {
      */
     private static ResetManager instance;
 
+    private static Boolean allowReset = true;
+
     /**
      * Get the singleton instance of reset manager
      * @return ResetManager singleton instance
@@ -40,6 +42,10 @@ public class ResetManager {
         resettableList = new ArrayList<>();
     }
 
+    public Boolean isAllowReset(){
+        return allowReset;
+    }
+
     /**
      * Reset the game by traversing through all the list
      * By doing this way, it will avoid using `instanceof` all over the place.
@@ -48,6 +54,7 @@ public class ResetManager {
         for (Resettable resettable: this.resettableList){
             resettable.resetInstance();
         }
+        allowReset = false;
     }
 
     /**
