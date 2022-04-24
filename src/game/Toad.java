@@ -1,4 +1,4 @@
-package game.items;
+package game;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -8,6 +8,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
+import game.TalkToToadAction;
+import game.items.PowerStar;
+import game.items.SuperMushroom;
 
 public class Toad extends Actor {
   /**
@@ -27,7 +30,7 @@ public class Toad extends Actor {
       actions.add(new TalkToToadAction(otherActor));
     } else if (otherActor.hasCapability(Status.BUY_FROM_TOAD)){
       for (Item item : this.getInventory()){
-        actions.add(new BuyItemAction(this, otherActor, item));
+        actions.add(new BuyItemAction(this, item));
       }
     }
     return actions;
