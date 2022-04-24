@@ -9,4 +9,6 @@ public enum Status {
     TALL, // use this status to tell that current instance has "grown".
     DORMANT, // use this status to show that the Koopa has now entered dormant state.
     HAS_WRENCH, // use this status to show that the Player now possess the wrench in his inventory.
+    BUY_ITEM,
+    TALK_TO_TOAD
 }
