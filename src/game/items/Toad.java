@@ -1,0 +1,40 @@
+package game.items;
+
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
+import game.Status;
+
+public class Toad extends Actor {
+  /**
+   * Constructor.
+   *
+   */
+  public Toad() {
+    super("Toad", 'T', 1);
+    this.addItemToInventory(new SuperMushroom());
+    this.addItemToInventory(new PowerStar());
+  }
+
+  public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+    ActionList actions = new ActionList();
+    // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
+    if(otherActor.hasCapability(Status.TALK_TO_TOAD)) {
+      actions.add(new TalkToToadAction(otherActor));
+    } else if (otherActor.hasCapability(Status.BUY_FROM_TOAD)){
+      for (Item item : this.getInventory()){
+        actions.add(new BuyItemAction(this, otherActor, item));
+      }
+    }
+    return actions;
+  }
+
+  @Override
+  public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+    return new DoNothingAction();
+  }
+}
