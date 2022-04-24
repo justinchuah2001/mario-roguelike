@@ -12,7 +12,8 @@ import game.Status;
  * Class representing the Player.
  */
 public class Player extends Actor  {
-
+	private final int WEAR_OFF = 10;
+	private int counter = 1;
 	private final Menu menu = new Menu();
 
 	/**
@@ -32,6 +33,18 @@ public class Player extends Actor  {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
+
+		if (this.hasCapability(Status.TALL)){
+			this.setDisplayChar('M');
+		}
+
+		if (this.hasCapability(Status.INVINCIBLE)){
+			if (counter == WEAR_OFF){
+				this.removeCapability(Status.INVINCIBLE);
+			}else{
+				counter+= 1;
+			}
+		}
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
