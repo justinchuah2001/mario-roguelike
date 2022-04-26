@@ -15,8 +15,7 @@ import java.util.Random;
  * A little fungus guy.
  */
 public class Goomba extends Enemy {
-	private final int SUICIDE = 1;
-	private Random randomInt = new Random();
+	private final Random randomInt = new Random();
 
 	/**
 	 * Constructor.
@@ -25,10 +24,8 @@ public class Goomba extends Enemy {
 		super("Goomba", 'g', 50);
 	}
 	public boolean suicide(){
-		if ((randomInt.nextInt(10))<= SUICIDE){
-			return true;
-		}
-		return false;
+		int SUICIDE = 1;
+		return (randomInt.nextInt(10)) <= SUICIDE;
 	}
 
 	@Override
@@ -44,6 +41,7 @@ public class Goomba extends Enemy {
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 		if (suicide()){
 			map.removeActor(this);
+			return new DoNothingAction();
 		}
 		for(game.Behaviour Behaviour : behaviours.values()) {
 			Action action = Behaviour.getAction(this, map);

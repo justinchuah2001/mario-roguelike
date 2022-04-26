@@ -10,6 +10,7 @@ public class Tree extends Ground {
     public int age;
     public Random r = new Random();
 
+
     /**
      * Constructor.
      * @param displayChar character to display for this type of terrain

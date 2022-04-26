@@ -13,7 +13,6 @@ import game.Status;
  * Class representing the Player.
  */
 public class Player extends Actor implements Resettable {
-	private final int WEAR_OFF = 10;
 	private int counter = 1;
 	private final Menu menu = new Menu();
 	private int wallet = 0;
@@ -37,15 +36,16 @@ public class Player extends Actor implements Resettable {
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 
-		if (this.hasCapability(Status.TALL)){
+		if (this.hasCapability(Status.TALL)) {
 			this.setDisplayChar('M');
 		}
 
-		if (this.hasCapability(Status.INVINCIBLE)){
-			if (counter == WEAR_OFF){
+		if (this.hasCapability(Status.INVINCIBLE)) {
+			int WEAR_OFF = 10;
+			if (counter == WEAR_OFF) {
 				this.removeCapability(Status.INVINCIBLE);
-			}else{
-				counter+= 1;
+			} else {
+				counter += 1;
 			}
 		}
 
@@ -54,8 +54,8 @@ public class Player extends Actor implements Resettable {
 	}
 
 	@Override
-	public char getDisplayChar(){
-		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
+	public char getDisplayChar() {
+		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()) : super.getDisplayChar();
 	}
 
 	@Override
@@ -69,9 +69,9 @@ public class Player extends Actor implements Resettable {
 		this.wallet += coinValue;
 	}
 
-	public boolean deductFromWallet(int amount){
+	public boolean deductFromWallet(int amount) {
 		boolean valid = false;
-		if (this.wallet >= amount){
+		if (this.wallet >= amount) {
 			this.wallet -= amount;
 			valid = true;
 		}
