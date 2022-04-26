@@ -16,6 +16,7 @@ public class Player extends Actor implements Resettable {
 	private final int WEAR_OFF = 10;
 	private int counter = 1;
 	private final Menu menu = new Menu();
+	private int wallet = 0;
 
 	/**
 	 * Constructor.
@@ -62,5 +63,18 @@ public class Player extends Actor implements Resettable {
 		this.resetMaxHp(this.getMaxHp());
 		this.removeCapability(Status.TALL);
 		this.removeCapability(Status.INVINCIBLE);
+	}
+
+	public void addToWallet(int coinValue) {
+		this.wallet += coinValue;
+	}
+
+	public boolean deductFromWallet(int amount){
+		boolean valid = false;
+		if (this.wallet >= amount){
+			this.wallet -= amount;
+			valid = true;
+		}
+		return valid;
 	}
 }
