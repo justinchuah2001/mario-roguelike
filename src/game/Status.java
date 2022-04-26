@@ -11,5 +11,6 @@ public enum Status {
     HAS_WRENCH, // use this status to show that the Player now possess the wrench in his inventory.
     BUY_FROM_TOAD,
     TALK_TO_TOAD,
-    INVINCIBLE
+    INVINCIBLE,
+    RESET
 }
