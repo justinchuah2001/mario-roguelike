@@ -17,20 +17,15 @@ public class Mature extends Tree {
     public void tick(Location location) {
         super.tick(location);
 
-        System.out.println(age);
-        System.out.println(hasFertileGround(location));
-
         if (r.nextInt(5) == 0) {
             location.setGround(new Dirt());
-            System.out.println("tree died :(");
             return;
         }
 
         if (r.nextInt(20) < 3 && !location.containsAnActor()) {
             location.addActor(new Koopa());
         }
-        if (age == 5) {
-            System.out.println("next tree");
+        if (age == 5 && hasFertileGround(location)) {
             spawnSprout(location);
             this.age = 0;
         }
@@ -64,20 +59,14 @@ public class Mature extends Tree {
             }
         } while (!location.map().getXRange().contains(x) || !location.map().getYRange().contains(y) || !(location.map().at(x, y).getGround() instanceof Dirt));
 
-        System.out.println("is it dirt?");
-        System.out.println(location.map().at(x,y).getGround() instanceof Dirt);
-
         location.map().at(x, y).setGround(new Sprout());
-
-
-        System.out.println("new sprout");
     }
 
     private boolean hasFertileGround(Location location) {
-
-        for(int x = location.x() - 1; x == location.x() + 2; x++){
-            for(int y = location.y() - 1; y == location.y() + 2; y++){
-                if(location.map().at(x,y).getGround() instanceof Dirt){
+        for(int x = location.x() - 1; x < location.x() + 2; x++){
+            for(int y = location.y() - 1; y < location.y() + 2; y++){
+                if(location.map().getXRange().contains(x) && location.map().getYRange().contains(y) &&
+                        location.map().at(x,y).getGround() instanceof Dirt){
                     return true;
                 }
             }
