@@ -9,8 +9,10 @@ import edu.monash.fit2099.engine.positions.Location;
 public class PowerStar extends Consumables{
     private int counter = 1;
     private static final int LIFESPAN = 10;
+    private final int  price ;
     public PowerStar(){
         super("Power Star",'*', true);
+        this.price = 600;
     }
 
     @Override
@@ -21,6 +23,10 @@ public class PowerStar extends Consumables{
         else{
             counter+=1;
         }
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     @Override
