@@ -22,6 +22,7 @@ public class Toad extends Actor {
     super("Toad", 'T', 1);
     this.addItemToInventory(new SuperMushroom());
     this.addItemToInventory(new PowerStar());
+    this.addItemToInventory(new Wrench());
   }
 
   public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
