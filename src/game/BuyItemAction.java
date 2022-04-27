@@ -14,27 +14,25 @@ public class BuyItemAction extends Action {
   private Actor seller;
   private Item item;
   private int price;
-  private boolean sold;
 
   public BuyItemAction(Actor seller, Item item) {
     this.seller = seller;
     this.item = item;
     this.price = ((Buyable) item).getPrice();
-    this.sold = false;
   }
 
   @Override
   public String execute(Actor buyer, GameMap map) {
     Player player = (Player) buyer;
     String res;
+    boolean sold = false;
 
     if (player.deductFromWallet(this.price)) {
       player.addItemToInventory(item);
       seller.removeItemFromInventory(item);
-      this.sold = true;
     }
 
-    if (this.sold) {
+    if (sold) {
       res = buyer + " buys " + item + " from " + seller;
     } else {
       res = "in sufficient coin for " + buyer + " to buy " + item + " from " + seller;
