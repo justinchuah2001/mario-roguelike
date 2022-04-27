@@ -11,7 +11,7 @@ import game.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Enemy extends Actor {
+public abstract class Enemy extends Actor implements Resettable{
     protected final Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public Enemy(String name, char displayChar, int hitPoints){
@@ -33,11 +33,20 @@ public abstract class Enemy extends Actor {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for(Behaviour Behaviour : behaviours.values()) {
-            Action action = Behaviour.getAction(this, map);
-            if (action != null)
-                return action;
+        if (this.hasCapability(Status.RESET)){
+            map.removeActor(this);
+        } else {
+            for (Behaviour Behaviour : behaviours.values()) {
+                Action action = Behaviour.getAction(this, map);
+                if (action != null)
+                    return action;
+            }
         }
         return new DoNothingAction();
+    }
+
+    @Override
+    public void resetInstance() {
+        this.addCapability(Status.RESET);
     }
 }
