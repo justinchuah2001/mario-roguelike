@@ -14,6 +14,7 @@ import game.ground.Dirt;
 import game.ground.Sprout;
 import game.ground.Wall;
 import game.items.Consumables;
+import game.items.PowerStar;
 import game.items.SuperMushroom;
 
 /**
@@ -59,7 +60,10 @@ public class Application {
 			gameMap.addActor(toad, gameMap.at(46, 10));
 
 			Consumables SuperMushroom = new SuperMushroom();
-			gameMap.at(43,11).addItem(SuperMushroom);
+			gameMap.at(42,11).addItem(SuperMushroom);
+
+			Consumables PowerStar = new PowerStar();
+			gameMap.at(42,9).addItem(PowerStar);
 
 			Wrench wrench = new Wrench();
 			gameMap.at(43, 9).addItem(wrench);

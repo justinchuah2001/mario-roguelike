@@ -10,8 +10,7 @@ import game.items.SuperMushroom;
 
 public class ConsumeItemAction extends Action {
     protected Consumables consumedItem;
-    private Consumables SuperMushroom;
-    private Consumables PowerStar;
+
 
     public ConsumeItemAction(Consumables consumedItem){
         this.consumedItem = consumedItem;
@@ -27,7 +26,7 @@ public class ConsumeItemAction extends Action {
                 this.consumedItem.consumedEffect(self);
                 self.removeItemFromInventory(item);
 
-                return self + "has consumed " + consumedItem;
+                return self + " has consumed " + consumedItem;
 
         }
 
@@ -36,7 +35,7 @@ public class ConsumeItemAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + "consume" + consumedItem;
+        return actor + " consume " + consumedItem;
     }
 
 }

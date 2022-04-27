@@ -48,9 +48,21 @@ public class AttackAction extends Action {
 			return actor + " misses " + target + ".";
 		}
 
-		int damage = weapon.damage();
+		int damage;
+
+		if ( target.hasCapability(Status.INVINCIBLE)){
+			damage = 0;
+			target.hurt(damage);
+
+		}else if (actor.hasCapability(Status.INVINCIBLE)){
+			damage = 9999;
+			target.hurt(damage);
+		}
+		else{
+			damage = weapon.damage();
+			target.hurt(damage);
+		}
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
-		target.hurt(damage);
 		if (target.hasCapability(Status.TALL)){
 			target.removeCapability(Status.TALL);
 		}

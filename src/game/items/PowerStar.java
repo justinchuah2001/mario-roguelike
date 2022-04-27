@@ -8,8 +8,8 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 
 public class PowerStar extends Consumables implements Buyable{
-    private int counter = 1;
-    private static final int LIFESPAN = 10;
+    private int counter = 10;
+    private static final int LIFESPAN = 0;
     private final int  price ;
     public PowerStar(){
         super("Power Star",'*', true);
@@ -29,7 +29,7 @@ public class PowerStar extends Consumables implements Buyable{
             currentLocation.removeItem(this);
         }
         else{
-            counter+=1;
+            counter-=1;
         }
     }
 
@@ -46,8 +46,14 @@ public class PowerStar extends Consumables implements Buyable{
                 }
             }
         }else{
-            counter +=1;
+            counter -=1;
         }
+    }
+
+
+    @Override
+    public String toString(){
+        return "Power Star - " + counter + " turns remaining";
     }
 
 }

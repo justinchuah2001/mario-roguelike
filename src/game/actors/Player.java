@@ -13,7 +13,7 @@ import game.Status;
  * Class representing the Player.
  */
 public class Player extends Actor implements Resettable {
-	private int counter = 1;
+	private int counter = 11;
 	private final Menu menu = new Menu();
 	private int wallet = 0;
 
@@ -37,11 +37,13 @@ public class Player extends Actor implements Resettable {
 			return lastAction.getNextAction();
 
 		if (this.hasCapability(Status.INVINCIBLE)) {
-			int WEAR_OFF = 10;
+			int WEAR_OFF = 1;
 			if (counter == WEAR_OFF) {
 				this.removeCapability(Status.INVINCIBLE);
+				display.println("Mario is no longer invincible.");
 			} else {
-				counter += 1;
+				counter -= 1;
+				display.println("Mario is INVINCIBLE " + counter + " - turns remain");
 			}
 		}
 
