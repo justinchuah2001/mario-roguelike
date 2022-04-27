@@ -13,34 +13,37 @@ import java.util.List;
 public class BuyItemAction extends Action {
   private Actor seller;
   private Item item;
+  private int price;
   private boolean sold;
 
   public BuyItemAction(Actor seller, Item item) {
     this.seller = seller;
     this.item = item;
+    this.price = ((Buyable) item).getPrice();
     this.sold = false;
   }
 
   @Override
   public String execute(Actor buyer, GameMap map) {
     Player player = (Player) buyer;
-    Buyable commodity = (Buyable) this.item;
+    String res;
 
-    if (player.deductFromWallet(commodity.getPrice())) {
+    if (player.deductFromWallet(this.price)) {
       player.addItemToInventory(item);
       seller.removeItemFromInventory(item);
+      this.sold = true;
     }
-    return this.menuDescription(buyer);
+
+    if (this.sold) {
+      res = buyer + " buys " + item + " from " + seller;
+    } else {
+      res = "in sufficient coin for " + buyer + " to buy " + item + " from " + seller;
+    }
+    return res;
   }
 
   @Override
-  public String menuDescription(Actor actor) {
-    String res;
-    if (this.sold) {
-      res = actor + " buys " + item + " from " + seller;
-    } else {
-      res = "in sufficient coin for " + actor + " to buy " + item + " from " + seller;
-    }
-    return res;
+  public String menuDescription(Actor buyer) {
+    return String.format("%s buys Power Star ($%d)", buyer, this.price);
   }
 }

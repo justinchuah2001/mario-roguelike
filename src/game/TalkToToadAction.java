@@ -15,11 +15,6 @@ public class TalkToToadAction extends Action {
 
   @Override
   public String execute(Actor actor, GameMap map) {
-    return menuDescription(this.target);
-  }
-
-  @Override
-  public String menuDescription(Actor actor) {
     ArrayList<String> monologues = new ArrayList<>();
     monologues.add("The Princess is depending on you! You are our only hope.");
     monologues.add("Being imprisoned in these walls can drive a fungus crazy :(");
@@ -31,5 +26,10 @@ public class TalkToToadAction extends Action {
     }
 
     return monologues.get((int)(Math.random() * monologues.size()));
+  }
+
+  @Override
+  public String menuDescription(Actor actor) {
+    return actor + " talk to Toad";
   }
 }
