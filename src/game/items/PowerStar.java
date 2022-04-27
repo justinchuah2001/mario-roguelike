@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpItemAction;
 import edu.monash.fit2099.engine.positions.Location;
 
-public class PowerStar extends Consumables{
+public class PowerStar extends Consumables implements Buyable{
     private int counter = 1;
     private static final int LIFESPAN = 10;
     private final int  price ;

@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
 import game.TalkToToadAction;
+import game.items.Buyable;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
 
@@ -30,7 +31,9 @@ public class Toad extends Actor {
       actions.add(new TalkToToadAction(otherActor));
     } else if (otherActor.hasCapability(Status.BUY_FROM_TOAD)){
       for (Item item : this.getInventory()){
-        actions.add(new BuyItemAction(this, item));
+        if (item instanceof Buyable) {
+          actions.add(new BuyItemAction(this, item));
+        }
       }
     }
     return actions;

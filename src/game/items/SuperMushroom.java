@@ -1,6 +1,6 @@
 package game.items;
 
-public class SuperMushroom extends Consumables{
+public class SuperMushroom extends Consumables implements Buyable {
     private final int  price;
     public SuperMushroom(){
         super("Super Mushroom", '^', true);
