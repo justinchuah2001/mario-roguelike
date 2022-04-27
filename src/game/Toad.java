@@ -32,8 +32,9 @@ public class Toad extends Actor {
       actions.add(new TalkToToadAction(otherActor));
     } else if (otherActor.hasCapability(Status.BUY_FROM_TOAD)){
       for (Item item : this.getInventory()){
-        if (item instanceof Buyable) {
-          actions.add(new BuyItemAction(this, item));
+        Action buyAction = BuyItemAction.getInstance(this, item);
+        if (buyAction != null){
+          actions.add(buyAction);
         }
       }
     }

@@ -15,10 +15,18 @@ public class BuyItemAction extends Action {
   private Item item;
   private int price;
 
-  public BuyItemAction(Actor seller, Item item) {
+  private BuyItemAction(Actor seller, Item item) {
     this.seller = seller;
     this.item = item;
     this.price = ((Buyable) item).getPrice();
+  }
+
+  public static BuyItemAction getInstance(Actor seller, Item item){
+    if (item instanceof Buyable){
+      return new BuyItemAction(seller, item);
+    } else {
+      return null;
+    }
   }
 
   @Override
