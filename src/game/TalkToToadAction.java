@@ -26,10 +26,10 @@ public class TalkToToadAction extends Action {
     if (!actor.hasCapability(Status.HAS_WRENCH)){
       monologues.add("You might need a wrench to smash Koopa's hard shells.");
     }
-    if (actor.hasCapability(Status.TALL)){
+    if (!actor.hasCapability(Status.TALL)){
       monologues.add("You better get back to finding the Power Stars.");
     }
 
-    return null;
+    return monologues.get((int)(Math.random() * monologues.size()));
   }
 }
