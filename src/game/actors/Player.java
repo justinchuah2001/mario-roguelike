@@ -38,6 +38,8 @@ public class Player extends Actor implements Resettable {
 
 		if (this.hasCapability(Status.TALL)) {
 			this.setDisplayChar('M');
+		}else{
+			this.setDisplayChar('m');
 		}
 
 		if (this.hasCapability(Status.INVINCIBLE)) {

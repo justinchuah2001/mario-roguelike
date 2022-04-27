@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpItemAction;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Status;
 
 public class PowerStar extends Consumables implements Buyable{
     private int counter = 1;
@@ -13,6 +14,13 @@ public class PowerStar extends Consumables implements Buyable{
     public PowerStar(){
         super("Power Star",'*', true);
         this.price = 600;
+    }
+
+    @Override
+    public void consumedEffect(Actor actor) {
+        super.consumedEffect(actor);
+        actor.heal(200);
+        actor.addCapability(Status.INVINCIBLE);
     }
 
     @Override

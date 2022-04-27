@@ -17,16 +17,7 @@ public class ConsumeItemAction extends Action {
         this.consumedItem = consumedItem;
     }
 
-    public void consumedEffect(Actor actor){
-        if (this.consumedItem == SuperMushroom){
-            actor.addCapability(Status.TALL);
-            actor.increaseMaxHp(50);
 
-        }else if(this.consumedItem == PowerStar){
-            actor.addCapability(Status.INVINCIBLE);
-            actor.heal(200);
-        }
-    }
 
     @Override
     public String execute(Actor self, GameMap map) {
@@ -34,7 +25,8 @@ public class ConsumeItemAction extends Action {
         for (Item item : self.getInventory())
             if (consumedItem == item){
                 self.getInventory().remove(item);
-                consumedEffect(self);
+                this.consumedItem.consumedEffect(self);
+
                 return self + "has consumed " + consumedItem;
 
         }
@@ -44,7 +36,7 @@ public class ConsumeItemAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + "has consumed" + consumedItem;
+        return actor + "consume" + consumedItem;
     }
 
 }
