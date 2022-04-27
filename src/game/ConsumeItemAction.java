@@ -24,8 +24,8 @@ public class ConsumeItemAction extends Action {
 
         for (Item item : self.getInventory())
             if (consumedItem == item){
-                self.getInventory().remove(item);
                 this.consumedItem.consumedEffect(self);
+                self.removeItemFromInventory(item);
 
                 return self + "has consumed " + consumedItem;
 

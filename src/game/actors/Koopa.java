@@ -17,9 +17,10 @@ public class Koopa extends Enemy {
     protected final Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public Koopa(){
-        super("Koopa", 'K', 100);
+        super("Koopa", 'K', 1);
         addItemToInventory(new SuperMushroom());
-        this.behaviours.put(1, new WanderBehaviour());
+        this.behaviours.put(10, new WanderBehaviour());
+        this.addCapability(Status.PRE_DORMANT);
     }
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
@@ -34,6 +35,8 @@ public class Koopa extends Enemy {
             if(this.hasCapability(Status.DORMANT) && otherActor.hasCapability(Status.HAS_WRENCH)){
                 actions.add(new DestroyShellAction(this, direction));
                 this.behaviours.clear();
+            }else if (this.hasCapability(Status.DORMANT)){
+                actions.clear();
             }
             else{
             actions.add(new AttackAction(this,direction));
@@ -46,7 +49,9 @@ public class Koopa extends Enemy {
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if (this.hasCapability(Status.DORMANT)){
+            this.removeCapability(Status.PRE_DORMANT);
             this.setDisplayChar('D');
+            actions.clear();
             return new DoNothingAction();
         }
         for(Behaviour Behaviour : behaviours.values()) {

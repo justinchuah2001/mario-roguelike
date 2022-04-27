@@ -13,6 +13,8 @@ import game.actors.Player;
 import game.ground.Dirt;
 import game.ground.Sprout;
 import game.ground.Wall;
+import game.items.Consumables;
+import game.items.SuperMushroom;
 
 /**
  * The main class for the Mario World game.
@@ -55,6 +57,12 @@ public class Application {
 
 			Actor toad = new Toad();
 			gameMap.addActor(toad, gameMap.at(46, 10));
+
+			Consumables SuperMushroom = new SuperMushroom();
+			gameMap.at(43,11).addItem(SuperMushroom);
+
+			Wrench wrench = new Wrench();
+			gameMap.at(43, 9).addItem(wrench);
 
 			// FIXME: the Goomba should be generated from the Tree
 			gameMap.at(35, 10).addActor(new Goomba());

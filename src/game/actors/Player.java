@@ -36,12 +36,6 @@ public class Player extends Actor implements Resettable {
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 
-		if (this.hasCapability(Status.TALL)) {
-			this.setDisplayChar('M');
-		}else{
-			this.setDisplayChar('m');
-		}
-
 		if (this.hasCapability(Status.INVINCIBLE)) {
 			int WEAR_OFF = 10;
 			if (counter == WEAR_OFF) {

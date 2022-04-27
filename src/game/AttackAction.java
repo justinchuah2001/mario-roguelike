@@ -62,7 +62,11 @@ public class AttackAction extends Action {
 			for (Action drop : dropActions)
 				drop.execute(target, map);
 			// remove actor
-			map.removeActor(target);
+			if (!target.hasCapability(Status.PRE_DORMANT)){
+				map.removeActor(target);
+			}else{
+				target.addCapability(Status.DORMANT);
+			}
 			result += System.lineSeparator() + target + " is killed.";
 		}
 

@@ -42,7 +42,7 @@ public class PowerStar extends Consumables implements Buyable{
         if (counter == LIFESPAN){
             for (Item item: actor.getInventory()){
                 if (item == this){
-                    actor.getInventory().remove(item);
+                    actor.removeItemFromInventory(item);
                 }
             }
         }else{
