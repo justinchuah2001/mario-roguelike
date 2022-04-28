@@ -27,10 +27,11 @@ public class ConsumeItemAction extends Action {
                 self.removeItemFromInventory(item);
 
                 return self + " has consumed " + consumedItem;
-
         }
 
-        return "Item does not exist in inventory!";
+        this.consumedItem.consumedEffect(self);
+        map.locationOf(self).removeItem(consumedItem);
+        return self + " has consumed " + consumedItem;
     }
 
     @Override

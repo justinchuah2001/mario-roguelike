@@ -17,7 +17,7 @@ public class Koopa extends Enemy {
     protected final Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public Koopa(){
-        super("Koopa", 'K', 1);
+        super("Koopa", 'K', 100);
         addItemToInventory(new SuperMushroom());
         this.behaviours.put(10, new WanderBehaviour());
         this.addCapability(Status.PRE_DORMANT);

@@ -7,7 +7,9 @@ import game.ConsumeItemAction;
 
 
 public abstract class Consumables extends Item {
+
     private Actor actor;
+
     public Consumables(String name, char displayChar, boolean portable){
         super(name, displayChar,portable);
         this.addAction(new ConsumeItemAction(this));
