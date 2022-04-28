@@ -1,4 +1,4 @@
-package game;
+package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -35,7 +35,7 @@ public class BuyItemAction extends Action {
     if (sold) {
       res = buyer + " buys " + item + " from " + seller;
     } else {
-      res = "in sufficient coin for " + buyer + " to buy " + item + " from " + seller;
+      res = "insufficient coin for " + buyer + " to buy " + item + " from " + seller;
     }
     return res;
   }

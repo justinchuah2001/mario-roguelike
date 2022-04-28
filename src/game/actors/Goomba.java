@@ -43,7 +43,7 @@ public class Goomba extends Enemy {
 			map.removeActor(this);
 			return new DoNothingAction();
 		}
-		for(game.Behaviour Behaviour : behaviours.values()) {
+		for(game.behaviours.Behaviour Behaviour : behaviours.values()) {
 			Action action = Behaviour.getAction(this, map);
 			if (action != null)
 				return action;
