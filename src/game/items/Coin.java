@@ -28,7 +28,6 @@ public class Coin extends Item implements Resettable {
     @Override
     public void tick(Location currentLocation) {
         super.tick(currentLocation);
-
         currentLocation.removeItem(this);
     }
 }

@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Resettable;
 import game.Status;
+import game.actors.Goomba;
 
 import java.util.Random;
 
@@ -26,7 +27,7 @@ public class Tree extends Ground implements Resettable {
     public void tick(Location location){
         super.tick(location);   // do nothing
 
-        if (this.hasCapability(Status.RESET)){
+        if (this.hasCapability(Status.RESET) && r.nextInt(3) == 0){
             location.setGround(new Dirt());
             return ;
         }

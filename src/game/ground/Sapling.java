@@ -17,10 +17,9 @@ public class Sapling extends Tree{
 
     @Override
     public void tick(Location location){
-        super.tick(location);
-
         if(r.nextInt(10) == 0){
             location.addItem(new Coin(20));
         }
+        super.tick(location);
     }
 }

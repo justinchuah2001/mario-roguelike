@@ -144,6 +144,7 @@ public class World {
 			actions.add(item.getPickUpAction(actor));
 		}
 		actions.add(new DoNothingAction());
+
 		if (ResetManager.getInstance().isAllowReset()){
 			actions.add(new ResetAction());
 		}
