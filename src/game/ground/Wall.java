@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 import game.actions.JumpAction;
+import game.items.Coin;
 
 import java.util.Random;
 
@@ -22,7 +23,16 @@ public class Wall extends Ground implements Jumpable{
 
 	@Override
 	public String jump(Actor actor, Location location) {
-		if(actor.hasCapability(Status.TALL)){
+		if(actor.hasCapability(Status.INVINCIBLE)){
+
+			String destroyMessage = actor + " destroys the " + location.getGround().toString() + "! You're wrecking the place! A coin appeared!";
+
+			location.map().moveActor(actor, location);
+			location.setGround(new Dirt());
+			location.addItem(new Coin(5));
+
+			return destroyMessage;
+		} else if(actor.hasCapability(Status.TALL)){
 			location.map().moveActor(actor, location);
 			return actor + " jumps up the " + location.getGround().toString() + " with no problem! Wahoo!";
 		}else if(r.nextInt(10) <= 7){
