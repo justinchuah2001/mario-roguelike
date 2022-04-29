@@ -18,8 +18,10 @@ public class Sprout extends Tree {
     @Override
     public String jump(Actor actor, Location location) {
         if(actor.hasCapability(Status.TALL)){
+            location.map().moveActor(actor, location);
             return actor + " jumps up the " + location.getGround() + "with no problem! Boing~";
         }else if(r.nextInt(10) <= 8){
+            location.map().moveActor(actor, location);
             return actor + " jumps up the " + location.getGround() + "! Boing~";
         }else{
             actor.hurt(10);

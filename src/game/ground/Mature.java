@@ -18,8 +18,10 @@ public class Mature extends Tree {
     @Override
     public String jump(Actor actor, Location location) {
         if(actor.hasCapability(Status.TALL)){
+            location.map().moveActor(actor, location);
             return actor + " jumps up the " + location.getGround() + "with no problem! Yahoohoo!~";
         } else if(r.nextInt(10) <= 6){
+            location.map().moveActor(actor, location);
             return actor + " jumps up the " + location.getGround() + "! Yahoohoo!~";
         }else{
             actor.hurt(30);

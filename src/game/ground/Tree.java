@@ -1,10 +1,12 @@
 package game.ground;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Resettable;
 import game.Status;
+import game.actions.JumpAction;
 
 import java.util.Random;
 
@@ -26,6 +28,14 @@ public class Tree extends Ground implements Jumpable, Resettable {
     @Override
     public String jump(Actor actor, Location location) {
         return null;
+    }
+
+    @Override
+    public ActionList allowableActions(Actor actor, Location location, String direction){
+        if (!location.containsAnActor()){
+            return new ActionList(new JumpAction(this, location, direction));
+        }
+        return new ActionList();
     }
 
     @Override

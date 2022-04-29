@@ -21,7 +21,7 @@ public class Toad extends Actor {
    *
    */
   public Toad() {
-    super("Toad", 'T', 1);
+    super("Toad", 'O', 1);
     this.addItemToInventory(new SuperMushroom());
     this.addItemToInventory(new PowerStar());
     this.addItemToInventory(new Wrench());

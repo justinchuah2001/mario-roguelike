@@ -20,8 +20,10 @@ public class Sapling extends Tree {
     @Override
     public String jump(Actor actor, Location location) {
         if(actor.hasCapability(Status.TALL)){
+            location.map().moveActor(actor, location);
             return actor + " jumps up the " + location.getGround() + "with no problem! Wahoo!";
         } else if(r.nextInt(10) <= 7){
+            location.map().moveActor(actor, location);
             return actor + " jumps up the " + location.getGround() + "! Wahoo!";
         }else{
             actor.hurt(20);
