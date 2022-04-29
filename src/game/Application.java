@@ -66,7 +66,6 @@ public class Application {
 
 			Consumables PowerStar = new PowerStar();
 			gameMap.at(42,9).addItem(PowerStar);
-			gameMap.at(44,9).addItem(PowerStar);
 
 			Wrench wrench = new Wrench();
 			gameMap.at(43, 9).addItem(wrench);
