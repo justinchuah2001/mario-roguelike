@@ -21,6 +21,7 @@ public class PickUpCoinAction extends Action {
         coin = (Coin)item;
         Player player = (Player) actor;
         player.addToWallet(coin.getCoinValue());
+
         return menuDescription(actor);
     }
 
