@@ -48,6 +48,8 @@ public class Player extends Actor implements Resettable {
 		}
 
 		// return/print the console menu
+		display.println("Mario " + this.printHp() + " at (" + map.locationOf(this).x() + ", " + map.locationOf(this).y() + ")");
+		display.println("Wallet: " + this.wallet);
 		return menu.showMenu(this, actions, display);
 	}
 

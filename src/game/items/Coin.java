@@ -25,10 +25,4 @@ public class Coin extends Item implements Resettable {
         this.addCapability(Status.RESET);
     }
 
-    @Override
-    public void tick(Location currentLocation) {
-        super.tick(currentLocation);
-
-        currentLocation.removeItem(this);
-    }
 }
