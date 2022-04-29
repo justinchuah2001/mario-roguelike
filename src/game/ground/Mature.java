@@ -24,7 +24,7 @@ public class Mature extends Tree {
     public String jump(Actor actor, Location location) {
         if(actor.hasCapability(Status.INVINCIBLE)){
 
-            String destroyMessage = actor + " destroys the " + location.getGround().toString() + "! Lets'a go! A coin appeared!";
+            String destroyMessage = actor + " destroys the " + location.getGround().toString() + "! No more Koopas from you! A coin appeared!";
 
             location.map().moveActor(actor, location);
             location.setGround(new Dirt());

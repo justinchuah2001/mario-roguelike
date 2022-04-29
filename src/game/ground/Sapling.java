@@ -24,7 +24,7 @@ public class Sapling extends Tree {
     @Override
     public String jump(Actor actor, Location location) {
         if(actor.hasCapability(Status.INVINCIBLE)){
-            String destroyMessage = actor + " destroys the " + location.getGround().toString() + "! A coin appeared!";
+            String destroyMessage = actor + " destroys the " + location.getGround().toString() + "! Maybe that one was worth keeping around? A coin appeared!";
 
             location.map().moveActor(actor, location);
             location.setGround(new Dirt());
