@@ -1,7 +1,10 @@
 package game.ground;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Status;
 import game.actors.Koopa;
+import game.items.Coin;
 
 public class Mature extends Tree {
 
@@ -13,10 +16,37 @@ public class Mature extends Tree {
         this.age = 0;
     }
 
+    public String toString(){
+        return "Mature Tree";
+    }
+
+    @Override
+    public String jump(Actor actor, Location location) {
+        if(actor.hasCapability(Status.INVINCIBLE)){
+
+            String destroyMessage = actor + " destroys the " + location.getGround().toString() + "! No more Koopas from you! A coin appeared!";
+
+            location.map().moveActor(actor, location);
+            location.setGround(new Dirt());
+            location.addItem(new Coin(5));
+
+            return destroyMessage;
+
+        }else if(actor.hasCapability(Status.TALL)){
+            location.map().moveActor(actor, location);
+            return actor + " jumps up the " + location.getGround().toString() + " with no problem! Yahoohoo!~";
+        } else if(r.nextInt(10) <= 6){
+            location.map().moveActor(actor, location);
+            return actor + " jumps up the " + location.getGround().toString() + "! Yahoohoo!~";
+        }else{
+            actor.hurt(30);
+            return  actor + " fails to jump the " + location.getGround().toString() +". Took 30 fall damage. Ouch!";
+        }
+    }
+
     @Override
     public void tick(Location location) {
         super.tick(location);
-
         if (r.nextInt(5) == 0) {
             location.setGround(new Dirt());
             return;

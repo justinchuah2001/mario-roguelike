@@ -2,12 +2,12 @@ package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.PickUpCoinAction;
+import game.actions.PickUpCoinAction;
 import game.Resettable;
 import game.Status;
 
 public class Coin extends Item implements Resettable {
-    private int value;
+    private final int value;
 
     public Coin(int value){
         super("Coin", '$', true);
@@ -25,10 +25,4 @@ public class Coin extends Item implements Resettable {
         this.addCapability(Status.RESET);
     }
 
-    @Override
-    public void tick(Location currentLocation) {
-        super.tick(currentLocation);
-
-        currentLocation.removeItem(this);
-    }
 }
