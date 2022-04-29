@@ -24,6 +24,6 @@ public class JumpAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " jumps onto the " + jumpable + "(" + jumpableLocation.x() + ", " + jumpableLocation.y() +  ") to the " + direction;
+        return actor + " jumps onto the " + jumpable.toString() + "(" + jumpableLocation.x() + ", " + jumpableLocation.y() +  ") to the " + direction;
     }
 }

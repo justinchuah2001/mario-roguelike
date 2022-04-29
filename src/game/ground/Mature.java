@@ -15,17 +15,21 @@ public class Mature extends Tree {
         this.age = 0;
     }
 
+    public String toString(){
+        return "Mature Tree";
+    }
+
     @Override
     public String jump(Actor actor, Location location) {
         if(actor.hasCapability(Status.TALL)){
             location.map().moveActor(actor, location);
-            return actor + " jumps up the " + location.getGround() + "with no problem! Yahoohoo!~";
+            return actor + " jumps up the " + location.getGround().toString() + " with no problem! Yahoohoo!~";
         } else if(r.nextInt(10) <= 6){
             location.map().moveActor(actor, location);
-            return actor + " jumps up the " + location.getGround() + "! Yahoohoo!~";
+            return actor + " jumps up the " + location.getGround().toString() + "! Yahoohoo!~";
         }else{
             actor.hurt(30);
-            return  actor + " fails to jump the " + location.getGround() +". Took 30 fall damage. Ouch!";
+            return  actor + " fails to jump the " + location.getGround().toString() +". Took 30 fall damage. Ouch!";
         }
     }
 

@@ -16,17 +16,21 @@ public class Wall extends Ground implements Jumpable{
 	}
 	private Random r = new Random();
 
+	public String toString(){
+		return "Wall";
+	}
+
 	@Override
 	public String jump(Actor actor, Location location) {
 		if(actor.hasCapability(Status.TALL)){
 			location.map().moveActor(actor, location);
-			return actor + " jumps up the " + location.getGround() + "with no problem! Wahoo!";
+			return actor + " jumps up the " + location.getGround().toString() + " with no problem! Wahoo!";
 		}else if(r.nextInt(10) <= 7){
 			location.map().moveActor(actor, location);
-			return actor + " jumps up the " + location.getGround() + "! Wahoo!";
+			return actor + " jumps up the " + location.getGround().toString() + "! Wahoo!";
 		}else{
 			actor.hurt(20);
-			return  actor + " bonks the " + location.getGround() +". Took 20 fall damage. Bonk!";
+			return actor + " bonks the " + location.getGround().toString() +". Took 20 fall damage. Bonk!";
 		}
 	}
 
