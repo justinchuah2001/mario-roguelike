@@ -29,6 +29,7 @@ public class PowerStar extends Consumables implements Buyable{
         if (counter == LIFESPAN){
             currentLocation.removeItem(this);
             resetCounter();
+            System.out.println("Power Star has expired and removed. ");
         }
         else{
             counter-=1;
