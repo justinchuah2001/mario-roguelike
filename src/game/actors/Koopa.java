@@ -8,6 +8,12 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.*;
+import game.actions.AttackAction;
+import game.actions.DestroyShellAction;
+import game.behaviours.AttackBehaviour;
+import game.behaviours.Behaviour;
+import game.behaviours.FollowBehaviour;
+import game.behaviours.WanderBehaviour;
 import game.items.SuperMushroom;
 
 import java.util.HashMap;
@@ -17,7 +23,7 @@ public class Koopa extends Enemy {
     protected final Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public Koopa(){
-        super("Koopa", 'K', 1);
+        super("Koopa", 'K', 100);
         addItemToInventory(new SuperMushroom());
         this.behaviours.put(10, new WanderBehaviour());
         this.addCapability(Status.PRE_DORMANT);

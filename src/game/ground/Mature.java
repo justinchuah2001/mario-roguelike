@@ -1,6 +1,8 @@
 package game.ground;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Status;
 import game.actors.Koopa;
 
 public class Mature extends Tree {
@@ -11,6 +13,18 @@ public class Mature extends Tree {
     public Mature() {
         super('T');
         this.age = 0;
+    }
+
+    @Override
+    public String jump(Actor actor, Location location) {
+        if(actor.hasCapability(Status.TALL)){
+            return actor + " jumps up the " + location.getGround() + "with no problem! Yahoohoo!~";
+        } else if(r.nextInt(10) <= 6){
+            return actor + " jumps up the " + location.getGround() + "! Yahoohoo!~";
+        }else{
+            actor.hurt(30);
+            return  actor + " fails to jump the " + location.getGround() +". Took 30 fall damage. Ouch!";
+        }
     }
 
     @Override

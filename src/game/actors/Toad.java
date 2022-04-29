@@ -1,4 +1,4 @@
-package game;
+package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -8,7 +8,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
-import game.TalkToToadAction;
+import game.Wrench;
+import game.actions.BuyItemAction;
+import game.actions.TalkToToadAction;
 import game.items.Buyable;
 import game.items.PowerStar;
 import game.items.SuperMushroom;

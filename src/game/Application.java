@@ -10,7 +10,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Goomba;
 import game.actors.Player;
+import game.actors.Toad;
 import game.ground.Dirt;
+import game.ground.Floor;
 import game.ground.Sprout;
 import game.ground.Wall;
 import game.items.Consumables;
@@ -64,6 +66,7 @@ public class Application {
 
 			Consumables PowerStar = new PowerStar();
 			gameMap.at(42,9).addItem(PowerStar);
+			gameMap.at(44,9).addItem(PowerStar);
 
 			Wrench wrench = new Wrench();
 			gameMap.at(43, 9).addItem(wrench);

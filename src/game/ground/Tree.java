@@ -1,5 +1,6 @@
 package game.ground;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Resettable;
@@ -7,7 +8,7 @@ import game.Status;
 
 import java.util.Random;
 
-public class Tree extends Ground implements Resettable {
+public class Tree extends Ground implements Jumpable, Resettable {
 
     public int age;
     public Random r = new Random();
@@ -23,8 +24,17 @@ public class Tree extends Ground implements Resettable {
     }
 
     @Override
+    public String jump(Actor actor, Location location) {
+        return null;
+    }
+
+    @Override
+    public boolean canActorEnter(Actor actor){
+        return false;
+    }
+
+    @Override
     public void tick(Location location){
-        super.tick(location);   // do nothing
 
         if (this.hasCapability(Status.RESET)){
             location.setGround(new Dirt());
@@ -44,6 +54,7 @@ public class Tree extends Ground implements Resettable {
     public void resetInstance() {
         this.addCapability(Status.RESET);
     }
+
 }
 
 

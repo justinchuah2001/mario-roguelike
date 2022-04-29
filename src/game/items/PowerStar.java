@@ -11,6 +11,7 @@ public class PowerStar extends Consumables implements Buyable{
     private int counter = 10;
     private static final int LIFESPAN = 1;
     private final int  price ;
+    private final int RESET_VAL = 10;
     public PowerStar(){
         super("Power Star",'*', true);
         this.price = 600;
@@ -27,6 +28,7 @@ public class PowerStar extends Consumables implements Buyable{
     public void tick(Location currentLocation) {
         if (counter == LIFESPAN){
             currentLocation.removeItem(this);
+            resetCounter();
         }
         else{
             counter-=1;
@@ -39,17 +41,16 @@ public class PowerStar extends Consumables implements Buyable{
 
     @Override
     public void tick(Location currentLocation, Actor actor) {
-        if (counter == LIFESPAN){
-            for (Item item: actor.getInventory()){
-                if (item == this){
-                    actor.removeItemFromInventory(item);
-                }
-            }
+        if (counter == LIFESPAN ){
+            actor.removeItemFromInventory(this);
         }else{
             counter -=1;
         }
     }
 
+    public void resetCounter(){
+        this.counter= RESET_VAL;
+    }
 
     @Override
     public String toString(){
