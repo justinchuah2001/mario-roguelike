@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
-import game.Wrench;
+import game.items.Wrench;
 import game.actions.BuyItemAction;
 import game.actions.TalkToToadAction;
 import game.items.PowerStar;

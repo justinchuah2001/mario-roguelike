@@ -1,7 +1,7 @@
-package game;
+package game.items;
 
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.items.Buyable;
+import game.Status;
 
 public class Wrench extends WeaponItem implements Buyable {
     private final int price;
@@ -11,6 +11,10 @@ public class Wrench extends WeaponItem implements Buyable {
         this.price = 200;
     }
 
+    /**
+     * This function returns the price of Wrench
+     * @return Price of Wrench.
+     */
     public int getPrice() {
         return price;
     }
