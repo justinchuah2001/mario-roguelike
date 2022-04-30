@@ -9,6 +9,13 @@ import game.actions.PickUpCoinAction;
 import game.reset.Resettable;
 import game.Status;
 
+/**
+ * A class that represents a coin, the currency for this game that allows the player to buy items.
+ *
+ * @author Caelan Kao Khai Xuen
+ * @version 1.0
+ *
+ */
 public class Coin extends Item implements Resettable {
     private final int value;
 
