@@ -9,7 +9,7 @@ import game.Status;
 
 public class PowerStar extends Consumables implements Buyable{
     private int counter = 10;
-    private static final int LIFESPAN = 0;
+    private static final int LIFESPAN = 1;
     private final int  price ;
     private final int RESET_VAL = 10;
     public PowerStar(){
@@ -29,6 +29,7 @@ public class PowerStar extends Consumables implements Buyable{
         if (counter == LIFESPAN){
             currentLocation.removeItem(this);
             resetCounter();
+            System.out.println("Power Star has expired and removed. ");
         }
         else{
             counter-=1;
