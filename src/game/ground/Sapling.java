@@ -21,7 +21,7 @@ public class Sapling extends Tree {
      */
     public Sapling(){
         super('t');
-        this.age = 10;
+        this.setAge(10);
     }
 
     /**

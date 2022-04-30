@@ -23,7 +23,7 @@ public class Sprout extends Tree {
      */
     public Sprout() {
         super('+');
-        this.age = 0;
+        this.setAge(0);
     }
 
     /**

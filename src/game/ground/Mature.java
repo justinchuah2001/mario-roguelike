@@ -21,7 +21,7 @@ public class Mature extends Tree {
      */
     public Mature() {
         super('T');
-        this.age = 0;
+        this.setAge(0);
     }
 
     /**
@@ -52,9 +52,9 @@ public class Mature extends Tree {
         if (r.nextInt(20) < 3 && !location.containsAnActor()) {
             location.addActor(new Koopa());
         }
-        if (age == 5 && hasFertileGround(location)) {
+        if (getAge() == 5 && hasFertileGround(location)) {
             spawnSprout(location);
-            this.age = 0;
+            this.setAge(0);
         }
 
         super.tick(location);

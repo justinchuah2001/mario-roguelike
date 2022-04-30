@@ -21,10 +21,11 @@ import java.util.Random;
  */
 
 public class Tree extends Ground implements Jumpable, Resettable {
+
     /**
      * the age of the tree
      */
-    public int age;
+    private int age;
     /**
      * a random number generator. to be used by child classes
      */
@@ -110,6 +111,14 @@ public class Tree extends Ground implements Jumpable, Resettable {
     @Override
     public void resetInstance() {
         this.addCapability(Status.RESET);
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
 }
