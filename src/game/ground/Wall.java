@@ -10,13 +10,29 @@ import game.items.Coin;
 
 import java.util.Random;
 
-public class Wall extends Ground implements Jumpable{
+/**
+ * The Wall class is a class that represents a wall. Standard, impassable terrain by normal means.
+ *
+ * @author Caelan Kao Khai Xuen
+ * @version 1.0
+ * @see edu.monash.fit2099.engine.positions.Ground
+ */
 
+public class Wall extends Ground implements Jumpable{
+	private Random r = new Random();
+
+	/**
+	 * A constructor for the Wall class
+	 */
 	public Wall() {
 		super('#');
 	}
-	private Random r = new Random();
 
+
+	/**
+	 * Override of the toString method
+	 * @return A string with the name of the Ground
+	 */
 	public String toString(){
 		return "Wall";
 	}
