@@ -4,11 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
 import game.actions.JumpAction;
-import game.items.Coin;
-
-import java.util.Random;
 
 /**
  * The Wall class is a class that represents a wall. Standard, impassable terrain by normal means.

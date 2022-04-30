@@ -2,9 +2,7 @@ package game.ground;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
 import game.actors.Koopa;
-import game.items.Coin;
 
 /**
  * A class that represents a Mature Tree, the third and final stage of a Tree.

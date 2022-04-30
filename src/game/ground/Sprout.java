@@ -2,9 +2,7 @@ package game.ground;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
 import game.actors.Goomba;
-import game.items.Coin;
 
 /**
  * A class that represents a Sprout, the first stage of a Tree.
