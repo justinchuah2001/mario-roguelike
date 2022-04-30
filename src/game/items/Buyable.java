@@ -6,7 +6,7 @@ package game.items;
  *
  * @author Chan Jia Zheng
  * @version 1
- * @see game.Wrench
+ * @see game.items.Wrench
  * @see SuperMushroom
  * @see PowerStar
  */

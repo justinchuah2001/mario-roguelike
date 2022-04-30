@@ -18,6 +18,7 @@ import game.ground.Wall;
 import game.items.Consumables;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
+import game.items.Wrench;
 
 /**
  * The main class for the Mario World game.

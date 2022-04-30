@@ -1,7 +1,7 @@
-package game;
+package game.items;
 
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.items.Buyable;
+import game.Status;
 
 public class Wrench extends WeaponItem implements Buyable {
     private final int price;
