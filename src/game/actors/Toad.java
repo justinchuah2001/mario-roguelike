@@ -18,7 +18,7 @@ import game.items.SuperMushroom;
 public class Toad extends Actor {
   /**
    * Constructor.
-   *
+   * Add item to its inventory.
    */
   public Toad() {
     super("Toad", 'O', 1);
@@ -27,6 +27,7 @@ public class Toad extends Actor {
     this.addItemToInventory(new Wrench());
   }
 
+  @Override
   public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
     ActionList actions = new ActionList();
 

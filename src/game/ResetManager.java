@@ -22,6 +22,9 @@ public class ResetManager {
      */
     private static ResetManager instance;
 
+    /**
+     * Show that whether the Player is allowed to reset the game.
+     */
     private static Boolean allowReset = true;
 
     /**
@@ -42,6 +45,10 @@ public class ResetManager {
         resettableList = new ArrayList<>();
     }
 
+    /**
+     * This function shows that whether the Player is allowed to reset the game.
+     * @return Whether the Player is allowed to reset the game.
+     */
     public Boolean isAllowReset(){
         return allowReset;
     }
@@ -51,8 +58,11 @@ public class ResetManager {
      * By doing this way, it will avoid using `instanceof` all over the place.
      */
     public void run(){
-        for (Resettable resettable: this.resettableList){
+        Resettable resettable;
+        while (this.resettableList.size() > 0){
+            resettable = this.resettableList.get(0);
             resettable.resetInstance();
+            this.cleanUp(resettable);
         }
         allowReset = false;
     }
