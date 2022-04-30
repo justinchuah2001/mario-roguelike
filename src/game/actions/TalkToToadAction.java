@@ -7,13 +7,33 @@ import game.Status;
 
 import java.util.ArrayList;
 
+/**
+ * This action allows Player to talk to the Toad.
+ * @author Chan Jia Zheng
+ * @version 1
+ * @see game.actors.Toad#allowableActions(Actor, String, GameMap)
+ */
 public class TalkToToadAction extends Action {
+  /**
+   * The actor who wants to talk to Toad.
+   */
   protected Actor target;
 
+  /**
+   * constructor
+   * @param target The actor who wants to talk to Toad.
+   */
   public TalkToToadAction(Actor target) {
     this.target = target;
   }
 
+  /**
+   *  This action returns the monologue of Player with the Toad based on the Player's Status.
+   *
+   * @param actor The actor performing the action.
+   * @param map The map the actor is on.
+   * @return The monologue of Player interact with the Toad.
+   */
   @Override
   public String execute(Actor actor, GameMap map) {
     ArrayList<String> monologues = new ArrayList<>();
@@ -29,6 +49,12 @@ public class TalkToToadAction extends Action {
     return monologues.get((int)(Math.random() * monologues.size()));
   }
 
+  /**
+   * This function returns the menu description of the action.
+   *
+   * @param actor The actor performing the action.
+   * @return Menu description of the action.
+   */
   @Override
   public String menuDescription(Actor actor) {
     return actor + " talk to Toad";
