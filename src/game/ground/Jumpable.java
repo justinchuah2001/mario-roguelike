@@ -40,8 +40,11 @@ public interface Jumpable {
             return jumpMovement(actor, location) + "! " + getFlavourJump();
 
         }else{
-            return jumpFailure(actor, location, getFallDamage()) + getFlavourFail();
-
+            String message = jumpFailure(actor, location, getFallDamage()) + getFlavourFail();
+            if (!actor.isConscious()){
+                location.map().removeActor(actor);
+            }
+            return message;
         }
     }
 
@@ -79,12 +82,12 @@ public interface Jumpable {
      * @return Generic message for destroying a jumpable object
      */
     default String destroy(Actor actor, Location location){
-        String jumpable = location.getGround().toString();
+        String destroyed = location.getGround().toString();
         location.map().moveActor(actor, location);
         location.setGround(new Dirt());
         location.addItem(new Coin(5));
 
-        return actor + " destroys the " + jumpable +"! ";
+        return actor + " destroys the " + destroyed +"! ";
     }
 
     /**
