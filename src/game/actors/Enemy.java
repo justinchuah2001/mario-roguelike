@@ -17,6 +17,12 @@ import game.reset.Resettable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * An abstract class that contains generic hostile character traits
+ *
+ * @see game.actors.Goomba
+ * @see game.actors.Koopa
+ */
 public abstract class Enemy extends Actor implements Resettable {
     protected final Map<Integer, Behaviour> behaviours = new HashMap<>();
 
