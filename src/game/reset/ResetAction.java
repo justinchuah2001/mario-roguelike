@@ -11,10 +11,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * @see edu.monash.fit2099.engine.positions.World
  */
 public class ResetAction extends Action {
-  /**
-   * The resetManager that manages all the Resettable instance in the game.
-   */
-  private final ResetManager resetManager = ResetManager.getInstance();
 
   /**
    * This function execute the action.
@@ -24,7 +20,7 @@ public class ResetAction extends Action {
    */
   @Override
   public String execute(Actor actor, GameMap map) {
-    this.resetManager.run();
+    ResetManager.getInstance().run();
     return String.format("%s Successfully reset the Game", actor);
   }
 
