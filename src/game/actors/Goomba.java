@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Status;
 
 import java.util.Random;
 
@@ -39,7 +40,7 @@ public class Goomba extends Enemy {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-		if (suicide()){
+		if (suicide() || this.hasCapability(Status.RESET)){
 			map.removeActor(this);
 			return new DoNothingAction();
 		}

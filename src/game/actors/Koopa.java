@@ -54,16 +54,18 @@ public class Koopa extends Enemy {
     }
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if (this.hasCapability(Status.DORMANT)){
+        if (this.hasCapability(Status.RESET)) {
+            map.removeActor(this);
+        } else if (this.hasCapability(Status.DORMANT)){
             this.removeCapability(Status.PRE_DORMANT);
             this.setDisplayChar('D');
             actions.clear();
-            return new DoNothingAction();
-        }
-        for(Behaviour Behaviour : behaviours.values()) {
-            Action action = Behaviour.getAction(this, map);
-            if (action != null)
-                return action;
+        } else {
+            for (Behaviour Behaviour : behaviours.values()) {
+                Action action = Behaviour.getAction(this, map);
+                if (action != null)
+                    return action;
+            }
         }
         return new DoNothingAction();
     }

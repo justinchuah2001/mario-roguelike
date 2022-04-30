@@ -1,10 +1,7 @@
 package game.actors;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.*;
 import game.actions.AttackAction;
@@ -35,20 +32,6 @@ public abstract class Enemy extends Actor implements Resettable {
             this.behaviours.put(3, new FollowBehaviour(otherActor));
         }
         return actions;
-    }
-
-    @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if (this.hasCapability(Status.RESET)){
-            map.removeActor(this);
-        } else {
-            for (Behaviour Behaviour : behaviours.values()) {
-                Action action = Behaviour.getAction(this, map);
-                if (action != null)
-                    return action;
-            }
-        }
-        return new DoNothingAction();
     }
 
     @Override
