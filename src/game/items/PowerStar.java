@@ -1,9 +1,6 @@
 package game.items;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.items.PickUpItemAction;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 
@@ -36,6 +33,10 @@ public class PowerStar extends Consumables implements Buyable{
         }
     }
 
+    /**
+     * This function returns the price of PowerStar
+     * @return Price of PowerStar.
+     */
     public int getPrice() {
         return price;
     }

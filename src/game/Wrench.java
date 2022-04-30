@@ -11,6 +11,10 @@ public class Wrench extends WeaponItem implements Buyable {
         this.price = 200;
     }
 
+    /**
+     * This function returns the price of Wrench
+     * @return Price of Wrench.
+     */
     public int getPrice() {
         return price;
     }
