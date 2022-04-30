@@ -20,10 +20,9 @@ public interface Jumpable {
     Random r = new Random();
 
     /**
-     * Default method for running jump checks
-     *
-     * <p>The jump method implemented will call the other methods in the interface based on conditionals and attach
-     * flavour text.</p>
+     * Default method for running jump checks.
+     * <p>Calls destroy if actor is invincible, bypasses the probability if actor is tall, and moves or damages
+     * the player based on probability otherwise.</p>
      *
      * @param actor the actor jumping
      * @param location the location of the jumpable object
@@ -80,20 +79,36 @@ public interface Jumpable {
      * @return Generic message for destroying a jumpable object
      */
     default String destroy(Actor actor, Location location){
+        String jumpable = location.getGround().toString();
         location.map().moveActor(actor, location);
         location.setGround(new Dirt());
         location.addItem(new Coin(5));
 
-        return actor + " destroys the " + location.getGround().toString() +"! ";
+        return actor + " destroys the " + jumpable +"! ";
     }
 
+    /**
+     * @return the success rate for jumping onto the jumpable object
+     */
     int getJumpSuccessRate();
 
+    /**
+     * @return the fall damage that the actor will take if they fail the jump
+     */
     int getFallDamage();
 
+    /**
+     * @return a string with flavour text for succeeding a jump
+     */
     String getFlavourJump();
 
+    /**
+     * @return a string with flavour text for failing a jump
+     */
     String getFlavourFail();
 
+    /**
+     * @return a string with flavour text for destroying a jumpable object
+     */
     String getFlavourDestroy();
 }
