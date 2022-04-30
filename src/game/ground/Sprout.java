@@ -36,25 +36,22 @@ public class Sprout extends Tree {
 
     @Override
     public String jump(Actor actor, Location location) {
+        String message = "";
         if(actor.hasCapability(Status.INVINCIBLE)){
-            String destroyMessage = actor + " destroys the " + location.getGround().toString() + "! Bye bye Goomba spawner~ A coin appeared!";
+            message += destroy(actor, location) + "! Bye bye Goomba spawner~ A coin appeared!";
 
-            location.map().moveActor(actor, location);
-            location.setGround(new Dirt());
-            location.addItem(new Coin(5));
-
-            return destroyMessage;
         }
         else if(actor.hasCapability(Status.TALL)){
-            location.map().moveActor(actor, location);
-            return actor + " jumps up the " + location.getGround().toString() + " with no problem! Boing~";
+            message += jumpMovement(actor, location) + " with no problem! Boing~";
+
         }else if(r.nextInt(10) <= 8){
-            location.map().moveActor(actor, location);
-            return actor + " jumps up the " + location.getGround().toString() + "! Boing~";
+            message += jumpMovement(actor, location) + "! Boing~";
+
         }else{
-            actor.hurt(10);
-            return  actor + " fails to jump the " + location.getGround().toString() +". Took 10 fall damage. Oof!";
+            message += jumpFailure(actor, location,10) +". Took 10 fall damage. Oof!";
+
         }
+        return message;
     }
 
     /**

@@ -34,25 +34,21 @@ public class Sapling extends Tree {
 
     @Override
     public String jump(Actor actor, Location location) {
+        String message = "";
         if(actor.hasCapability(Status.INVINCIBLE)){
-            String destroyMessage = actor + " destroys the " + location.getGround().toString() +
-                    "! Money does grow on trees! A coin appeared!";
+            message += destroy(actor, location) + "! Money does grow on trees! A coin appeared!";
 
-            location.map().moveActor(actor, location);
-            location.setGround(new Dirt());
-            location.addItem(new Coin(5));
-
-            return destroyMessage;
         } else if(actor.hasCapability(Status.TALL)){
-            location.map().moveActor(actor, location);
-            return actor + " jumps up the " + location.getGround().toString() + " with no problem! Wahoo!";
+            message += jumpMovement(actor, location) + " with no problem! Wahoo!";
+
         } else if(r.nextInt(10) <= 7){
-            location.map().moveActor(actor, location);
-            return actor + " jumps up the " + location.getGround().toString() + "! Wahoo!";
+            message += jumpMovement(actor, location) + "! Wahoo!";
+
         } else{
-            actor.hurt(20);
-            return  actor + " fails to jump the " + location.getGround().toString() +". Took 20 fall damage. Owie!";
+             message += jumpFailure( actor, location,20)+". Took 20 fall damage. Owie!";
+
         }
+        return message;
     }
 
 

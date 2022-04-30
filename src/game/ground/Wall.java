@@ -39,25 +39,21 @@ public class Wall extends Ground implements Jumpable{
 
 	@Override
 	public String jump(Actor actor, Location location) {
+		String message = "";
 		if(actor.hasCapability(Status.INVINCIBLE)){
+			message += destroy(actor, location) + "! You're wrecking the place! A coin appeared!";
 
-			String destroyMessage = actor + " destroys the " + location.getGround().toString() + "! You're wrecking the place! A coin appeared!";
-
-			location.map().moveActor(actor, location);
-			location.setGround(new Dirt());
-			location.addItem(new Coin(5));
-
-			return destroyMessage;
 		} else if(actor.hasCapability(Status.TALL)){
-			location.map().moveActor(actor, location);
-			return actor + " jumps up the " + location.getGround().toString() + " with no problem! Wahoo!";
+			message += jumpMovement(actor, location) + " with no problem! Wahoo!";
+
 		}else if(r.nextInt(10) <= 7){
-			location.map().moveActor(actor, location);
-			return actor + " jumps up the " + location.getGround().toString() + "! Wahoo!";
+			message += jumpMovement(actor, location) + "! Wahoo!";
+
 		}else{
-			actor.hurt(20);
-			return actor + " bonks the " + location.getGround().toString() +". Took 20 fall damage. Bonk!";
+			message += jumpFailure(actor, location, 20) + ". Took 20 fall damage. Bonk!";
+
 		}
+		return message;
 	}
 
 	@Override
