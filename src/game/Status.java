@@ -6,12 +6,12 @@ package game;
  */
 public enum Status {
     HOSTILE_TO_ENEMY, // use this status to be considered hostile towards enemy (e.g., to be attacked by enemy)
-    TALL, // use this status to tell that current instance has "grown".
-    DORMANT, // use this status to show that the Koopa has now entered dormant state.
-    HAS_WRENCH, // use this status to show that the Player now possess the wrench in his inventory.
-    BUY_FROM_TOAD,
-    TALK_TO_TOAD,
+    TALL,             // use this status to tell that current instance has "grown".
+    DORMANT,          // use this status to show that the Koopa has now entered dormant state.
+    HAS_WRENCH,       // use this status to show that the Player now possess the wrench in his inventory.
+    BUY_FROM_TOAD,    // use this status to show that the Player can buy from Toad
+    TALK_TO_TOAD,     // use this status to show that the Player can talk to Toad
     PRE_DORMANT,
     INVINCIBLE,
-    RESET
+    RESET             // use this status to show that the object is resettable
 }
