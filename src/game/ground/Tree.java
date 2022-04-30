@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.Resettable;
 import game.Status;
 import game.actions.JumpAction;
+import game.actors.Goomba;
 
 import java.util.Random;
 
@@ -46,7 +47,9 @@ public class Tree extends Ground implements Jumpable, Resettable {
     @Override
     public void tick(Location location){
         if (this.hasCapability(Status.RESET)){
-            location.setGround(new Dirt());
+            if(r.nextInt(2) == 0){
+                location.setGround(new Dirt());
+            }
             return ;
         }
 

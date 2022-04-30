@@ -46,7 +46,6 @@ public class Mature extends Tree {
 
     @Override
     public void tick(Location location) {
-        super.tick(location);
         if (r.nextInt(5) == 0) {
             location.setGround(new Dirt());
             return;
@@ -59,6 +58,8 @@ public class Mature extends Tree {
             spawnSprout(location);
             this.age = 0;
         }
+
+        super.tick(location);
     }
 
     private void spawnSprout(Location location) {
