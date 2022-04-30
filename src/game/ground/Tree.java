@@ -59,7 +59,9 @@ public class Tree extends Ground implements Jumpable, Resettable {
     }
 
     /**
-     * The age of the Tree goes up by 1 every game tick and changes the tree to a sprout at age 10, and a Mature at age 20
+     * <p>The age of the Tree goes up by 1 every game tick and changes the tree to a sprout at age 10,
+     * and a Mature at age 20 </p>
+     *
      * @param location The location of the Ground
      */
     @Override
