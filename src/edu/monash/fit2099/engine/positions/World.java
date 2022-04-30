@@ -7,8 +7,8 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.ActorLocationsIterator;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
-import game.ResetAction;
-import game.ResetManager;
+import game.reset.ResetAction;
+import game.reset.ResetManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;

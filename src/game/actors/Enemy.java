@@ -12,11 +12,12 @@ import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.reset.Resettable;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Enemy extends Actor implements Resettable{
+public abstract class Enemy extends Actor implements Resettable {
     protected final Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public Enemy(String name, char displayChar, int hitPoints){

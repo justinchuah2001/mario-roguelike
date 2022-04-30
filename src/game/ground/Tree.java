@@ -4,10 +4,9 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Resettable;
+import game.reset.Resettable;
 import game.Status;
 import game.actions.JumpAction;
-import game.actors.Goomba;
 
 import java.util.Random;
 
