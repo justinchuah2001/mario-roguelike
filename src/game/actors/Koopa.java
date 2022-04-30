@@ -27,6 +27,7 @@ public class Koopa extends Enemy {
         addItemToInventory(new SuperMushroom());
         this.behaviours.put(10, new WanderBehaviour());
         this.addCapability(Status.PRE_DORMANT);
+
     }
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
@@ -37,19 +38,15 @@ public class Koopa extends Enemy {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            if(this.hasCapability(Status.DORMANT) && otherActor.hasCapability(Status.HAS_WRENCH)){
-                actions.add(new DestroyShellAction(this, direction));
-                this.behaviours.clear();
+        if(this.hasCapability(Status.DORMANT) && otherActor.hasCapability(Status.HAS_WRENCH)){
+            actions.add(new DestroyShellAction(this, direction));
+            this.behaviours.clear();
             }else if (this.hasCapability(Status.DORMANT)){
-                actions.clear();
+            actions.clear();
             }
             else{
-            actions.add(new AttackAction(this,direction));
-            this.behaviours.put(2, new AttackBehaviour(otherActor, direction));
-            this.behaviours.put(3, new FollowBehaviour(otherActor));
+            actions.add(super.allowableActions(otherActor, direction, map));
             }
-        }
         return actions;
     }
     @Override

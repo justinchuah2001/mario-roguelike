@@ -29,7 +29,7 @@ public class DestroyShellAction extends Action {
                 drop.execute(target, map);
             // remove actor
             map.removeActor(target);
-            return actor + "has destroyed " + target +"shell.";
+            return actor + " has destroyed " + target +"shell.";
         }
 
         return "Can only destroy Koopa shell!";
@@ -37,6 +37,6 @@ public class DestroyShellAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + "destroyed shell at" + direction;
+        return actor + " destroyed shell at " + direction;
     }
 }
