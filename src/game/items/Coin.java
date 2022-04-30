@@ -33,11 +33,18 @@ public class Coin extends Item implements Resettable {
         return null;
     }
 
+    /**
+     * Add the RESET Status to coin, it will be removed if it is ticked
+     */
     @Override
     public void resetInstance() {
         this.addCapability(Status.RESET);
     }
 
+    /**
+     * remove the Coin from the ground if ResetAction is made by Player.
+     * @param currentLocation The location of the ground on which we lie.
+     */
     @Override
     public void tick(Location currentLocation) {
         if (this.hasCapability(Status.RESET)){
