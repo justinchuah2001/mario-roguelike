@@ -12,6 +12,8 @@ import game.Status;
 
 /**
  * Special Action for attacking other Actors.
+ * @author Justin Chuah
+ * @version 1.0
  */
 public class AttackAction extends Action {
 
@@ -34,12 +36,20 @@ public class AttackAction extends Action {
 	 * Constructor.
 	 * 
 	 * @param target the Actor to attack
+	 * @param direction   The direction of incoming attack.
 	 */
 	public AttackAction(Actor target, String direction) {
 		this.target = target;
 		this.direction = direction;
 	}
 
+	/**
+	 * This function let an Actor attack another actor(target)
+	 *
+	 * @param actor The Actor who does the attack onto the target
+	 * @param map The map the actor is on.
+	 * @return A description whether the actor successfully attacks the target
+	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
 
@@ -51,12 +61,12 @@ public class AttackAction extends Action {
 
 		int damage;
 
-		if ( target.hasCapability(Status.INVINCIBLE)){
+		if ( target.hasCapability(Status.INVINCIBLE)){ //If target of attack action is invincible, deal no damage
 			damage = 0;
 			target.hurt(damage);
 
-		}else if (actor.hasCapability(Status.INVINCIBLE)){
-			damage = 9999;
+		}else if (actor.hasCapability(Status.INVINCIBLE)){ //If current person attack is invincible, kill enemy target instantly
+			damage = 999999;
 			target.hurt(damage);
 		}
 		else{
@@ -64,7 +74,7 @@ public class AttackAction extends Action {
 			target.hurt(damage);
 		}
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
-		if (target.hasCapability(Status.TALL)){
+		if (target.hasCapability(Status.TALL)){ //If actor with tall status is damaged, remove tall status
 			target.removeCapability(Status.TALL);
 		}
 		if (!target.isConscious()) {
@@ -74,17 +84,23 @@ public class AttackAction extends Action {
 				dropActions.add(item.getDropAction(actor));
 			for (Action drop : dropActions)
 				drop.execute(target, map);
-			// remove actor
+			// remove actor if he does not possess PRE_DORMANT status
 			if (!target.hasCapability(Status.PRE_DORMANT)){
 				map.removeActor(target);
 			}else{
-				target.addCapability(Status.DORMANT);
+				target.addCapability(Status.DORMANT); //Give actor with PRE_DORMANT status DORMANT status if unconscious
 			}
 			result += System.lineSeparator() + target + " is killed.";
 		}
 
 		return result;
 	}
+	/**
+	 * This function returns the menu description of the action.
+	 *
+	 * @param actor Actor who does the attacking
+	 * @return Menu description of the action.
+	 */
 
 	@Override
 	public String menuDescription(Actor actor) {
