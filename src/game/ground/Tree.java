@@ -42,7 +42,7 @@ public class Tree extends Ground implements Jumpable, Resettable {
 
     @Override
     public String jump(Actor actor, Location location) {
-        return null;
+        return Jumpable.super.jump(actor, location);
     }
 
     @Override
@@ -78,6 +78,31 @@ public class Tree extends Ground implements Jumpable, Resettable {
         else if (age == 20){
             location.setGround(new Mature());
         }
+    }
+
+    @Override
+    public int getJumpSuccessRate() {
+        return 0;
+    }
+
+    @Override
+    public int getFallDamage() {
+        return 0;
+    }
+
+    @Override
+    public String getFlavourJump() {
+        return null;
+    }
+
+    @Override
+    public String getFlavourFail() {
+        return null;
+    }
+
+    @Override
+    public String getFlavourDestroy() {
+        return null;
     }
 
     @Override

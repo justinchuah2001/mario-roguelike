@@ -34,23 +34,8 @@ public class Sapling extends Tree {
 
     @Override
     public String jump(Actor actor, Location location) {
-        String message = "";
-        if(actor.hasCapability(Status.INVINCIBLE)){
-            message += destroy(actor, location) + "! Money does grow on trees! A coin appeared!";
-
-        } else if(actor.hasCapability(Status.TALL)){
-            message += jumpMovement(actor, location) + " with no problem! Wahoo!";
-
-        } else if(r.nextInt(10) <= 7){
-            message += jumpMovement(actor, location) + "! Wahoo!";
-
-        } else{
-             message += jumpFailure( actor, location,20)+". Took 20 fall damage. Owie!";
-
-        }
-        return message;
+        return super.jump(actor, location);
     }
-
 
     /**
      * Every turn, there is a 10% chance for a coin to be generated
@@ -62,5 +47,30 @@ public class Sapling extends Tree {
             location.addItem(new Coin(20));
         }
         super.tick(location);
+    }
+
+    @Override
+    public int getJumpSuccessRate() {
+        return 80;
+    }
+
+    @Override
+    public int getFallDamage() {
+        return 20;
+    }
+
+    @Override
+    public String getFlavourJump() {
+        return "Wahoo! ";
+    }
+
+    @Override
+    public String getFlavourFail() {
+        return "Owie! ";
+    }
+
+    @Override
+    public String getFlavourDestroy() {
+        return "Money does grow on trees! ";
     }
 }

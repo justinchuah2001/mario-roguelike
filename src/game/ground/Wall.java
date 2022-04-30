@@ -19,13 +19,14 @@ import java.util.Random;
  */
 
 public class Wall extends Ground implements Jumpable{
-	private Random r = new Random();
+	int fallDamage;
 
 	/**
 	 * A constructor for the Wall class
 	 */
 	public Wall() {
 		super('#');
+		this.fallDamage = 20;
 	}
 
 
@@ -37,24 +38,6 @@ public class Wall extends Ground implements Jumpable{
 		return "Wall";
 	}
 
-	@Override
-	public String jump(Actor actor, Location location) {
-		String message = "";
-		if(actor.hasCapability(Status.INVINCIBLE)){
-			message += destroy(actor, location) + "! You're wrecking the place! A coin appeared!";
-
-		} else if(actor.hasCapability(Status.TALL)){
-			message += jumpMovement(actor, location) + " with no problem! Wahoo!";
-
-		}else if(r.nextInt(10) <= 7){
-			message += jumpMovement(actor, location) + "! Wahoo!";
-
-		}else{
-			message += jumpFailure(actor, location, 20) + ". Took 20 fall damage. Bonk!";
-
-		}
-		return message;
-	}
 
 	@Override
 	public ActionList allowableActions(Actor actor, Location location, String direction){
@@ -72,5 +55,30 @@ public class Wall extends Ground implements Jumpable{
 	@Override
 	public boolean blocksThrownObjects() {
 		return true;
+	}
+
+	@Override
+	public int getJumpSuccessRate() {
+		return 80;
+	}
+
+	@Override
+	public int getFallDamage() {
+		return 20;
+	}
+
+	@Override
+	public String getFlavourJump() {
+		return "Hup! ";
+	}
+
+	@Override
+	public String getFlavourFail() {
+		return "Bonk! ";
+	}
+
+	@Override
+	public String getFlavourDestroy() {
+		return "You're wrecking the place! ";
 	}
 }

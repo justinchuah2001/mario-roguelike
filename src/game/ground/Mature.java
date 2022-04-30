@@ -34,21 +34,7 @@ public class Mature extends Tree {
 
     @Override
     public String jump(Actor actor, Location location) {
-        String message = "";
-        if(actor.hasCapability(Status.INVINCIBLE)){
-            message += destroy(actor, location) + "! No more Koopas from you! A coin appeared!";
-
-        } else if(actor.hasCapability(Status.TALL)){
-            message += jumpMovement(actor, location) + " with no problem! Yahoohoo!~";
-
-        } else if(r.nextInt(10) <= 6){
-            message += jumpMovement(actor, location) + "! Yahoohoo!~";
-
-        } else{
-            message += jumpFailure(actor, location, 30) + ". Took 30 fall damage. Ouch!";
-
-        }
-        return message;
+        return super.jump(actor, location);
     }
 
     /**
@@ -129,6 +115,31 @@ public class Mature extends Tree {
             }
         }
         return false;
+    }
+
+    @Override
+    public int getJumpSuccessRate() {
+        return 70;
+    }
+
+    @Override
+    public int getFallDamage() {
+        return 30;
+    }
+
+    @Override
+    public String getFlavourJump() {
+        return "Yahoohoo!~ ";
+    }
+
+    @Override
+    public String getFlavourFail() {
+        return "Ouch! ";
+    }
+
+    @Override
+    public String getFlavourDestroy() {
+        return "No more Koopas from you! ";
     }
 }
 

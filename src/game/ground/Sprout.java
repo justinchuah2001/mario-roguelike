@@ -36,22 +36,7 @@ public class Sprout extends Tree {
 
     @Override
     public String jump(Actor actor, Location location) {
-        String message = "";
-        if(actor.hasCapability(Status.INVINCIBLE)){
-            message += destroy(actor, location) + "! Bye bye Goomba spawner~ A coin appeared!";
-
-        }
-        else if(actor.hasCapability(Status.TALL)){
-            message += jumpMovement(actor, location) + " with no problem! Boing~";
-
-        }else if(r.nextInt(10) <= 8){
-            message += jumpMovement(actor, location) + "! Boing~";
-
-        }else{
-            message += jumpFailure(actor, location,10) +". Took 10 fall damage. Oof!";
-
-        }
-        return message;
+        return super.jump(actor, location);
     }
 
     /**
@@ -65,5 +50,30 @@ public class Sprout extends Tree {
         }
 
         super.tick(location);
+    }
+
+    @Override
+    public int getJumpSuccessRate() {
+        return 90;
+    }
+
+    @Override
+    public int getFallDamage() {
+        return 10;
+    }
+
+    @Override
+    public String getFlavourJump() {
+        return "Boing~ ";
+    }
+
+    @Override
+    public String getFlavourFail() {
+        return "Oof! ";
+    }
+
+    @Override
+    public String getFlavourDestroy() {
+        return "Bye bye Goomba spawner~ ";
     }
 }
