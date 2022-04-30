@@ -60,20 +60,35 @@ public class Player extends Actor implements Resettable {
 		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()) : super.getDisplayChar();
 	}
 
+	/**
+	 * This function reset the Player when the user choose to reset the game.
+	 */
 	@Override
 	public void resetInstance() {
-		this.resetMaxHp(this.getMaxHp());
+		this.heal(this.getMaxHp());
 		this.removeCapability(Status.TALL);
 		this.removeCapability(Status.INVINCIBLE);
 	}
 
+	/**
+	 * This function add coins to the Player's wallet.
+	 * @param coinValue The value of coin that we want to add to the Player's wallet.
+	 */
 	public void addToWallet(int coinValue) {
-		this.wallet += coinValue;
+		if (coinValue > 0) {
+			this.wallet += coinValue;
+		}
 	}
 
+	/**
+	 * This
+	 * @param amount How much we want to deduct from Player's wallet.
+	 * @see game.actions.BuyItemAction
+	 * @return Whether the amount is successfully deducted from Player's wallet.
+	 */
 	public boolean deductFromWallet(int amount) {
 		boolean valid = false;
-		if (this.wallet >= amount) {
+		if (amount > 0 && this.wallet >= amount) {
 			this.wallet -= amount;
 			valid = true;
 		}
