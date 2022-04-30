@@ -10,38 +10,50 @@ import game.items.Coin;
 
 import java.util.Random;
 
-public class Wall extends Ground implements Jumpable{
+/**
+ * The Wall class is a class that represents a wall. Standard, impassable terrain by normal means.
+ *
+ * @author Caelan Kao Khai Xuen
+ * @version 1.0
+ * @see edu.monash.fit2099.engine.positions.Ground
+ */
 
+public class Wall extends Ground implements Jumpable{
+	private Random r = new Random();
+
+	/**
+	 * A constructor for the Wall class
+	 */
 	public Wall() {
 		super('#');
 	}
-	private Random r = new Random();
 
+
+	/**
+	 * Override of the toString method
+	 * @return A string with the name of the Ground
+	 */
 	public String toString(){
 		return "Wall";
 	}
 
 	@Override
 	public String jump(Actor actor, Location location) {
+		String message = "";
 		if(actor.hasCapability(Status.INVINCIBLE)){
+			message += destroy(actor, location) + "! You're wrecking the place! A coin appeared!";
 
-			String destroyMessage = actor + " destroys the " + location.getGround().toString() + "! You're wrecking the place! A coin appeared!";
-
-			location.map().moveActor(actor, location);
-			location.setGround(new Dirt());
-			location.addItem(new Coin(5));
-
-			return destroyMessage;
 		} else if(actor.hasCapability(Status.TALL)){
-			location.map().moveActor(actor, location);
-			return actor + " jumps up the " + location.getGround().toString() + " with no problem! Wahoo!";
+			message += jumpMovement(actor, location) + " with no problem! Wahoo!";
+
 		}else if(r.nextInt(10) <= 7){
-			location.map().moveActor(actor, location);
-			return actor + " jumps up the " + location.getGround().toString() + "! Wahoo!";
+			message += jumpMovement(actor, location) + "! Wahoo!";
+
 		}else{
-			actor.hurt(20);
-			return actor + " bonks the " + location.getGround().toString() +". Took 20 fall damage. Bonk!";
+			message += jumpFailure(actor, location, 20) + ". Took 20 fall damage. Bonk!";
+
 		}
+		return message;
 	}
 
 	@Override

@@ -6,44 +6,56 @@ import game.Status;
 import game.actors.Koopa;
 import game.items.Coin;
 
+/**
+ * A class that represents a Mature Tree, the third and final stage of a Tree.
+ *
+ * @author Caelan Kao Khai Xuen
+ * @version 1.0
+ * @see game.ground.Tree
+ * */
 public class Mature extends Tree {
 
     /**
-     * Constructor.
+     * A constructor for the Mature class
+     * The age counter is reset to 0 so that it can be reused to spawn new sprouts
      */
     public Mature() {
         super('T');
         this.age = 0;
     }
 
+    /**
+     * Override of the toString method
+     * @return A string with the name of the Ground
+     */
     public String toString(){
         return "Mature Tree";
     }
 
     @Override
     public String jump(Actor actor, Location location) {
+        String message = "";
         if(actor.hasCapability(Status.INVINCIBLE)){
+            message += destroy(actor, location) + "! No more Koopas from you! A coin appeared!";
 
-            String destroyMessage = actor + " destroys the " + location.getGround().toString() + "! No more Koopas from you! A coin appeared!";
+        } else if(actor.hasCapability(Status.TALL)){
+            message += jumpMovement(actor, location) + " with no problem! Yahoohoo!~";
 
-            location.map().moveActor(actor, location);
-            location.setGround(new Dirt());
-            location.addItem(new Coin(5));
-
-            return destroyMessage;
-
-        }else if(actor.hasCapability(Status.TALL)){
-            location.map().moveActor(actor, location);
-            return actor + " jumps up the " + location.getGround().toString() + " with no problem! Yahoohoo!~";
         } else if(r.nextInt(10) <= 6){
-            location.map().moveActor(actor, location);
-            return actor + " jumps up the " + location.getGround().toString() + "! Yahoohoo!~";
-        }else{
-            actor.hurt(30);
-            return  actor + " fails to jump the " + location.getGround().toString() +". Took 30 fall damage. Ouch!";
+            message += jumpMovement(actor, location) + "! Yahoohoo!~";
+
+        } else{
+            message += jumpFailure(actor, location, 30) + ". Took 30 fall damage. Ouch!";
+
         }
+        return message;
     }
 
+    /**
+     * Every turn, there is a 20% chance for this Mature Tree to die
+     * Every 5 turns, a new Sprout can spawn on an adjacent Dirt tile, then the age is reset to 0.
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
         if (r.nextInt(5) == 0) {
@@ -62,6 +74,12 @@ public class Mature extends Tree {
         super.tick(location);
     }
 
+    /**
+     * This method spawns a sprout on an adjacent dirt tile. An adjacent tile is randomly selected and will be
+     * reselected if it is an invalid option, such as being out of bounds or that it is not Dirt.
+     *
+     * @param location The location of the Mature Tree
+     */
     private void spawnSprout(Location location) {
         int x = 0;
         int y = 0;
@@ -88,11 +106,19 @@ public class Mature extends Tree {
                     y = location.y() + 1;
                 }
             }
-        } while (!location.map().getXRange().contains(x) || !location.map().getYRange().contains(y) || !(location.map().at(x, y).getGround() instanceof Dirt));
+        } while (!location.map().getXRange().contains(x) ||
+                !location.map().getYRange().contains(y) ||
+                !(location.map().at(x, y).getGround() instanceof Dirt));
 
         location.map().at(x, y).setGround(new Sprout());
     }
 
+    /**
+     * A failsafe so that Mature Tree does not attempt to spawn a sprout should there be an edge case where all
+     * adjacent tiles to a Mature Tree are invalid, which would cause the random tile selection to infinitely loop
+     * @param location The location of the Mature Tree
+     * @return A boolean that dictates if there is at least one valid option to spawn a sprout
+     */
     private boolean hasFertileGround(Location location) {
         for(int x = location.x() - 1; x < location.x() + 2; x++){
             for(int y = location.y() - 1; y < location.y() + 2; y++){
