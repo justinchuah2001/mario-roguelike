@@ -10,7 +10,7 @@ import game.actions.JumpAction;
 
 import java.util.Random;
 /**
- * A class that represents a Tree, which has 3 different stages that change with its age.
+ * An abstract class that represents a Tree, which has 3 different stages that change with its age.
  *
  * @author Caelan Kao Khai Xuen
  * @version 1.0
@@ -19,7 +19,7 @@ import java.util.Random;
  * @see game.ground.Mature
  * @see edu.monash.fit2099.engine.positions.Ground
  */
-public class Tree extends Ground implements Jumpable, Resettable {
+public abstract class Tree extends Ground implements Jumpable, Resettable {
 
     /**
      * the age of the tree
