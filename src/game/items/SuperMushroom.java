@@ -40,4 +40,9 @@ public class SuperMushroom extends Consumables implements Buyable {
     public int getPrice() {
         return price;
     }
+
+    @Override
+    public void buy(Actor actor) {
+        actor.addItemToInventory(this);
+    }
 }

@@ -43,10 +43,10 @@ public class Toad extends Actor {
       actions.add(new TalkToToadAction(otherActor));
     }
     if (otherActor.hasCapability(Status.BUY_FROM_TOAD)){   // only TALK_TO_TOAD actor can buy from the Toad
-      actions.add(BuyItemAction.getInstance(otherActor, new SuperMushroom()));
-      actions.add(BuyItemAction.getInstance(otherActor, new PowerStar()));
+      actions.add(BuyItemAction.getInstance(new SuperMushroom()));
+      actions.add(BuyItemAction.getInstance(new PowerStar()));
       if (!otherActor.hasCapability(Status.HAS_WRENCH)) {
-        actions.add(BuyItemAction.getInstance(otherActor, new Wrench()));
+        actions.add(BuyItemAction.getInstance(new Wrench()));
       }
     }
     return actions;

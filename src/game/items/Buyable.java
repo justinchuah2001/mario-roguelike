@@ -1,5 +1,7 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actors.Actor;
+
 /**
  * Interface for Item in the game to show that item is buyable so it can be used
  * by BuyItemAction. All Buyable item should have a price.
@@ -16,4 +18,6 @@ public interface Buyable {
    * @return Price of the Buyable item.
    */
   int getPrice();
+
+  void buy(Actor actor);
 }

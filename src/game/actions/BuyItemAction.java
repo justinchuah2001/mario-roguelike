@@ -18,11 +18,6 @@ import java.util.List;
  */
 public class BuyItemAction extends Action {
   /**
-   * Seller of the item
-   */
-  private Actor seller;
-
-  /**
    * The item to be traded.
    */
   private Item item;
@@ -36,11 +31,9 @@ public class BuyItemAction extends Action {
    * Constructor. It is set to private as we should only meet the condition stated in
    * getInstance(Actor seller, Item item).
    *
-   * @param seller Seller of the item.
    * @param item The item to be traded.
    */
-  private BuyItemAction(Actor seller, Item item) {
-    this.seller = seller;
+  private BuyItemAction(Item item) {
     this.item = item;
     this.price = ((Buyable) item).getPrice();
   }
@@ -48,13 +41,12 @@ public class BuyItemAction extends Action {
   /**
    * This function only creates the BuyItemAction for other modules if and only if the item is Buyable.
    *
-   * @param seller Seller of the item.
    * @param item The item to be traded.
    * @return BuyItemAction
    */
-  public static BuyItemAction getInstance(Actor seller, Item item){
+  public static BuyItemAction getInstance(Item item){
     if (item instanceof Buyable){
-      return new BuyItemAction(seller, item);
+      return new BuyItemAction(item);
     } else {
       return null;
     }
@@ -74,15 +66,14 @@ public class BuyItemAction extends Action {
     boolean sold = false;
 
     if (player.deductFromWallet(this.price)) {
-      player.addItemToInventory(item);
-      seller.removeItemFromInventory(item);
+      ((Buyable) item).buy(buyer);
       sold = true;
     }
 
     if (sold) {
-      res = buyer + " buys " + item + " from " + seller + ".";
+      res = buyer + " bought " + item + ".";
     } else {
-      res = "Insufficient coin for " + buyer + " to buy " + item + " from " + seller + ".";
+      res = "Insufficient coin for " + buyer + " to buy " + item + ".";
     }
     return res;
   }

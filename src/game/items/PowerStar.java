@@ -72,6 +72,11 @@ public class PowerStar extends Consumables implements Buyable{
     }
 
     @Override
+    public void buy(Actor actor) {
+        actor.addItemToInventory(this);
+    }
+
+    @Override
     public void tick(Location currentLocation, Actor actor) {
         if (counter == LIFESPAN ){
             actor.removeItemFromInventory(this);

@@ -1,5 +1,6 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Status;
 
@@ -21,7 +22,6 @@ public class Wrench extends WeaponItem implements Buyable {
      */
     public Wrench(){
         super("Wrench", 'W', 50, "Bonk", 80);
-        this.addCapability(Status.HAS_WRENCH);
         this.price = 200;
     }
 
@@ -31,5 +31,11 @@ public class Wrench extends WeaponItem implements Buyable {
      */
     public int getPrice() {
         return price;
+    }
+
+    @Override
+    public void buy(Actor actor) {
+        actor.addItemToInventory(this);
+        actor.addCapability(Status.HAS_WRENCH);
     }
 }
