@@ -29,7 +29,6 @@ public class SuperMushroom extends Consumables implements Buyable {
      */
     @Override
     public void consumedEffect(Actor actor) {
-        super.consumedEffect(actor);
         actor.increaseMaxHp(50);
         actor.addCapability(Status.TALL);
     }

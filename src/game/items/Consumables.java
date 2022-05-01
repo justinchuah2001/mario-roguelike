@@ -12,11 +12,6 @@ import game.actions.ConsumeItemAction;
  */
 public abstract class Consumables extends Item {
     /**
-     * Actor that consumed the consumable
-     */
-    private Actor actor;
-
-    /**
      * Constructor.
      * Adds the action that allows the actor to consume the consumable
      * @param name Name of the consumable item
@@ -32,8 +27,5 @@ public abstract class Consumables extends Item {
      * Set the actor under the effects of the consumed item
      * @param actor Actor consuming
      */
-    public void consumedEffect(Actor actor) {
-        this.actor = actor;
-
-    }
+    public abstract void consumedEffect(Actor actor);
 }
