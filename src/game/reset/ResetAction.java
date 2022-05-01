@@ -31,7 +31,7 @@ public class ResetAction extends Action {
    */
   @Override
   public String menuDescription(Actor actor) {
-    return String.format("%s reset the Game", actor);
+    return String.format("%s resets the Game", actor);
   }
 
   /**

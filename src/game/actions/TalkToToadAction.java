@@ -57,6 +57,6 @@ public class TalkToToadAction extends Action {
    */
   @Override
   public String menuDescription(Actor actor) {
-    return actor + " talk to Toad";
+    return actor + " talks to Toad";
   }
 }
