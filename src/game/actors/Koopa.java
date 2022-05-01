@@ -8,16 +8,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.*;
-import game.actions.AttackAction;
-import game.actions.DestroyShellAction;
-import game.behaviours.AttackBehaviour;
+import game.actions.BreakShellAction;
 import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
 import game.items.SuperMushroom;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A little turtle who is hostile to the player when in range.
@@ -59,7 +52,7 @@ public class Koopa extends Enemy {
         // If Koopa is currently in dormant state(in shell ) and other actor wields a wrench,
         // allow the other actor to destroy the shell which drops a mushroom at the location
         if(this.hasCapability(Status.DORMANT) && otherActor.hasCapability(Status.HAS_WRENCH)){
-            actions.add(new DestroyShellAction(this, direction));
+            actions.add(new BreakShellAction(this, direction));
             this.behaviours.clear(); //Koopa in dormant state is not allowed to move or attack
             }else if (this.hasCapability(Status.DORMANT)){
             actions.clear(); ////Koopa in dormant state is not allowed to move or attack

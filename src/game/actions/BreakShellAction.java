@@ -13,7 +13,7 @@ import game.Status;
  * @version 1.0
  * @see game.actors.Koopa
  */
-public class DestroyShellAction extends Action {
+public class BreakShellAction extends Action {
     /**
      * target of the action, in this case a Koopa
      */
@@ -28,7 +28,7 @@ public class DestroyShellAction extends Action {
      * @param target Koopa shell that is being targeted
      * @param direction
      */
-    public DestroyShellAction(Actor target, String direction) {
+    public BreakShellAction(Actor target, String direction) {
         this.target = target;
         this.direction = direction;
     }
@@ -67,6 +67,6 @@ public class DestroyShellAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " destroyed shell at " + direction;
+        return actor + " destroy shell at " + direction;
     }
 }

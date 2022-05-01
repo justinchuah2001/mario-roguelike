@@ -29,6 +29,7 @@ public class Player extends Actor implements Resettable {
 	 */
 	private int wallet = 0;
 
+
 	/**
 	 * Constructor.
 	 *
