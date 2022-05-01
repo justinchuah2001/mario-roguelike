@@ -82,7 +82,7 @@ public class BuyItemAction extends Action {
     if (sold) {
       res = buyer + " buys " + item + " from " + seller + ".";
     } else {
-      res = "insufficient coin for " + buyer + " to buy " + item + " from " + seller + ".";
+      res = "Insufficient coin for " + buyer + " to buy " + item + " from " + seller + ".";
     }
     return res;
   }
@@ -95,6 +95,6 @@ public class BuyItemAction extends Action {
    */
   @Override
   public String menuDescription(Actor buyer) {
-    return String.format("%s buys Power Star ($%d)", buyer, this.price);
+    return String.format("%s buys %s ($%d)", buyer, this.item, this.price);
   }
 }

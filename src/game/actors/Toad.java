@@ -44,7 +44,8 @@ public class Toad extends Actor {
 
     if(otherActor.hasCapability(Status.TALK_TO_TOAD)) {           // it can be talked to only by the TALK_TO_TOAD actor
       actions.add(new TalkToToadAction(otherActor));
-    } else if (otherActor.hasCapability(Status.BUY_FROM_TOAD)){   // only TALK_TO_TOAD actor can buy from the Toad
+    }
+    if (otherActor.hasCapability(Status.BUY_FROM_TOAD)){   // only TALK_TO_TOAD actor can buy from the Toad
       for (Item item : this.getInventory()){
         Action buyAction = BuyItemAction.getInstance(this, item);
         if (buyAction != null){
