@@ -26,9 +26,6 @@ public class Toad extends Actor {
    */
   public Toad() {
     super("Toad", 'O', 1);
-    this.addItemToInventory(new SuperMushroom());
-    this.addItemToInventory(new PowerStar());
-    this.addItemToInventory(new Wrench());
   }
 
   /**
@@ -46,11 +43,10 @@ public class Toad extends Actor {
       actions.add(new TalkToToadAction(otherActor));
     }
     if (otherActor.hasCapability(Status.BUY_FROM_TOAD)){   // only TALK_TO_TOAD actor can buy from the Toad
-      for (Item item : this.getInventory()){
-        Action buyAction = BuyItemAction.getInstance(this, item);
-        if (buyAction != null){
-          actions.add(buyAction);
-        }
+      actions.add(BuyItemAction.getInstance(otherActor, new SuperMushroom()));
+      actions.add(BuyItemAction.getInstance(otherActor, new PowerStar()));
+      if (!otherActor.hasCapability(Status.HAS_WRENCH)) {
+        actions.add(BuyItemAction.getInstance(otherActor, new Wrench()));
       }
     }
     return actions;
