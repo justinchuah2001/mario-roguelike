@@ -7,8 +7,8 @@ package game.items;
  * @author Chan Jia Zheng
  * @version 1
  * @see game.items.Wrench
- * @see SuperMushroom
- * @see PowerStar
+ * @see game.items.SuperMushroom
+ * @see game.items.PowerStar
  */
 
 /**
