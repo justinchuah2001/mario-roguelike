@@ -43,7 +43,7 @@ public class Sprout extends Tree {
      */
     @Override
     public void tick(Location location){
-        if(r.nextInt(10) == 0 && !location.containsAnActor()){
+        if(r.nextInt(100) < 10 && !location.containsAnActor()){
             location.addActor(new Goomba());
         }
 

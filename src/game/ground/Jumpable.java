@@ -21,12 +21,13 @@ public interface Jumpable {
 
     /**
      * Default method for running jump checks.
-     * <p>Calls destroy if actor is invincible, bypasses the probability if actor is tall, and moves or damages
-     * the player based on probability otherwise.</p>
+     * <p>Destroys Jumpable if actor is INVINCIBLE, bypasses the probability if actor is TALL, and moves or damages
+     * the actor based on probability otherwise.</p>
      *
      * @param actor the actor jumping
      * @param location the location of the jumpable object
      * @return String that describes if the actor succeeds or fails in Jumping onto the object
+     * @see Status
      */
     default String jump(Actor actor, Location location){
 

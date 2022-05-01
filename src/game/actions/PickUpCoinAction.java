@@ -7,6 +7,14 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.Player;
 import game.items.Coin;
 
+/**
+ * This action allows an actor to pick up a Coin object, add the value to the actor's wallet, and instead of adding
+ * the coin into the inventory, remove it from the map.
+ *
+ * @author Justin Chuah
+ * @version 1.0
+ * @see game.items.Coin
+ */
 public class PickUpCoinAction extends Action {
     private Item item;
     private Coin coin;

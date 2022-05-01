@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.actors.Goomba;
 import game.actors.Player;
 import game.actors.Toad;
 import game.ground.Dirt;
@@ -70,9 +69,6 @@ public class Application {
 
 			Wrench wrench = new Wrench();
 			gameMap.at(43, 9).addItem(wrench);
-
-			// FIXME: the Goomba should be generated from the Tree
-			gameMap.at(35, 10).addActor(new Goomba());
 
 			world.run();
 

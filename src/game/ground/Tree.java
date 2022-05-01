@@ -68,7 +68,7 @@ public class Tree extends Ground implements Jumpable, Resettable {
     @Override
     public void tick(Location location){
         if (this.hasCapability(Status.RESET)){
-            if(r.nextInt(2) == 0){
+            if(r.nextInt(100) < 50){
                 location.setGround(new Dirt());
             }
             return ;

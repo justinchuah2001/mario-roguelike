@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A little turtle  who is hostile to the player when in range
+ * A little turtle who is hostile to the player when in range
  *
  * @author Justin Chuah
  * @version 1.0

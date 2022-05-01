@@ -36,18 +36,19 @@ public class Mature extends Tree {
     }
 
     /**
-     * Every turn, there is a 20% chance for this Mature Tree to die
+     * Every turn, there is a 20% chance for this Mature Tree to die.
+     * Every turn, there is also a 15% chance for a Koopa to spawn, if there is no actor on the Mature Tree.
      * Every 5 turns, a new Sprout can spawn on an adjacent Dirt tile, then the age is reset to 0.
      * @param location The location of the Ground
      */
     @Override
     public void tick(Location location) {
-        if (r.nextInt(5) == 0) {
+        if (r.nextInt(100) < 20) {
             location.setGround(new Dirt());
             return;
         }
 
-        if (r.nextInt(20) < 3 && !location.containsAnActor()) {
+        if (r.nextInt(100) < 15 && !location.containsAnActor()) {
             location.addActor(new Koopa());
         }
         if (getAge() == 5 && hasFertileGround(location)) {
@@ -100,6 +101,7 @@ public class Mature extends Tree {
     /**
      * A failsafe so that Mature Tree does not attempt to spawn a sprout should there be an edge case where all
      * adjacent tiles to a Mature Tree are invalid, which would cause the random tile selection to infinitely loop
+     *
      * @param location The location of the Mature Tree
      * @return A boolean that dictates if there is at least one valid option to spawn a sprout
      */

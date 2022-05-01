@@ -17,7 +17,7 @@ import game.Status;
  */
 public class Player extends Actor implements Resettable {
 	/**
-	 * Counter to track power star effect ( Last for 10 turns)
+	 * Counter to track power star effect (Last for 10 turns)
 	 */
 	private int counter = 10;
 	/**
