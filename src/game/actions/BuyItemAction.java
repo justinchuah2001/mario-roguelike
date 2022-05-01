@@ -66,6 +66,7 @@ public class BuyItemAction extends Action {
     boolean sold = false;
 
     if (player.deductFromWallet(this.price)) {
+      item.togglePortability();
       ((Buyable) item).buy(buyer);
       sold = true;
     }
