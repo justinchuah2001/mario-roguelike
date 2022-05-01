@@ -12,7 +12,6 @@ import game.actors.Koopa;
  * @see game.ground.Tree
  * */
 public class Mature extends Tree {
-
     /**
      * A constructor for the Mature class
      * The age counter is reset to 0 so that it can be reused to spawn new sprouts

@@ -12,9 +12,7 @@ import game.actors.Goomba;
  * @see game.ground.Tree
  * @see edu.monash.fit2099.engine.positions.Ground
  */
-
 public class Sprout extends Tree {
-
     /**
      * A constructor for the Sprout class.
      * The age is initialised as 0

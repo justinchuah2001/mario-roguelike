@@ -15,7 +15,6 @@ import java.util.Random;
  * @see game.ground.Wall
  * @see game.ground.Tree
  */
-
 public interface Jumpable {
     Random r = new Random();
 
@@ -48,7 +47,6 @@ public interface Jumpable {
             return message;
         }
     }
-
 
     /**
      * Generic code block to move the actor onto the jumpable object and returns a generic message

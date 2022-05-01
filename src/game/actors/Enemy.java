@@ -59,6 +59,7 @@ public abstract class Enemy extends Actor implements Resettable {
         }
         return actions;
     }
+
     /**
      * Add the RESET Status to coin, it will be removed if it is ticked
      */

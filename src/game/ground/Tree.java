@@ -19,7 +19,6 @@ import java.util.Random;
  * @see game.ground.Mature
  * @see edu.monash.fit2099.engine.positions.Ground
  */
-
 public class Tree extends Ground implements Jumpable, Resettable {
 
     /**

@@ -25,7 +25,6 @@ public class Wall extends Ground implements Jumpable{
 		this.fallDamage = 20;
 	}
 
-
 	/**
 	 * Override of the toString method
 	 * @return A string with the name of the Ground
@@ -33,7 +32,6 @@ public class Wall extends Ground implements Jumpable{
 	public String toString(){
 		return "Wall";
 	}
-
 
 	@Override
 	public ActionList allowableActions(Actor actor, Location location, String direction){

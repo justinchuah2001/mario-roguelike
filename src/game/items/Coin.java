@@ -14,7 +14,6 @@ import game.Status;
  *
  * @author Caelan Kao Khai Xuen
  * @version 1.0
- *
  */
 public class Coin extends Item implements Resettable {
     private final int value;

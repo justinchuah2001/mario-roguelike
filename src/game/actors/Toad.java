@@ -17,7 +17,7 @@ import game.items.SuperMushroom;
 /**
  * This class represents the actor Toad in the game.
  * @author Chan Jia Zheng
- * @version 1
+ * @version 1.0
  */
 public class Toad extends Actor {
   /**

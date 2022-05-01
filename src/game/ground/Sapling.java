@@ -12,7 +12,6 @@ import game.items.Coin;
  * @see game.ground.Tree
  * @see edu.monash.fit2099.engine.positions.Ground
  */
-
 public class Sapling extends Tree {
     /**
      * A constructor for the Sapling class.
