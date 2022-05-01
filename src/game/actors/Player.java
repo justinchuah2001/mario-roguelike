@@ -67,6 +67,7 @@ public class Player extends Actor implements Resettable {
 			if (counter == WEAR_OFF) {
 				this.removeCapability(Status.INVINCIBLE);
 				display.println("Mario is no longer invincible.");
+				counter = 10; // Reset the counter
 			} else {
 				display.println("Mario is INVINCIBLE " + counter + " - turns remain");
 				counter -= 1;
