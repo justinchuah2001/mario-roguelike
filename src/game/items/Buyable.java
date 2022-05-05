@@ -19,5 +19,9 @@ public interface Buyable {
    */
   int getPrice();
 
+  /**
+   * This function decides what happen if the item is bought by an Actor.
+   * @param actor
+   */
   void buy(Actor actor);
 }
