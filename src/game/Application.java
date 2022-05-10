@@ -10,10 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Player;
 import game.actors.Toad;
-import game.ground.Dirt;
-import game.ground.Floor;
-import game.ground.Sprout;
-import game.ground.Wall;
+import game.ground.*;
 import game.items.Consumables;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
@@ -29,7 +26,8 @@ public class Application {
 
 			World world = new World(new Display());
 
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout());
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout(),
+					new Lava(), new WarpPipe());
 
 			List<String> map = Arrays.asList(
 				"..........................................##..........+.........................",
@@ -54,6 +52,29 @@ public class Application {
 
 			GameMap gameMap = new GameMap(groundFactory, map);
 			world.addGameMap(gameMap);
+
+			List<String> LavaMap = Arrays.asList(
+				"C.........................................##..........+..........",
+				"............+............+..................#....................",
+				"............................................#....................",
+				".............................................##..................",
+				"...............................................#.................",
+				"................................................#................",
+				".................+................................#..............",
+				".................................................##..............",
+				"................................................##...............",
+				".........+..............................+#____####...............",
+				".......................................+#_____###++..............",
+				".......................................+#______###...............",
+				"........................................+#_____###...............",
+				"........................+........................##.............+",
+				"...................................................#.............",
+				"....................................................#............",
+				"...................+.................................#...........");
+
+
+			GameMap lavaGameMap = new GameMap(groundFactory, LavaMap);
+			world.addGameMap(lavaGameMap);
 
 			Actor mario = new Player("Mario", 'm', 100);
 			world.addPlayer(mario, gameMap.at(42, 10));
