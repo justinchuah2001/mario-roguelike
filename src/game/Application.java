@@ -8,7 +8,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.Bowser;
 import game.actors.Player;
+import game.actors.PrincessPeach;
 import game.actors.Toad;
 import game.ground.*;
 import game.items.Consumables;
@@ -26,7 +28,8 @@ public class Application {
 
 			World world = new World(new Display());
 
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout(),
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
+					new Sprout(), new Mature(),
 					new Lava(), new WarpPipe());
 
 			List<String> map = Arrays.asList(
@@ -53,34 +56,40 @@ public class Application {
 			GameMap gameMap = new GameMap(groundFactory, map);
 			world.addGameMap(gameMap);
 
-			List<String> LavaMap = Arrays.asList(
-				"C.........................................##..........+..........",
-				"............+............+..................#....................",
-				"............................................#....................",
-				".............................................##..................",
-				"...............................................#.................",
-				"................................................#................",
-				".................+................................#..............",
-				".................................................##..............",
-				"................................................##...............",
+			List<String> lavaMap = Arrays.asList(
+				"C..........................................###........+..........",
+				"............+............+..................###..................",
+				".............................................###.................",
+				"..............................................###................",
+				"...............................................###...............",
+				"................................................###..............",
+				".................+..............................###..............",
+				"................................................###..............",
+				"...............................................###...............",
 				".........+..............................+#____####...............",
-				".......................................+#_____###++..............",
+				".......................................+#_____###................",
 				".......................................+#______###...............",
 				"........................................+#_____###...............",
-				"........................+........................##.............+",
-				"...................................................#.............",
-				"....................................................#............",
-				"...................+.................................#...........");
+				"........................+.......................###..............",
+				".................................................###.............",
+				"..................................................###............",
+				"...................+...............................###...........");
 
 
-			GameMap lavaGameMap = new GameMap(groundFactory, LavaMap);
+			GameMap lavaGameMap = new GameMap(groundFactory, lavaMap);
 			world.addGameMap(lavaGameMap);
 
 			Actor mario = new Player("Mario", 'm', 100);
-			world.addPlayer(mario, gameMap.at(42, 10));
+			world.addPlayer(mario, lavaGameMap.at(0, 10));
 
 			Actor toad = new Toad();
 			gameMap.addActor(toad, gameMap.at(46, 10));
+
+			Actor bowser = new Bowser();
+			lavaGameMap.addActor(bowser, lavaGameMap.at(63, 16));
+
+			Actor peach = new PrincessPeach();
+			lavaGameMap.addActor(peach, lavaGameMap.at(64,16));
 
 			Consumables SuperMushroom = new SuperMushroom();
 			gameMap.at(42,11).addItem(SuperMushroom);
