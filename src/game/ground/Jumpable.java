@@ -36,7 +36,7 @@ public interface Jumpable {
         } else if(actor.hasCapability(Status.TALL)){
             return jumpMovement(actor, location) + " easily! " + getFlavourJump();
 
-        }else if(r.nextInt(100) < getJumpSuccessRate()){
+        } else if(r.nextInt(100) < getJumpSuccessRate()){
             return jumpMovement(actor, location) + "! " + getFlavourJump();
 
         }else{
