@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,10 +28,10 @@ public class Application {
 	public static void main(String[] args) {
 
 			World world = new World(new Display());
+			ArrayList<GameMap> worldList = new ArrayList<>();
 
 			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
-					new Sprout(), new Mature(),
-					new Lava(), new WarpPipe());
+					new Sprout(), new WarpPipe(), new Lava());
 
 			List<String> map = Arrays.asList(
 				"..........................................##..........+.........................",
@@ -40,7 +41,7 @@ public class Application {
 				"...............................................#................................",
 				"................................................#...............................",
 				".................+................................#.............................",
-				".................................................##.............................",
+				"............................................C....##.............................",
 				"................................................##..............................",
 				".........+..............................+#____####.................+............",
 				".......................................+#_____###++.............................",
@@ -55,6 +56,7 @@ public class Application {
 
 			GameMap gameMap = new GameMap(groundFactory, map);
 			world.addGameMap(gameMap);
+			worldList.add(gameMap);
 
 			List<String> lavaMap = Arrays.asList(
 				"C..........................................###........+..........",
@@ -63,9 +65,9 @@ public class Application {
 				"..............................................###................",
 				"...............................................###...............",
 				"................................................###..............",
-				".................+..............................###..............",
-				"................................................###..............",
-				"...............................................###...............",
+				".................+........................LLL...###..............",
+				"..........................................LLL...###..............",
+				"..........................................LLL..###...............",
 				".........+..............................+#____####...............",
 				".......................................+#_____###................",
 				".......................................+#______###...............",
@@ -78,9 +80,10 @@ public class Application {
 
 			GameMap lavaGameMap = new GameMap(groundFactory, lavaMap);
 			world.addGameMap(lavaGameMap);
+			worldList.add(lavaGameMap);
 
-			Actor mario = new Player("Mario", 'm', 100);
-			world.addPlayer(mario, lavaGameMap.at(0, 10));
+			Actor mario = new Player("Mario", 'm', 100, worldList);
+			world.addPlayer(mario, gameMap.at(42, 10));
 
 			Actor toad = new Toad();
 			gameMap.addActor(toad, gameMap.at(46, 10));
