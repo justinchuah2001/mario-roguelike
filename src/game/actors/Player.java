@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.displays.Menu;
 import game.reset.Resettable;
 import game.Status;
 
+import java.util.ArrayList;
+
 /**
  * Class representing the Player.
  *
@@ -29,6 +31,8 @@ public class Player extends Actor implements Resettable {
 	 */
 	private int wallet = 0;
 
+	private ArrayList<GameMap> worldList;
+
 
 	/**
 	 * Constructor.
@@ -37,12 +41,13 @@ public class Player extends Actor implements Resettable {
 	 * @param displayChar Character to represent the player in the UI
 	 * @param hitPoints   Player's starting number of hitpoints
 	 */
-	public Player(String name, char displayChar, int hitPoints) {
+	public Player(String name, char displayChar, int hitPoints, ArrayList<GameMap> worldList) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.BUY_FROM_TOAD);
 		this.addCapability(Status.TALK_TO_TOAD);
 		this.registerInstance();
+		this.worldList = worldList;
 	}
 
 
@@ -123,5 +128,9 @@ public class Player extends Actor implements Resettable {
 			valid = true;
 		}
 		return valid;
+	}
+
+	public ArrayList<GameMap> getWorldList() {
+		return worldList;
 	}
 }
