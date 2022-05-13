@@ -14,7 +14,7 @@ public class PowerStar extends Consumables implements Buyable{
     /**
      * Counter that shows the star of the fading timer of the power star
      */
-    private int counter = 10;
+    private int counter ;
     /**
      * Value to show when the star fades and removed from the game
      */
@@ -34,6 +34,7 @@ public class PowerStar extends Consumables implements Buyable{
     public PowerStar(){
         super("Power Star",'*', true);
         this.price = 600;
+        this.counter = 10;
     }
 
     /**

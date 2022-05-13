@@ -97,8 +97,8 @@ public class Application {
 			Consumables SuperMushroom = new SuperMushroom();
 			gameMap.at(42,11).addItem(SuperMushroom);
 
-			Consumables PowerStar = new PowerStar();
-			gameMap.at(42,9).addItem(PowerStar);
+			gameMap.at(42,9).addItem(new PowerStar());
+
 
 			Wrench wrench = new Wrench();
 			gameMap.at(43, 9).addItem(wrench);
