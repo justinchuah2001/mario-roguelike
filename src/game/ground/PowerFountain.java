@@ -1,5 +1,7 @@
 package game.ground;
 
+import edu.monash.fit2099.engine.actors.Actor;
+
 public class PowerFountain extends Fountain{
     /**
      * Constructor.
@@ -8,5 +10,10 @@ public class PowerFountain extends Fountain{
      */
     public PowerFountain(char displayChar) {
         super('A');
+    }
+
+    @Override
+    public void drinkEffects(Actor actor) {
+        //actor.addcapability(power???)
     }
 }

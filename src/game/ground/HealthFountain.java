@@ -1,5 +1,7 @@
 package game.ground;
 
+import edu.monash.fit2099.engine.actors.Actor;
+
 public class HealthFountain extends Fountain{
     /**
      * Constructor.
@@ -8,5 +10,10 @@ public class HealthFountain extends Fountain{
      */
     public HealthFountain(char displayChar) {
         super('H');
+    }
+
+    @Override
+    public void drinkEffects(Actor actor) {
+        actor.heal(50);
     }
 }
