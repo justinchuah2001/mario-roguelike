@@ -55,7 +55,11 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
 
     @Override
     public boolean canActorEnter(Actor actor){
-        return false;
+        if (actor.hasCapability(Status.FLYING)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**

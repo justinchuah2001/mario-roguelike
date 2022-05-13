@@ -9,10 +9,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.actors.Bowser;
-import game.actors.Player;
-import game.actors.PrincessPeach;
-import game.actors.Toad;
+import game.actors.*;
 import game.ground.*;
 import game.items.Consumables;
 import game.items.PowerStar;
@@ -98,6 +95,9 @@ public class Application {
 			gameMap.at(42,11).addItem(SuperMushroom);
 
 			gameMap.at(42,9).addItem(new PowerStar());
+			Actor flyingKoopa = new FlyingKoopa();
+			gameMap.addActor(flyingKoopa, gameMap.at(51,13));
+
 
 
 			Wrench wrench = new Wrench();
