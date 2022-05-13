@@ -2,6 +2,7 @@ package game.ground;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actors.GroundKoopa;
 import game.actors.Koopa;
 
 /**
@@ -48,7 +49,7 @@ public class Mature extends Tree {
         }
 
         if (r.nextInt(100) < 15 && !location.containsAnActor()) {
-            location.addActor(new Koopa());
+            location.addActor(new GroundKoopa());
         }
         if (getAge() == 5 && hasFertileGround(location)) {
             spawnSprout(location);

@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.*;
 import game.actions.BreakShellAction;
 import game.behaviours.Behaviour;
+import game.behaviours.WanderBehaviour;
 import game.items.SuperMushroom;
 
 /**
@@ -18,14 +19,15 @@ import game.items.SuperMushroom;
  * @author Justin Chuah
  * @version 1.0
  */
-public class Koopa extends Enemy {
+public abstract class Koopa extends Enemy {
     /**
      * Constructor
      * Add SuperMushroom to its inventory that gets dropped on death
      * Given PRE_DORMANT status to allow Koopa to enter dormant when not conscious
      */
-    public Koopa(){
-        super("Koopa", 'K', 100);
+    public Koopa(String name, char displayChar, int hitPoints){
+        super(name, displayChar, hitPoints);
+        this.behaviours.put(10, new WanderBehaviour());
         this.addItemToInventory(new SuperMushroom());
         this.addCapability(Status.PRE_DORMANT);
 
