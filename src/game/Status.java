@@ -13,5 +13,6 @@ public enum Status {
     TALK_TO_TOAD,     // use this status to show that the Player can talk to Toad
     PRE_DORMANT,      // use this status to show that the Koopa is able to enter dormant state(is conscious).
     INVINCIBLE,       // use this status to show that the Player is now under the effects of PowerStar
-    RESET             // use this status to show that the Item is resettable
+    RESET,         // use this status to show that the Item is resettable
+    HAS_KEY
 }
