@@ -8,12 +8,8 @@ public class Bottle extends Consumables {
     /**
      * Constructor.
      * Adds the action that allows the actor to consume the consumable
-     *
-     * @param name        Name of the consumable item
-     * @param displayChar Display character of the item on the map
-     * @param portable    Boolean to determine whether item is droppable and pickable
      */
-    public Bottle(String name, char displayChar, boolean portable) {
+    public Bottle() {
         super("Bottle", 'b', false);
     }
 
