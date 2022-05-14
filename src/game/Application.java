@@ -98,10 +98,11 @@ public class Application {
 			Actor flyingKoopa = new FlyingKoopa();
 			gameMap.addActor(flyingKoopa, gameMap.at(51,13));
 
-
-
 			Wrench wrench = new Wrench();
 			gameMap.at(43, 9).addItem(wrench);
+
+			Fire fire = new Fire();
+			gameMap.at(43,8).addItem(fire);
 
 			world.run();
 
