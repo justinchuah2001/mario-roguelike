@@ -103,6 +103,7 @@ public class Player extends Actor implements Resettable {
 		this.heal(this.getMaxHp());
 		this.removeCapability(Status.TALL);
 		this.removeCapability(Status.INVINCIBLE);
+		this.removeCapability(Status.FIRE);
 	}
 
 	/**
