@@ -15,5 +15,6 @@ public enum Status {
     INVINCIBLE,       // use this status to show that the Player is now under the effects of PowerStar
     RESET,         // use this status to show that the Item is resettable
     HAS_KEY,
-    FLYING
+    FLYING,
+    FIRE    // actor's attack spawns fire
 }

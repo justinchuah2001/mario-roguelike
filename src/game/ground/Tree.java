@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.items.FireFlower;
 import game.reset.Resettable;
 import game.Status;
 import game.actions.JumpAction;
@@ -55,11 +56,7 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
 
     @Override
     public boolean canActorEnter(Actor actor){
-        if (actor.hasCapability(Status.FLYING)){
-            return true;
-        }else{
-            return false;
-        }
+        return actor.hasCapability(Status.FLYING);
     }
 
     /**
@@ -80,10 +77,20 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
         age++;
         if (age == 10){
             location.setGround(new Sapling());
+            if (r.nextInt(100) < 50){
+                spawnFireFlower(location);
+            }
         }
         else if (age == 20){
             location.setGround(new Mature());
+            if (r.nextInt(100) < 50){
+                spawnFireFlower(location);
+            }
         }
+    }
+
+    private void spawnFireFlower(Location location){
+            location.addItem(new FireFlower());
     }
 
     @Override
