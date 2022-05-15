@@ -20,6 +20,10 @@ import game.items.SuperMushroom;
  * @version 1.0
  */
 public abstract class Koopa extends Enemy {
+    protected Monologue monologue;
+
+    private final static String[] sentences = {"Never gonna make you cry!",
+            "Koopi koopi koopii~!"};
     /**
      * Constructor
      * Add SuperMushroom to its inventory that gets dropped on death
@@ -30,7 +34,7 @@ public abstract class Koopa extends Enemy {
         this.behaviours.put(10, new WanderBehaviour());
         this.addItemToInventory(new SuperMushroom());
         this.addCapability(Status.PRE_DORMANT);
-
+        this.monologue = new Monologue(this, sentences);
     }
     /**
      * Method for which the Koopa attacks another actor
@@ -90,6 +94,7 @@ public abstract class Koopa extends Enemy {
                     return action;
             }
         }
+        this.monologue.show(display);
         return new DoNothingAction();
     }
 }

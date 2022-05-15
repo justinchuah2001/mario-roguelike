@@ -23,6 +23,10 @@ public class Monologue {
 
   }
 
+  public void addSentence(String sentence){
+    this.sentences.add(sentence);
+  }
+
   public void show(Display display){
     int totalSentences = this.sentences.size();
     if(totalSentences > 0 && turnToTalk) {

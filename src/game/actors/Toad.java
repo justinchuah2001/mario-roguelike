@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Monologue;
 import game.Status;
 import game.items.Wrench;
 import game.actions.BuyItemAction;
@@ -20,12 +21,19 @@ import game.items.SuperMushroom;
  * @version 1.0
  */
 public class Toad extends Actor {
+  private Monologue monologue;
+
+  private final static String[] sentences = {"You might need a wrench to smash Koopa's hard shells.",
+          "You better get back to finding the Power Stars.",
+          "The Princess is depending on you! You are our only hope.",
+          "Being imprisoned in these walls can drive a fungus crazy :("};
   /**
    * Constructor.
    * Add item to its inventory.
    */
   public Toad() {
     super("Toad", 'O', 1);
+    this.monologue = new Monologue(this, sentences);
   }
 
   /**
@@ -62,6 +70,7 @@ public class Toad extends Actor {
    */
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+    this.monologue.show(display);
     return new DoNothingAction();
   }
 }

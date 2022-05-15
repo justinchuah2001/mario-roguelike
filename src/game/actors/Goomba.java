@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Monologue;
 import game.Status;
 
 import java.util.Random;
@@ -18,6 +19,11 @@ import java.util.Random;
  * @version 1.0
  */
 public class Goomba extends Enemy {
+	private Monologue monologue;
+
+	private final static String[] sentences = {"Mugga mugga!",
+					"Ugha ugha... (Never gonna run around and desert you...)",
+					"Ooga-Chaka Ooga-Ooga!"};
 	/**
 	 * random number generator
 	 */
@@ -28,6 +34,7 @@ public class Goomba extends Enemy {
 	 */
 	public Goomba() {
 		super("Goomba", 'g', 50);
+		this.monologue = new Monologue(this, sentences);
 	}
 
 	/**
@@ -65,6 +72,7 @@ public class Goomba extends Enemy {
 			if (action != null)
 				return action;
 		}
+		this.monologue.show(display);
 		return new DoNothingAction();
 	}
 

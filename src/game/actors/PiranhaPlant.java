@@ -2,16 +2,22 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Monologue;
 import game.Status;
 import game.actions.AttackAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 
 public class PiranhaPlant extends Enemy{
+    private Monologue monologue;
+
+    private final static String[] sentences = {"Slsstssthshs~! (Never gonna say goodbye~)",
+            "Ohmnom nom nom nom."};
 
     /**
      * Constructor for Piranha Plant.
@@ -20,6 +26,7 @@ public class PiranhaPlant extends Enemy{
     public PiranhaPlant() {
         super("Piranha Plant", 'Y', 150);
         this.behaviours.clear();
+        this.monologue = new Monologue(this, sentences);
     }
 
     @Override
@@ -41,6 +48,7 @@ public class PiranhaPlant extends Enemy{
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        return null;
+        this.monologue.show(display);
+        return new DoNothingAction();
     }
 }
