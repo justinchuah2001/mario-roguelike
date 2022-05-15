@@ -5,10 +5,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.*;
 import game.actions.AttackAction;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
+import game.actions.FireAttack;
+import game.behaviours.*;
+import game.ground.Fountain;
 import game.reset.Resettable;
 
 import java.util.HashMap;
@@ -26,6 +25,7 @@ public abstract class Enemy extends Actor implements Resettable {
      * A hash map that is used to store the possible behaviours for characters of this  class
      */
     protected final Map<Integer, Behaviour> behaviours = new HashMap<>();
+    private Fountain fountain;
 
     /**
      * Constructor.
@@ -37,6 +37,7 @@ public abstract class Enemy extends Actor implements Resettable {
     public Enemy(String name, char displayChar, int hitPoints){
         super(name, displayChar, hitPoints);
         this.behaviours.put(10, new WanderBehaviour());
+        this.behaviours.put(4, new DrinkBehaviour(fountain));
         this.registerInstance();
     }
 
@@ -50,9 +51,15 @@ public abstract class Enemy extends Actor implements Resettable {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
+        AttackAction attackAction = new AttackAction(this,direction);
+
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            actions.add(new AttackAction(this,direction));
+            actions.add(attackAction);
+            if (otherActor.hasCapability(Status.FIRE)){
+                actions.remove(attackAction);
+                actions.add(new FireAttack(this,direction));
+            }
             //behaviour that allows this actor to attack the other actor as a possible choice of action
             this.behaviours.put(2, new AttackBehaviour(otherActor, direction));
             //behaviour that allows this actor to follower the other actor as a possible choice of action

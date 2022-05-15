@@ -16,5 +16,6 @@ public enum Status {
     RESET,         // use this status to show that the Item is resettable
     HAS_KEY,
     FLYING,
+    FINAL_BOSS,
     FIRE    // actor's attack spawns fire
 }
