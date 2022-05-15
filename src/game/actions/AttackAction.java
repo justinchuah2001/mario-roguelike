@@ -9,7 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
-import game.ground.Fire;
+import game.items.Fire;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 

@@ -11,10 +11,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.*;
 import game.ground.*;
-import game.items.Consumables;
-import game.items.PowerStar;
-import game.items.SuperMushroom;
-import game.items.Wrench;
+import game.items.*;
 
 /**
  * The main class for the Mario World game.

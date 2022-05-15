@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
-import game.ground.Fire;
+import game.items.Fire;
 
 public class FireAttack extends Action {
   private Actor target;
