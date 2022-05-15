@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
+import game.ground.Fire;
 
 /**
  * Special Action for attacking other Actors.
@@ -60,6 +61,9 @@ public class AttackAction extends Action {
 		}
 
 		int damage;
+		if (actor.hasCapability(Status.FINAL_BOSS)){
+			map.locationOf(target).addItem(new Fire());
+		}
 
 		if ( target.hasCapability(Status.INVINCIBLE)){ //If target of attack action is invincible, deal no damage
 			damage = 0;
