@@ -1,7 +1,10 @@
+package game;
+
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Monologue {
@@ -10,16 +13,14 @@ public class Monologue {
   private boolean turnToTalk;
   private Actor actor;
 
-  public Monologue(Actor actor){
-    rand = new Random();
-    sentences = new ArrayList<>();
+  public Monologue(Actor actor, String[] sentences){
+    this.rand = new Random();
+    this.sentences = new ArrayList<>();
+    this.sentences.addAll(Arrays.asList(sentences));
 
-    turnToTalk = rand.nextInt(2) == 1;
+    this.turnToTalk = rand.nextInt(2) == 1;
     this.actor = actor;
-  }
 
-  public void insertSentence(String sentence){
-    this.sentences.add(sentence);
   }
 
   public void show(Display display){
