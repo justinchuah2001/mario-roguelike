@@ -5,15 +5,15 @@ import edu.monash.fit2099.engine.items.Item;
 import game.Status;
 
 public class FireFlower extends Consumables {
-    /***
-     * A constructor for the fire flower
-     */
-    public FireFlower() {
-        super("Fire Flower", 'f', true);
-    }
+  /***
+   * A constructor for the fire flower
+   */
+  public FireFlower() {
+    super("Fire Flower", 'f', true);
+  }
 
-    @Override
-    public void consumedEffect(Actor actor) {
-        actor.addCapability(Status.FIRE);
-    }
+  @Override
+  public void consumedEffect(Actor actor) {
+    actor.addCapability(Status.FIRE);
+  }
 }

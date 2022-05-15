@@ -10,6 +10,7 @@ import game.Status;
 import game.actions.JumpAction;
 
 import java.util.Random;
+
 /**
  * An abstract class that represents a Tree, which has 3 different stages that change with its age.
  *
@@ -22,114 +23,114 @@ import java.util.Random;
  */
 public abstract class Tree extends Ground implements Jumpable, Resettable {
 
-    /**
-     * the age of the tree
-     */
-    private int age;
-    /**
-     * a random number generator. to be used by child classes
-     */
-    public Random r = new Random();
+  /**
+   * the age of the tree
+   */
+  private int age;
+  /**
+   * a random number generator. to be used by child classes
+   */
+  public Random r = new Random();
 
 
-    /**
-     * Constructor.
-     * @param displayChar character to display for this type of terrain
-     */
-    public Tree(char displayChar) {
-        super(displayChar);
-        this.registerInstance();
+  /**
+   * Constructor.
+   *
+   * @param displayChar character to display for this type of terrain
+   */
+  public Tree(char displayChar) {
+    super(displayChar);
+    this.registerInstance();
+  }
+
+  @Override
+  public String jump(Actor actor, Location location) {
+    return Jumpable.super.jump(actor, location);
+  }
+
+  @Override
+  public ActionList allowableActions(Actor actor, Location location, String direction) {
+    if (!location.containsAnActor()) {
+      return new ActionList(new JumpAction(this, location, direction));
+    }
+    return new ActionList();
+  }
+
+  @Override
+  public boolean canActorEnter(Actor actor) {
+    return actor.hasCapability(Status.FLYING);
+  }
+
+  /**
+   * <p>The age of the Tree goes up by 1 every game tick and changes the tree to a sprout at age 10,
+   * and a Mature at age 20 </p>
+   *
+   * @param location The location of the Ground
+   */
+  @Override
+  public void tick(Location location) {
+    if (this.hasCapability(Status.RESET)) {
+      if (r.nextInt(100) < 50) {
+        location.setGround(new Dirt());
+      }
+      return;
     }
 
-    @Override
-    public String jump(Actor actor, Location location) {
-        return Jumpable.super.jump(actor, location);
+    age++;
+    if (age == 10) {
+      location.setGround(new Sapling());
+      if (r.nextInt(100) < 50) {
+        spawnFireFlower(location);
+      }
+    } else if (age == 20) {
+      location.setGround(new Mature());
+      if (r.nextInt(100) < 50) {
+        spawnFireFlower(location);
+      }
     }
+  }
 
-    @Override
-    public ActionList allowableActions(Actor actor, Location location, String direction){
-        if (!location.containsAnActor()){
-            return new ActionList(new JumpAction(this, location, direction));
-        }
-        return new ActionList();
-    }
+  private void spawnFireFlower(Location location) {
+    location.addItem(new FireFlower());
+  }
 
-    @Override
-    public boolean canActorEnter(Actor actor){
-        return actor.hasCapability(Status.FLYING);
-    }
+  @Override
+  public int getJumpSuccessRate() {
+    return 0;
+  }
 
-    /**
-     * <p>The age of the Tree goes up by 1 every game tick and changes the tree to a sprout at age 10,
-     * and a Mature at age 20 </p>
-     *
-     * @param location The location of the Ground
-     */
-    @Override
-    public void tick(Location location){
-        if (this.hasCapability(Status.RESET)){
-            if(r.nextInt(100) < 50){
-                location.setGround(new Dirt());
-            }
-            return ;
-        }
+  @Override
+  public int getFallDamage() {
+    return 0;
+  }
 
-        age++;
-        if (age == 10){
-            location.setGround(new Sapling());
-            if (r.nextInt(100) < 50){
-                spawnFireFlower(location);
-            }
-        }
-        else if (age == 20){
-            location.setGround(new Mature());
-            if (r.nextInt(100) < 50){
-                spawnFireFlower(location);
-            }
-        }
-    }
+  @Override
+  public String getFlavourJump() {
+    return null;
+  }
 
-    private void spawnFireFlower(Location location){
-            location.addItem(new FireFlower());
-    }
+  @Override
+  public String getFlavourFail() {
+    return null;
+  }
 
-    @Override
-    public int getJumpSuccessRate() {
-        return 0;
-    }
+  @Override
+  public String getFlavourDestroy() {
+    return null;
+  }
 
-    @Override
-    public int getFallDamage() {
-        return 0;
-    }
+  @Override
+  public void resetInstance() {
+    this.addCapability(Status.RESET);
+  }
 
-    @Override
-    public String getFlavourJump() {
-        return null;
-    }
+  public int getAge() {
+    return age;
+  }
 
-    @Override
-    public String getFlavourFail() {
-        return null;
-    }
-
-    @Override
-    public String getFlavourDestroy() {
-        return null;
-    }
-
-    @Override
-    public void resetInstance() {
-        this.addCapability(Status.RESET);
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
+  public void setAge(int age) {
+    this.age = age;
+  }
 
 }
 

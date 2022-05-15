@@ -16,33 +16,34 @@ import game.ground.Jumpable;
  * @see game.ground.Jumpable
  */
 public class JumpAction extends Action {
-    private Jumpable jumpable;
-    private Location jumpableLocation;
-    private String direction;
+  private Jumpable jumpable;
+  private Location jumpableLocation;
+  private String direction;
 
 
-    /**
-     * Constructor for the JumpAction class
-     * @param jumpable the jumpable object
-     * @param jumpableLocation the location of the jumpable object
-     * @param direction the direction of the jumpable object relative to the actor
-     */
-    public JumpAction(Jumpable jumpable, Location jumpableLocation, String direction){
-        this.jumpable = jumpable;
-        this.jumpableLocation = jumpableLocation;
-        this.direction = direction;
+  /**
+   * Constructor for the JumpAction class
+   *
+   * @param jumpable         the jumpable object
+   * @param jumpableLocation the location of the jumpable object
+   * @param direction        the direction of the jumpable object relative to the actor
+   */
+  public JumpAction(Jumpable jumpable, Location jumpableLocation, String direction) {
+    this.jumpable = jumpable;
+    this.jumpableLocation = jumpableLocation;
+    this.direction = direction;
+  }
+
+  @Override
+  public String execute(Actor actor, GameMap map) {
+    return jumpable.jump(actor, jumpableLocation);
+  }
+
+  @Override
+  public String menuDescription(Actor actor) {
+    if (actor.hasCapability(Status.INVINCIBLE)) {
+      return actor + " runs through the " + jumpable.toString() + "(" + jumpableLocation.x() + ", " + jumpableLocation.y() + ") to the " + direction;
     }
-
-    @Override
-    public String execute(Actor actor, GameMap map) {
-        return jumpable.jump(actor, jumpableLocation);
-    }
-
-    @Override
-    public String menuDescription(Actor actor) {
-        if(actor.hasCapability(Status.INVINCIBLE)){
-            return actor + " runs through the " + jumpable.toString() + "(" + jumpableLocation.x() + ", " + jumpableLocation.y() +  ") to the " + direction;
-        }
-        return actor + " jumps onto the " + jumpable.toString() + "(" + jumpableLocation.x() + ", " + jumpableLocation.y() +  ") to the " + direction;
-    }
+    return actor + " jumps onto the " + jumpable.toString() + "(" + jumpableLocation.x() + ", " + jumpableLocation.y() + ") to the " + direction;
+  }
 }

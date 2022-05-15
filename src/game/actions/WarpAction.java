@@ -8,25 +8,25 @@ import game.actors.Player;
 import game.ground.Warpable;
 
 public class WarpAction extends Action {
-    private Warpable warpable;
-    private Location warpDestination;
-    private String direction;
+  private Warpable warpable;
+  private Location warpDestination;
+  private String direction;
 
-    public WarpAction(Warpable warpable, Location warpDestination, String direction) {
-        this.warpable = warpable;
-        this.warpDestination = warpDestination;
-        this.direction = direction;
-    }
+  public WarpAction(Warpable warpable, Location warpDestination, String direction) {
+    this.warpable = warpable;
+    this.warpDestination = warpDestination;
+    this.direction = direction;
+  }
 
-    @Override
-    public String execute(Actor actor, GameMap map) {
-        return warpable.warp(actor, warpDestination);
-    }
+  @Override
+  public String execute(Actor actor, GameMap map) {
+    return warpable.warp(actor, warpDestination);
+  }
 
-    @Override
-    public String menuDescription(Actor actor) {
-        //((Player) actor).getWorldList()
+  @Override
+  public String menuDescription(Actor actor) {
+    //((Player) actor).getWorldList()
 
-        return actor + " warps to ";
-    }
+    return actor + " warps to ";
+  }
 }

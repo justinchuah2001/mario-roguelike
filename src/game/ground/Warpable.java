@@ -5,12 +5,12 @@ import edu.monash.fit2099.engine.positions.Location;
 
 public interface Warpable {
 
-    default String warp(Actor actor, Location location){
+  default String warp(Actor actor, Location location) {
 
-        return "Travelling to ";
-    }
+    return "Travelling to ";
+  }
 
-    default String warpMovement(Actor actor, Location location){
-        return null;
-    }
+  default String warpMovement(Actor actor, Location location) {
+    return null;
+  }
 }

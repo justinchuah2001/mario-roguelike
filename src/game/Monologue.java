@@ -13,7 +13,7 @@ public class Monologue {
   private boolean turnToTalk;
   private Actor actor;
 
-  public Monologue(Actor actor, String[] sentences){
+  public Monologue(Actor actor, String[] sentences) {
     this.rand = new Random();
     this.sentences = new ArrayList<>();
     this.sentences.addAll(Arrays.asList(sentences));
@@ -23,13 +23,13 @@ public class Monologue {
 
   }
 
-  public void addSentence(String sentence){
+  public void addSentence(String sentence) {
     this.sentences.add(sentence);
   }
 
-  public void show(Display display){
+  public void show(Display display) {
     int totalSentences = this.sentences.size();
-    if(totalSentences > 0 && turnToTalk) {
+    if (totalSentences > 0 && turnToTalk) {
       String mySentence = this.sentences.get(rand.nextInt(totalSentences));
       String res = this.actor + ": \"" + mySentence + "\"";
       display.println(res);
