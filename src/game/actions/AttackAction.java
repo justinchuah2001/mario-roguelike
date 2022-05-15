@@ -10,6 +10,8 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
 import game.ground.Fire;
+import game.reset.ResetManager;
+import game.reset.Resettable;
 
 /**
  * Special Action for attacking other Actors.
@@ -91,6 +93,9 @@ public class AttackAction extends Action {
 			// remove actor if he does not possess PRE_DORMANT status
 			if (!target.hasCapability(Status.PRE_DORMANT)){
 				map.removeActor(target);
+				if (target instanceof Resettable){
+					ResetManager.getInstance().cleanUp((Resettable) target);
+				}
 			}else{
 				target.addCapability(Status.DORMANT); //Give actor with PRE_DORMANT status DORMANT status if unconscious
 			}
