@@ -12,8 +12,9 @@ import game.Status;
 import game.actions.AttackAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
+import game.reset.Resettable;
 
-public class PiranhaPlant extends Enemy {
+public class PiranhaPlant extends Enemy implements Resettable {
   private Monologue monologue;
 
   private final static String[] sentences = {"Slsstssthshs~! (Never gonna say goodbye~)",
@@ -27,6 +28,7 @@ public class PiranhaPlant extends Enemy {
     super("Piranha Plant", 'Y', 150);
     this.behaviours.clear();
     this.monologue = new Monologue(this, sentences);
+    this.resetInstance();
   }
 
   @Override
@@ -48,7 +50,15 @@ public class PiranhaPlant extends Enemy {
 
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+    if (this.hasCapability(Status.RESET)){
+      this.increaseMaxHp(50);
+    }
     this.monologue.show(display);
     return new DoNothingAction();
+  }
+
+  @Override
+  public void resetInstance() {
+    this.addCapability(Status.RESET);
   }
 }
