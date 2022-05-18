@@ -20,11 +20,9 @@ import java.util.Random;
  * @version 1.0
  */
 public class Goomba extends Enemy {
-  private Monologue monologue;
-
-  private final static String[] sentences = {"Mugga mugga!",
+  private final static String[] sentences = {"Rah, rah-ah-ah-ah!",
           "Ugha ugha... (Never gonna run around and desert you...)",
-          "Ooga-Chaka Ooga-Ooga!"};
+          "Roma, roma-ma!"};
   /**
    * random number generator
    */

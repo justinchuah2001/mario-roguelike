@@ -20,8 +20,6 @@ import game.items.SuperMushroom;
  * @version 1.0
  */
 public abstract class Koopa extends Enemy {
-  protected Monologue monologue;
-
   private final static String[] sentences = {"Never gonna make you cry!",
           "Koopi koopi koopii~!"};
 
