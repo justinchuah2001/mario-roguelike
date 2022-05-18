@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Justin Chuah, Chan Jia Zheng
  * @version 1.0
  */
-public class Player extends Actor implements Resettable {
+public class Player extends Actor implements Resettable, Warpable {
   /**
    * List of timed statuses that are active on the player
    */
@@ -155,7 +155,7 @@ public class Player extends Actor implements Resettable {
    * @return a string that displays the remaining duration for a timed status
    */
   public String displayStatus(Status status){
-    return "Mario is " + status.name() + "! - " + timedStatusHashMap.get(status) + " turns remain";
+    return this + " is " + status.name() + "! - " + timedStatusHashMap.get(status) + " turns remain";
   }
 
   /**
@@ -165,7 +165,7 @@ public class Player extends Actor implements Resettable {
    */
   public String removeStatus(Status status){
     this.removeCapability(status);
-    return this.name + " is no longer " + status.name().toLowerCase();
+    return this + " is no longer " + status.name().toLowerCase();
   }
 
   /**

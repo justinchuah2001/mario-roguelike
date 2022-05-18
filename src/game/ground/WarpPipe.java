@@ -4,12 +4,11 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Status;
 import game.actions.JumpAction;
-import game.actions.WarpAction;
 import game.actors.PiranhaPlant;
-import game.actors.Player;
 
-public class WarpPipe extends Ground implements Jumpable, Warpable{
+public class WarpPipe extends Ground implements Jumpable{
     private int turnsActive = 0;
     private boolean piranhaPlantSpawned = false;
     /**
@@ -17,6 +16,7 @@ public class WarpPipe extends Ground implements Jumpable, Warpable{
      */
     public WarpPipe() {
         super('C');
+        this.addCapability(Status.WARP_POINT);
 
   }
 
@@ -37,9 +37,6 @@ public class WarpPipe extends Ground implements Jumpable, Warpable{
     public ActionList allowableActions(Actor actor, Location location, String direction){
         if (!location.containsAnActor()){
             return new ActionList(new JumpAction(this, location, direction));
-        }
-        if (location.getActor() instanceof Player){
-            return new ActionList(new WarpAction(this, location, direction));
         }
         return new ActionList();
     }
