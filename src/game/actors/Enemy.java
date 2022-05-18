@@ -60,7 +60,7 @@ public abstract class Enemy extends Actor implements Resettable {
     // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
     if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
       actions.add(attackAction);
-      if (otherActor.hasCapability(Status.FIRE)) {
+      if (otherActor.hasCapability(Status.SHOOTING_FIRE)) {
         actions.remove(attackAction);
         actions.add(new FireAttackAction(this, direction));
       }

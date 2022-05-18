@@ -17,5 +17,5 @@ public enum Status {
   HAS_KEY,
   FLYING,
   FINAL_BOSS,
-  FIRE    // actor's attack spawns fire
+  SHOOTING_FIRE    // actor's attack spawns fire
 }

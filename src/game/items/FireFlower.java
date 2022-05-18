@@ -14,7 +14,7 @@ public class FireFlower extends Consumables {
 
   @Override
   public void consumedEffect(Actor actor) {
-    actor.addCapability(Status.FIRE);
-    ((Player) actor).setCounter(20);
+    actor.addCapability(Status.SHOOTING_FIRE);
+    ((Player) actor).addTimedStatus(Status.SHOOTING_FIRE,20);
   }
 }

@@ -10,6 +10,7 @@ import game.reset.Resettable;
 import game.Status;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Class representing the Player.
@@ -19,9 +20,10 @@ import java.util.ArrayList;
  */
 public class Player extends Actor implements Resettable {
   /**
-   * Counter to track power star effect
+   * List of timed statuses that are active on the player
    */
-  private int counter = 0;
+  private HashMap<Status, Integer> timedStatusHashMap = new HashMap<>();
+
   /**
    * Menu
    */
@@ -67,17 +69,9 @@ public class Player extends Actor implements Resettable {
       return lastAction.getNextAction();
 
     // Turn counter for the power star effect on player
-    if (this.hasCapability(Status.INVINCIBLE)) {
-      if (counter == 0) {
-        display.println(removeStatus(Status.INVINCIBLE));
-      } else {
-        display.println(displayStatus(Status.INVINCIBLE));
-        counter -= 1;
-      }
-    }
-    if (this.hasCapability(Status.FIRE)){
+    countdownStatus(display);
 
-    }
+
 
     // return/print the console menu
     display.println("Mario " + this.printHp() + " at (" + map.locationOf(this).x() + ", " + map.locationOf(this).y() + ")");
@@ -104,7 +98,7 @@ public class Player extends Actor implements Resettable {
     this.heal(this.getMaxHp());
     this.removeCapability(Status.TALL);
     this.removeCapability(Status.INVINCIBLE);
-    this.removeCapability(Status.FIRE);
+    this.removeCapability(Status.SHOOTING_FIRE);
   }
 
   /**
@@ -134,21 +128,32 @@ public class Player extends Actor implements Resettable {
     return valid;
   }
 
-  public String countdownStatus(){
-    return null;
+  public void countdownStatus(Display display){
+    for (Status i: timedStatusHashMap.keySet()) {
+      int temp = timedStatusHashMap.get(i);
+      temp -= 1;
+      if (temp == 0){
+        timedStatusHashMap.remove(i);
+        display.println( removeStatus(i) );
+      }else{
+        timedStatusHashMap.replace(i, timedStatusHashMap.get(i), temp);
+        display.println(displayStatus(i));
+      }
+    }
   }
 
   public String displayStatus(Status status){
-    return "Mario is " + status.name() + " - " + counter + " turns remain";
+    return "Mario is " + status.name() + "! - " + timedStatusHashMap.get(status) + " turns remain";
   }
 
   public String removeStatus(Status status){
     this.removeCapability(status);
-    return "Mario is no longer " + status;
+    return "Mario is no longer " + status.name().toLowerCase();
   }
 
-  public void setCounter(int counter) {
-    this.counter = counter;
+  public void addTimedStatus(Status status, int timer){
+    timedStatusHashMap.put(status, timer);
+    
   }
 
   public ArrayList<GameMap> getWorldList() {

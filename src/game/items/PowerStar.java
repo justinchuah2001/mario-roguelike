@@ -49,7 +49,7 @@ public class PowerStar extends Consumables implements Buyable {
   public void consumedEffect(Actor actor) {
     actor.heal(200);
     actor.addCapability(Status.INVINCIBLE);
-    ((Player) actor).setCounter(10);
+    ((Player) actor).addTimedStatus(Status.INVINCIBLE, 10);
 
   }
 
