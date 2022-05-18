@@ -17,7 +17,7 @@ public class FireAttack extends Action {
 
   @Override
   public String execute(Actor actor, GameMap map) {
-    if (actor.hasCapability(Status.FIRE)) {
+    if (actor.hasCapability(Status.fire)) {
       map.locationOf(target).addItem(new Fire());
       return actor + " set fire at " + target;
     }

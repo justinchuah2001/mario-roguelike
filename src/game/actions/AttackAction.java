@@ -68,11 +68,11 @@ public class AttackAction extends Action {
       map.locationOf(target).addItem(new Fire());
     }
 
-    if (target.hasCapability(Status.INVINCIBLE)) { //If target of attack action is invincible, deal no damage
+    if (target.hasCapability(Status.invincible)) { //If target of attack action is invincible, deal no damage
       damage = 0;
       target.hurt(damage);
 
-    } else if (actor.hasCapability(Status.INVINCIBLE)) { //If current person attack is invincible, kill enemy target instantly
+    } else if (actor.hasCapability(Status.invincible)) { //If current person attack is invincible, kill enemy target instantly
       damage = 999999;
       target.hurt(damage);
     } else {

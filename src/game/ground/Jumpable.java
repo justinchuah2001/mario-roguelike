@@ -30,7 +30,7 @@ public interface Jumpable {
    */
   default String jump(Actor actor, Location location) {
 
-    if (actor.hasCapability(Status.INVINCIBLE)) {
+    if (actor.hasCapability(Status.invincible)) {
       return destroy(actor, location) + getFlavourDestroy() + "A coin appeared!";
 
     } else if (actor.hasCapability(Status.TALL)) {

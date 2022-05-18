@@ -21,7 +21,7 @@ public class Player extends Actor implements Resettable {
   /**
    * Counter to track power star effect (Last for 10 turns)
    */
-  private int counter = 10;
+  private int counter = 0;
   /**
    * Menu
    */
@@ -67,16 +67,15 @@ public class Player extends Actor implements Resettable {
       return lastAction.getNextAction();
 
     // Turn counter for the power star effect on player
-    if (this.hasCapability(Status.INVINCIBLE)) {
-      final int WEAR_OFF = 0; //Constant value to determine the turn where power star effect wears off
-      if (counter == WEAR_OFF) {
-        this.removeCapability(Status.INVINCIBLE);
-        display.println("Mario is no longer invincible.");
-        counter = 10; // Reset the counter
+    if (this.hasCapability(Status.invincible)) {
+      if (counter == 0) {
+        display.println(removeStatus(Status.invincible));
       } else {
-        display.println("Mario is INVINCIBLE " + counter + " - turns remain");
+        display.println(displayStatus(Status.invincible));
         counter -= 1;
       }
+    } else if (this.hasCapability(Status.fire)){
+
     }
 
     // return/print the console menu
@@ -103,8 +102,8 @@ public class Player extends Actor implements Resettable {
   public void resetInstance() {
     this.heal(this.getMaxHp());
     this.removeCapability(Status.TALL);
-    this.removeCapability(Status.INVINCIBLE);
-    this.removeCapability(Status.FIRE);
+    this.removeCapability(Status.invincible);
+    this.removeCapability(Status.fire);
   }
 
   /**
@@ -132,6 +131,23 @@ public class Player extends Actor implements Resettable {
       valid = true;
     }
     return valid;
+  }
+
+  public String countdownStatus(){
+    return null;
+  }
+
+  public String displayStatus(Status status){
+    return "Mario is " + status.name() + " - " + counter + " turns remain";
+  }
+
+  public String removeStatus(Status status){
+    this.removeCapability(status);
+    return "Mario is no longer " + status;
+  }
+
+  public void setCounter(int counter) {
+    this.counter = counter;
   }
 
   public ArrayList<GameMap> getWorldList() {
