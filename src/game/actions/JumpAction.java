@@ -41,7 +41,7 @@ public class JumpAction extends Action {
 
   @Override
   public String menuDescription(Actor actor) {
-    if (actor.hasCapability(Status.invincible)) {
+    if (actor.hasCapability(Status.INVINCIBLE)) {
       return actor + " runs through the " + jumpable.toString() + "(" + jumpableLocation.x() + ", " + jumpableLocation.y() + ") to the " + direction;
     }
     return actor + " jumps onto the " + jumpable.toString() + "(" + jumpableLocation.x() + ", " + jumpableLocation.y() + ") to the " + direction;

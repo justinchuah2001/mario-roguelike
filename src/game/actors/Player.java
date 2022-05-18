@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class Player extends Actor implements Resettable {
   /**
-   * Counter to track power star effect (Last for 10 turns)
+   * Counter to track power star effect
    */
   private int counter = 0;
   /**
@@ -67,14 +67,15 @@ public class Player extends Actor implements Resettable {
       return lastAction.getNextAction();
 
     // Turn counter for the power star effect on player
-    if (this.hasCapability(Status.invincible)) {
+    if (this.hasCapability(Status.INVINCIBLE)) {
       if (counter == 0) {
-        display.println(removeStatus(Status.invincible));
+        display.println(removeStatus(Status.INVINCIBLE));
       } else {
-        display.println(displayStatus(Status.invincible));
+        display.println(displayStatus(Status.INVINCIBLE));
         counter -= 1;
       }
-    } else if (this.hasCapability(Status.fire)){
+    }
+    if (this.hasCapability(Status.FIRE)){
 
     }
 
@@ -102,8 +103,8 @@ public class Player extends Actor implements Resettable {
   public void resetInstance() {
     this.heal(this.getMaxHp());
     this.removeCapability(Status.TALL);
-    this.removeCapability(Status.invincible);
-    this.removeCapability(Status.fire);
+    this.removeCapability(Status.INVINCIBLE);
+    this.removeCapability(Status.FIRE);
   }
 
   /**

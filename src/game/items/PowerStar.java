@@ -48,7 +48,7 @@ public class PowerStar extends Consumables implements Buyable {
   @Override
   public void consumedEffect(Actor actor) {
     actor.heal(200);
-    actor.addCapability(Status.invincible);
+    actor.addCapability(Status.INVINCIBLE);
     ((Player) actor).setCounter(10);
 
   }

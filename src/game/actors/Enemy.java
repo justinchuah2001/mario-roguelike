@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.*;
 import game.actions.AttackAction;
-import game.actions.FireAttack;
+import game.actions.FireAttackAction;
 import game.behaviours.*;
 import game.ground.Fountain;
 import game.reset.Resettable;
@@ -60,9 +60,9 @@ public abstract class Enemy extends Actor implements Resettable {
     // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
     if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
       actions.add(attackAction);
-      if (otherActor.hasCapability(Status.fire)) {
+      if (otherActor.hasCapability(Status.FIRE)) {
         actions.remove(attackAction);
-        actions.add(new FireAttack(this, direction));
+        actions.add(new FireAttackAction(this, direction));
       }
       //behaviour that allows this actor to attack the other actor as a possible choice of action
       this.behaviours.put(2, new AttackBehaviour(otherActor, direction));
