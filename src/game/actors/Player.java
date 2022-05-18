@@ -11,6 +11,7 @@ import game.Status;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Class representing the Player.
@@ -22,7 +23,7 @@ public class Player extends Actor implements Resettable {
   /**
    * List of timed statuses that are active on the player
    */
-  private HashMap<Status, Integer> timedStatusHashMap = new HashMap<>();
+  private ConcurrentHashMap<Status, Integer> timedStatusHashMap = new ConcurrentHashMap<>();
 
   /**
    * Menu
@@ -68,10 +69,8 @@ public class Player extends Actor implements Resettable {
     if (lastAction.getNextAction() != null)
       return lastAction.getNextAction();
 
-    // Turn counter for the power star effect on player
+    // Turn counter for the statuses effect on player
     countdownStatus(display);
-
-
 
     // return/print the console menu
     display.println("Mario " + this.printHp() + " at (" + map.locationOf(this).x() + ", " + map.locationOf(this).y() + ")");
@@ -128,13 +127,20 @@ public class Player extends Actor implements Resettable {
     return valid;
   }
 
+  /**
+   * Counts down the duration for any active statuses, calls removeStatus when duration hits 0
+   * and displayStatus any other time
+   *
+   * @param display the display for the game
+   */
   public void countdownStatus(Display display){
     for (Status i: timedStatusHashMap.keySet()) {
       int temp = timedStatusHashMap.get(i);
       temp -= 1;
       if (temp == 0){
-        timedStatusHashMap.remove(i);
         display.println( removeStatus(i) );
+        timedStatusHashMap.remove(i);
+
       }else{
         timedStatusHashMap.replace(i, timedStatusHashMap.get(i), temp);
         display.println(displayStatus(i));
@@ -142,15 +148,31 @@ public class Player extends Actor implements Resettable {
     }
   }
 
+  /**
+   * Returns a string that displays the remaining duration for a timed status
+   *
+   * @param status The active status
+   * @return a string that displays the remaining duration for a timed status
+   */
   public String displayStatus(Status status){
     return "Mario is " + status.name() + "! - " + timedStatusHashMap.get(status) + " turns remain";
   }
 
+  /**
+   * Remove status from the player when duration hits 0
+   * @param status The status being removed
+   * @return A string that informs the user that the status has worn off
+   */
   public String removeStatus(Status status){
     this.removeCapability(status);
-    return "Mario is no longer " + status.name().toLowerCase();
+    return this.name + " is no longer " + status.name().toLowerCase();
   }
 
+  /**
+   * Method for classes for Statuses with timers to call so that they can be tracked
+   * @param status  the status being added
+   * @param timer   the duration of the status
+   */
   public void addTimedStatus(Status status, int timer){
     timedStatusHashMap.put(status, timer);
     

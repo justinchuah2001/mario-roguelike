@@ -88,6 +88,7 @@ public class Application {
     gameMap.at(42, 9).addItem(new PowerStar());
     gameMap.at(43, 9).addItem(new Wrench());
     gameMap.at(43, 8).addItem(new Fire());
+    gameMap.at(42,10).addItem(new FireFlower());
 
     world.run();
 
