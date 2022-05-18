@@ -15,10 +15,9 @@ import game.behaviours.FollowBehaviour;
 import game.reset.Resettable;
 
 public class PiranhaPlant extends Enemy implements Resettable {
-  private Monologue monologue;
-
   private final static String[] sentences = {"Slsstssthshs~! (Never gonna say goodbye~)",
-          "Ohmnom nom nom nom."};
+          "Gaga, ooh-la-la!",
+          "Want your bad romance!"};
 
   /**
    * Constructor for Piranha Plant.
