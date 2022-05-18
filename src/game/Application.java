@@ -78,27 +78,16 @@ public class Application {
     Actor mario = new Player("Mario", 'm', 100, worldList);
     world.addPlayer(mario, gameMap.at(42, 10));
 
-    Actor toad = new Toad();
-    gameMap.addActor(toad, gameMap.at(46, 10));
+    gameMap.addActor(new Toad(), gameMap.at(46, 10));
+    gameMap.addActor(new FlyingKoopa(), gameMap.at(51, 13));
 
-    Actor bowser = new Bowser();
-    lavaGameMap.addActor(bowser, lavaGameMap.at(63, 16));
+    lavaGameMap.addActor( new Bowser(), lavaGameMap.at(63, 16));
+    lavaGameMap.addActor(new PrincessPeach(), lavaGameMap.at(64, 16));
 
-    Actor peach = new PrincessPeach();
-    lavaGameMap.addActor(peach, lavaGameMap.at(64, 16));
-
-    Consumables SuperMushroom = new SuperMushroom();
-    gameMap.at(42, 11).addItem(SuperMushroom);
-
+    gameMap.at(42, 11).addItem(new SuperMushroom());
     gameMap.at(42, 9).addItem(new PowerStar());
-    Actor flyingKoopa = new FlyingKoopa();
-    gameMap.addActor(flyingKoopa, gameMap.at(51, 13));
-
-    Wrench wrench = new Wrench();
-    gameMap.at(43, 9).addItem(wrench);
-
-    Fire fire = new Fire();
-    gameMap.at(43, 8).addItem(fire);
+    gameMap.at(43, 9).addItem(new Wrench());
+    gameMap.at(43, 8).addItem(new Fire());
 
     world.run();
 
