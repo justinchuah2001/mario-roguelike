@@ -3,15 +3,13 @@ package game.actors;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
-import game.ground.WarpPipe;
 
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 public interface Warpable {
 
-    default String warp(Actor warper, Location source, GameMap sourceMap, Location destination){
+    default String warp(Actor warper, Location source, GameMap sourceMap, Location destination, String destinationName){
 
         //updating the tracker for which warp pipe to return to
         ConcurrentHashMap<GameMap, Location> temp = getPreviousWarpPoint();
@@ -27,7 +25,7 @@ public interface Warpable {
         //move actor to new map
         destination.map().moveActor(warper, destination);
 
-        return warper + " warps to " + destination.map().toString();
+        return warper + " warps to (" + destination.x() + ", " + destination.y() + ") in " + destinationName;
     }
 
     HashMap<String, GameMap> getWorldList();

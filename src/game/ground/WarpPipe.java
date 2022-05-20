@@ -42,10 +42,13 @@ public class WarpPipe extends Ground implements Jumpable{
             return new ActionList(new JumpAction(this, location, direction));
 
         }else if (location.getActor() instanceof Warpable){
-            for (GameMap map: ((Warpable) actor).getWorldList().values())
-                if (!map.contains(actor)){
+            for (String mapName: ((Warpable) actor).getWorldList().keySet())
+                if( !((Warpable) actor).getWorldList().get(mapName).contains(actor) ){
+
+                    GameMap map = ((Warpable) actor).getWorldList().get(mapName);
+
                     return new ActionList(new WarpAction(((Warpable) actor), location, location.map(),
-                            ((Warpable) actor).getPreviousWarpPoint().get(map)));
+                            ((Warpable) actor).getPreviousWarpPoint().get(map), mapName));
                 }
             }
         return new ActionList();
