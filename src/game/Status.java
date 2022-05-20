@@ -18,5 +18,6 @@ public enum Status {
   FLYING,
   FINAL_BOSS,
   SHOOTING_FIRE,    // actor's attack spawns fire
-  WARP_POINT
+  WARP_POINT,
+  POWER_UP
 }
