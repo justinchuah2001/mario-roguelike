@@ -42,6 +42,11 @@ public class Bowser extends Enemy implements Resettable {
       this.increaseMaxHp(0);
     }
     this.monologue.show(display);
+    for (game.behaviours.Behaviour Behaviour : behaviours.values()) {
+      Action action = Behaviour.getAction(this, map);
+      if (action != null)
+        return action;
+    }
     return new DoNothingAction();
   }
 
