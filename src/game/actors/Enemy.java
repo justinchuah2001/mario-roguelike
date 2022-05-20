@@ -57,14 +57,20 @@ public abstract class Enemy extends Actor implements Resettable {
     ActionList actions = new ActionList();
     AttackAction attackAction = new AttackAction(this, direction);
     FireAttackAction fireAttackAction = new FireAttackAction(this,direction);
+    boolean inRange = false;
 
     // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
     if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)&& !otherActor.hasCapability(Status.SHOOTING_FIRE)) {
       actions.add(attackAction);
-      if (otherActor.hasCapability(Status.SHOOTING_FIRE)) {
-        actions.remove(attackAction);
+      inRange = true;
+    }
+    else if (otherActor.hasCapability(Status.SHOOTING_FIRE) && otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+        //actions.remove(attackAction);
         actions.add(fireAttackAction);
+        inRange = true;
       }
+
+    if (inRange){
       //behaviour that allows this actor to attack the other actor as a possible choice of action
       this.behaviours.put(2, new AttackBehaviour(otherActor, direction));
       //behaviour that allows this actor to follower the other actor as a possible choice of action

@@ -9,7 +9,7 @@ public class FireFlower extends Consumables {
    * A constructor for the fire flower
    */
   public FireFlower() {
-    super("Fire Flower", 'f', true);
+    super("Fire Flower", 'f', false);
   }
 
   @Override
