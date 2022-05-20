@@ -6,10 +6,10 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Location;
 import game.reset.Resettable;
 import game.Status;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -34,7 +34,9 @@ public class Player extends Actor implements Resettable, Warpable {
    */
   private int wallet = 0;
 
-  private ArrayList<GameMap> worldList;
+  private HashMap<String, GameMap> worldList;
+
+  private ConcurrentHashMap<GameMap, Location> previousWarpPoints = new ConcurrentHashMap<>();
 
 
   /**
@@ -44,13 +46,18 @@ public class Player extends Actor implements Resettable, Warpable {
    * @param displayChar Character to represent the player in the UI
    * @param hitPoints   Player's starting number of hitpoints
    */
-  public Player(String name, char displayChar, int hitPoints, ArrayList<GameMap> worldList) {
+  public Player(String name, char displayChar, int hitPoints, HashMap<String, GameMap> worldList) {
     super(name, displayChar, hitPoints);
     this.addCapability(Status.HOSTILE_TO_ENEMY);
     this.addCapability(Status.BUY_FROM_TOAD);
     this.addCapability(Status.TALK_TO_TOAD);
     this.registerInstance();
     this.worldList = worldList;
+
+    for (GameMap map: worldList.values()){
+      Location defaultWarp = map.at(0,0);
+      previousWarpPoints.put(map, defaultWarp);
+    }
   }
 
 
@@ -133,15 +140,15 @@ public class Player extends Actor implements Resettable, Warpable {
    *
    * @param display the display for the game
    */
-  public void countdownStatus(Display display){
-    for (Status i: timedStatusHashMap.keySet()) {
+  public void countdownStatus(Display display) {
+    for (Status i : timedStatusHashMap.keySet()) {
       int temp = timedStatusHashMap.get(i);
       temp -= 1;
-      if (temp == 0){
-        display.println( removeStatus(i) );
+      if (temp == 0) {
+        display.println(removeStatus(i));
         timedStatusHashMap.remove(i);
 
-      }else{
+      } else {
         timedStatusHashMap.replace(i, timedStatusHashMap.get(i), temp);
         display.println(displayStatus(i));
       }
@@ -154,31 +161,46 @@ public class Player extends Actor implements Resettable, Warpable {
    * @param status The active status
    * @return a string that displays the remaining duration for a timed status
    */
-  public String displayStatus(Status status){
+  public String displayStatus(Status status) {
     return this + " is " + status.name() + "! - " + timedStatusHashMap.get(status) + " turns remain";
   }
 
   /**
    * Remove status from the player when duration hits 0
+   *
    * @param status The status being removed
    * @return A string that informs the user that the status has worn off
    */
-  public String removeStatus(Status status){
+  public String removeStatus(Status status) {
     this.removeCapability(status);
     return this + " is no longer " + status.name().toLowerCase();
   }
 
   /**
    * Method for classes for Statuses with timers to call so that they can be tracked
-   * @param status  the status being added
-   * @param timer   the duration of the status
+   *
+   * @param status the status being added
+   * @param timer  the duration of the status
    */
-  public void addTimedStatus(Status status, int timer){
+  public void addTimedStatus(Status status, int timer) {
     timedStatusHashMap.put(status, timer);
-    
+
   }
 
-  public ArrayList<GameMap> getWorldList() {
+  @Override
+  public HashMap<String, GameMap> getWorldList() {
     return worldList;
   }
+
+  @Override
+  public ConcurrentHashMap<GameMap, Location> getPreviousWarpPoint() {
+    return previousWarpPoints;
+  }
+
+  @Override
+  public void setPreviousWarpPoint(ConcurrentHashMap<GameMap, Location> updatedWarpPoints) {
+    this.previousWarpPoints = updatedWarpPoints;
+  }
+
+
 }

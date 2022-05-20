@@ -2,11 +2,14 @@ package game.ground;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 import game.actions.JumpAction;
+import game.actions.WarpAction;
 import game.actors.PiranhaPlant;
+import game.actors.Warpable;
 
 public class WarpPipe extends Ground implements Jumpable{
     private int turnsActive = 0;
@@ -27,7 +30,7 @@ public class WarpPipe extends Ground implements Jumpable{
     @Override
     public void tick(Location location) {
         turnsActive++;
-        if (turnsActive >= 1 && !piranhaPlantSpawned){
+        if (turnsActive >= 1 && !piranhaPlantSpawned && !location.containsAnActor()){
             location.addActor(new PiranhaPlant());
             piranhaPlantSpawned = true; //on reset, reset the boolean to false so plants can respawn
         }
@@ -37,9 +40,17 @@ public class WarpPipe extends Ground implements Jumpable{
     public ActionList allowableActions(Actor actor, Location location, String direction){
         if (!location.containsAnActor()){
             return new ActionList(new JumpAction(this, location, direction));
-        }
+
+        }else if (location.getActor() instanceof Warpable){
+            for (GameMap map: ((Warpable) actor).getWorldList().values())
+                if (!map.contains(actor)){
+                    return new ActionList(new WarpAction(((Warpable) actor), location, location.map(),
+                            ((Warpable) actor).getPreviousWarpPoint().get(map)));
+                }
+            }
         return new ActionList();
     }
+
 
     @Override
     public boolean canActorEnter(Actor actor) {
