@@ -25,7 +25,7 @@ public class Application {
     HashMap<String, GameMap> worldList = new HashMap<>();
 
     FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
-            new Sprout(), new WarpPipe(), new Lava(), new HealthFountain());
+            new Sprout(), new WarpPipe(), new Lava(), new HealthFountain(), new PowerFountain());
 
     List<String> map = Arrays.asList(
             "C.........................................##..........+.........................",
@@ -45,7 +45,7 @@ public class Application {
             "...C...............................................#............................",
             "....................................................#.....................C.....",
             "...................+...........C.....................#..........................",
-            "...........................................H..........#.........................",
+            "...........................................H.A........#.........................",
             ".......................................................##.......................");
 
     GameMap gameMap = new GameMap(groundFactory, map);

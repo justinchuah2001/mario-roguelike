@@ -7,7 +7,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.DrinkBottleAction;
+import game.ground.Buffable;
 import game.items.Bottle;
 import game.reset.Resettable;
 import game.Status;
@@ -21,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Justin Chuah, Chan Jia Zheng
  * @version 1.0
  */
-public class Player extends Actor implements Resettable, Warpable {
+public class Player extends Actor implements Resettable, Warpable, Buffable {
   /**
    * List of timed statuses that are active on the player
    */
@@ -35,6 +37,10 @@ public class Player extends Actor implements Resettable, Warpable {
    * Wallet to store track how many coins the player has
    */
   private int wallet = 0;
+
+  private int powerBuffCounter;
+
+  private final int baseDamage = 5;
 
   private HashMap<String, GameMap> worldList;
 
@@ -56,6 +62,7 @@ public class Player extends Actor implements Resettable, Warpable {
     this.addItemToInventory(new Bottle());
     this.registerInstance();
     this.worldList = worldList;
+    powerBuffCounter = 0;
 
     for (GameMap map: worldList.values()){
       Location defaultWarp = map.at(0,0);
@@ -77,6 +84,9 @@ public class Player extends Actor implements Resettable, Warpable {
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
     if (!Bottle.getInstance().getBottleContent().isEmpty()&& this.hasCapability(Status.HAS_BOTTLE)){
       actions.add(new DrinkBottleAction());
+    }
+    if (this.hasCapability(Status.POWER_UP)){
+      increaseCounter();
     }
     // Handle multi-turn Actions
     if (lastAction.getNextAction() != null)
@@ -208,5 +218,19 @@ public class Player extends Actor implements Resettable, Warpable {
     this.previousWarpPoints = updatedWarpPoints;
   }
 
+  @Override
+  public int getCounter() {
+    return powerBuffCounter;
+  }
 
+  @Override
+  public int increaseCounter() {
+    this.removeCapability(Status.POWER_UP);
+    return powerBuffCounter+=1;
+  }
+
+  @Override
+  protected IntrinsicWeapon getIntrinsicWeapon() {
+    return new IntrinsicWeapon(baseDamage + getAttackIncrease(),"punches");
+  }
 }
