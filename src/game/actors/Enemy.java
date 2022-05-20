@@ -40,7 +40,7 @@ public abstract class Enemy extends Actor implements Resettable {
   public Enemy(String name, char displayChar, int hitPoints) {
     super(name, displayChar, hitPoints);
     this.behaviours.put(10, new WanderBehaviour());
-    this.behaviours.put(4, new DrinkBehaviour(fountain));
+    this.behaviours.put(11, new DrinkBehaviour(fountain));
     this.registerInstance();
   }
 
