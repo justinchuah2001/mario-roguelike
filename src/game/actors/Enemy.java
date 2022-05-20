@@ -37,7 +37,6 @@ public abstract class Enemy extends Actor implements Resettable {
     public Enemy(String name, char displayChar, int hitPoints){
         super(name, displayChar, hitPoints);
         this.behaviours.put(10, new WanderBehaviour());
-        this.behaviours.put(4, new DrinkBehaviour(fountain));
         this.registerInstance();
     }
 
@@ -51,6 +50,7 @@ public abstract class Enemy extends Actor implements Resettable {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
+
         AttackAction attackAction = new AttackAction(this,direction);
 
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.

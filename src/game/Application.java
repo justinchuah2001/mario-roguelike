@@ -91,6 +91,9 @@ public class Application {
 			Actor peach = new PrincessPeach();
 			lavaGameMap.addActor(peach, lavaGameMap.at(64,16));
 
+			Actor piranha = new PiranhaPlant();
+			gameMap.addActor(piranha,gameMap.at(42,9));
+
 			Consumables SuperMushroom = new SuperMushroom();
 			gameMap.at(42,11).addItem(SuperMushroom);
 
