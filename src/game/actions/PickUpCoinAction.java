@@ -16,25 +16,25 @@ import game.items.Coin;
  * @see game.items.Coin
  */
 public class PickUpCoinAction extends Action {
-    private Item item;
-    private Coin coin;
+  private Item item;
+  private Coin coin;
 
-    public PickUpCoinAction(Item item) {
-        this.item = item;
-    }
+  public PickUpCoinAction(Item item) {
+    this.item = item;
+  }
 
-    @Override
-    public String execute(Actor actor, GameMap map) {
-        map.locationOf(actor).removeItem(item);
-        coin = (Coin)item;
-        Player player = (Player) actor;
-        player.addToWallet(coin.getCoinValue());
+  @Override
+  public String execute(Actor actor, GameMap map) {
+    map.locationOf(actor).removeItem(item);
+    coin = (Coin) item;
+    Player player = (Player) actor;
+    player.addToWallet(coin.getCoinValue());
 
-        return menuDescription(actor);
-    }
+    return menuDescription(actor);
+  }
 
-    @Override
-    public String menuDescription(Actor actor) {
-        return actor + " picks up the " + item;
-    }
+  @Override
+  public String menuDescription(Actor actor) {
+    return actor + " picks up the " + item;
+  }
 }

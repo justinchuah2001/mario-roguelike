@@ -11,77 +11,80 @@ import java.util.List;
  * What could be the drawbacks of this implementation?
  */
 public class ResetManager {
-    /**
-     * A list of resettable instances (any classes that implements Resettable,
-     * such as Player implements Resettable will be stored in here)
-     */
-    private List<Resettable> resettableList;
+  /**
+   * A list of resettable instances (any classes that implements Resettable,
+   * such as Player implements Resettable will be stored in here)
+   */
+  private List<Resettable> resettableList;
 
-    /**
-     * A singleton reset manager instance
-     */
-    private static ResetManager instance;
+  /**
+   * A singleton reset manager instance
+   */
+  private static ResetManager instance;
 
-    /**
-     * Show that whether the Player is allowed to reset the game.
-     */
-    private static Boolean allowReset = true;
+  /**
+   * Show that whether the Player is allowed to reset the game.
+   */
+  private static Boolean allowReset = true;
 
-    /**
-     * Get the singleton instance of reset manager
-     * @return ResetManager singleton instance
-     */
-    public static ResetManager getInstance(){
-        if(instance == null){
-            instance = new ResetManager();
-        }
-        return instance;
+  /**
+   * Get the singleton instance of reset manager
+   *
+   * @return ResetManager singleton instance
+   */
+  public static ResetManager getInstance() {
+    if (instance == null) {
+      instance = new ResetManager();
     }
+    return instance;
+  }
 
-    /**
-     * Constructor
-     */
-    private ResetManager(){
-        resettableList = new ArrayList<>();
+  /**
+   * Constructor
+   */
+  private ResetManager() {
+    resettableList = new ArrayList<>();
+  }
+
+  /**
+   * This function shows that whether the Player is allowed to reset the game.
+   *
+   * @return Whether the Player is allowed to reset the game.
+   */
+  public Boolean isAllowReset() {
+    return allowReset;
+  }
+
+  /**
+   * Reset the game by traversing through all the list
+   * By doing this way, it will avoid using `instanceof` all over the place.
+   */
+  public void run() {
+    Resettable resettable;
+    while (this.resettableList.size() > 0) {
+      resettable = this.resettableList.get(0);
+      resettable.resetInstance();
+      this.cleanUp(resettable);
     }
+    allowReset = false;
+  }
 
-    /**
-     * This function shows that whether the Player is allowed to reset the game.
-     * @return Whether the Player is allowed to reset the game.
-     */
-    public Boolean isAllowReset(){
-        return allowReset;
-    }
-
-    /**
-     * Reset the game by traversing through all the list
-     * By doing this way, it will avoid using `instanceof` all over the place.
-     */
-    public void run(){
-        Resettable resettable;
-        while (this.resettableList.size() > 0){
-            resettable = this.resettableList.get(0);
-            resettable.resetInstance();
-            this.cleanUp(resettable);
-        }
-        allowReset = false;
-    }
-
-    /**
-     * Add the Resettable instance to the list
-     * FIXME: it does nothing, you need to implement it :)
-     */
-    public void appendResetInstance(Resettable reset){
-        this.resettableList.add(reset);
-    }
+  /**
+   * Add the Resettable instance to the list
+   * FIXME: it does nothing, you need to implement it :)
+   */
+  public void appendResetInstance(Resettable reset) {
+    this.resettableList.add(reset);
+  }
 
 
-    /**
-     * Remove a Resettable instance from the list
-     * @param resettable resettable object
-     * FIXME: it does nothing, you need to implement it :)
-     */
-    public void cleanUp(Resettable resettable){
-        this.resettableList.remove(resettable);
-    }
+  /**
+   * Remove a Resettable instance from the list
+   *
+   * @param resettable resettable object
+   *                   FIXME: it does nothing, you need to implement it :)
+   */
+  public void cleanUp(Resettable resettable) {
+    this.resettableList.remove(resettable);
+  }
 }

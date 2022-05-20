@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * This action allows Player buy Item from other actors (Toad in this game).
+ *
  * @author Chan Jia Zheng
  * @version 1
  * @see game.actors.Toad#allowableActions(Actor, String, GameMap)
@@ -44,8 +45,8 @@ public class BuyItemAction extends Action {
    * @param item The item to be traded.
    * @return BuyItemAction
    */
-  public static BuyItemAction getInstance(Item item){
-    if (item instanceof Buyable){
+  public static BuyItemAction getInstance(Item item) {
+    if (item instanceof Buyable) {
       return new BuyItemAction(item);
     } else {
       return null;
@@ -56,7 +57,7 @@ public class BuyItemAction extends Action {
    * This function let an Actor buy the item from seller.
    *
    * @param buyer The Actor who wants to buy the item.
-   * @param map The map the actor is on.
+   * @param map   The map the actor is on.
    * @return A description whether the actor successfully buys the item from seller.
    */
   @Override

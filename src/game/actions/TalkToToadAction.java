@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 /**
  * This action allows Player to talk to the Toad.
+ *
  * @author Chan Jia Zheng
  * @version 1
  * @see game.actors.Toad#allowableActions(Actor, String, GameMap)
@@ -21,6 +22,7 @@ public class TalkToToadAction extends Action {
 
   /**
    * constructor
+   *
    * @param target The actor who wants to talk to Toad.
    */
   public TalkToToadAction(Actor target) {
@@ -28,10 +30,10 @@ public class TalkToToadAction extends Action {
   }
 
   /**
-   *  This action returns the monologue of Player with the Toad based on the Player's Status.
+   * This action returns the monologue of Player with the Toad based on the Player's Status.
    *
    * @param actor The actor performing the action.
-   * @param map The map the actor is on.
+   * @param map   The map the actor is on.
    * @return The monologue of Player interact with the Toad.
    */
   @Override
@@ -39,14 +41,14 @@ public class TalkToToadAction extends Action {
     ArrayList<String> monologues = new ArrayList<>();
     monologues.add("The Princess is depending on you! You are our only hope.");
     monologues.add("Being imprisoned in these walls can drive a fungus crazy :(");
-    if (!actor.hasCapability(Status.HAS_WRENCH)){
+    if (!actor.hasCapability(Status.HAS_WRENCH)) {
       monologues.add("You might need a wrench to smash Koopa's hard shells.");
     }
-    if (!actor.hasCapability(Status.TALL)){
+    if (!actor.hasCapability(Status.TALL)) {
       monologues.add("You better get back to finding the Power Stars.");
     }
 
-    return monologues.get((int)(Math.random() * monologues.size()));
+    return monologues.get((int) (Math.random() * monologues.size()));
   }
 
   /**

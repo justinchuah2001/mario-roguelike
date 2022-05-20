@@ -7,10 +7,10 @@ import edu.monash.fit2099.engine.positions.Ground;
  */
 public class Dirt extends Ground {
 
-	/**
-	 * A constructor for the Dirt class
-	 */
-	public Dirt() {
-		super('.');
-	}
+  /**
+   * A constructor for the Dirt class
+   */
+  public Dirt() {
+    super('.');
+  }
 }

@@ -15,12 +15,14 @@ import edu.monash.fit2099.engine.actors.Actor;
 public interface Buyable {
   /**
    * This function returns the price of the Buyable item.
+   *
    * @return Price of the Buyable item.
    */
   int getPrice();
 
   /**
    * This function decides what happen if the item is bought by an Actor.
+   *
    * @param actor
    */
   void buy(Actor actor);

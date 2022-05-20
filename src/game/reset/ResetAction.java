@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
  * This action allows User to reset the game.
+ *
  * @author Chan Jia Zheng
  * @version 1
  * @see edu.monash.fit2099.engine.positions.World
@@ -14,8 +15,9 @@ public class ResetAction extends Action {
 
   /**
    * This function execute the action.
+   *
    * @param actor The actor performing the action.
-   * @param map The map the actor is on.
+   * @param map   The map the actor is on.
    * @return Message shows that the game is reset.
    */
   @Override
@@ -26,6 +28,7 @@ public class ResetAction extends Action {
 
   /**
    * This function returns the menu description of the action.
+   *
    * @param actor The actor performing the action.
    * @return Menu description of the action.
    */
@@ -36,10 +39,11 @@ public class ResetAction extends Action {
 
   /**
    * This function returns the hot key of the action when it is shown in the menu.
+   *
    * @return hot key of the action
    */
   @Override
-  public String hotkey(){
+  public String hotkey() {
     return "r";
   }
 }
