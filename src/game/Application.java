@@ -80,8 +80,6 @@ public class Application {
     world.addPlayer(mario, gameMap.at(42, 10));
 
     gameMap.addActor(new Toad(), gameMap.at(46, 10));
-    gameMap.addActor(new FlyingKoopa(), gameMap.at(51, 13));
-    gameMap.addActor(new Bowser(), gameMap.at(42,15));
 
     lavaGameMap.addActor( new Bowser(), lavaGameMap.at(63, 16));
     lavaGameMap.addActor(new PrincessPeach(), lavaGameMap.at(64, 16));
