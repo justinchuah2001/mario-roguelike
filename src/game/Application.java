@@ -25,7 +25,7 @@ public class Application {
     HashMap<String, GameMap> worldList = new HashMap<>();
 
     FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
-            new Sprout(), new WarpPipe(), new Lava());
+            new Sprout(), new WarpPipe(), new Lava(), new HealthFountain());
 
     List<String> map = Arrays.asList(
             "C.........................................##..........+.........................",
@@ -45,7 +45,7 @@ public class Application {
             "...................................................#............................",
             "....................................................#...........................",
             "...................+.................................#..........................",
-            "......................................................#.........................",
+            "...........................................H..........#.........................",
             ".......................................................##.......................");
 
     GameMap gameMap = new GameMap(groundFactory, map);
@@ -81,7 +81,7 @@ public class Application {
 
     gameMap.addActor(new Toad(), gameMap.at(46, 10));
     gameMap.addActor(new FlyingKoopa(), gameMap.at(51, 13));
-    gameMap.addActor(new PiranhaPlant(), gameMap.at(42,11));
+    gameMap.addActor(new FlyingKoopa(), gameMap.at(42,11));
 
     lavaGameMap.addActor( new Bowser(), lavaGameMap.at(63, 16));
     lavaGameMap.addActor(new PrincessPeach(), lavaGameMap.at(64, 16));

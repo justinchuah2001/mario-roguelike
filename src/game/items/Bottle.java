@@ -1,9 +1,14 @@
 package game.items;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import game.Status;
+import game.actions.DrinkBottleAction;
 
-public class Bottle extends Consumables {
+import java.util.ArrayList;
+
+public class Bottle extends Item {
+  private static ArrayList<Water> bottleContent = new ArrayList<>();
+  private static Bottle instance;
 
   /**
    * Constructor.
@@ -11,10 +16,27 @@ public class Bottle extends Consumables {
    */
   public Bottle() {
     super("Bottle", 'b', false);
+    this.addCapability(Status.HAS_BOTTLE);
+  }
+
+  public void fillBottle(Water water){
+    bottleContent.add(water);
+  }
+
+  public ArrayList<Water> getBottleContent(){
+    return bottleContent;
+
+  }
+
+  public static Bottle getInstance(){
+    if(instance == null){
+      instance = new Bottle();
+    }
+    return instance;
   }
 
   @Override
-  public void consumedEffect(Actor actor) {
-
+  public String toString() {
+    return "Bottle " + this.getBottleContent();
   }
 }

@@ -11,4 +11,9 @@ public abstract class Water {
     }
 
     public abstract void waterEffect(Actor actor);
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

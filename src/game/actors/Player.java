@@ -7,6 +7,8 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.DrinkBottleAction;
+import game.items.Bottle;
 import game.reset.Resettable;
 import game.Status;
 
@@ -51,6 +53,7 @@ public class Player extends Actor implements Resettable, Warpable {
     this.addCapability(Status.HOSTILE_TO_ENEMY);
     this.addCapability(Status.BUY_FROM_TOAD);
     this.addCapability(Status.TALK_TO_TOAD);
+    this.addItemToInventory(new Bottle());
     this.registerInstance();
     this.worldList = worldList;
 
@@ -72,6 +75,9 @@ public class Player extends Actor implements Resettable, Warpable {
    */
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+    if (!Bottle.getInstance().getBottleContent().isEmpty()&& this.hasCapability(Status.HAS_BOTTLE)){
+      actions.add(new DrinkBottleAction());
+    }
     // Handle multi-turn Actions
     if (lastAction.getNextAction() != null)
       return lastAction.getNextAction();
