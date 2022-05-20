@@ -19,5 +19,9 @@ public enum Status {
   FINAL_BOSS,
   SHOOTING_FIRE,    // actor's attack spawns fire
   WARP_POINT,
-  POWER_UP
+  POWER_UP,
+  HAS_BOTTLE,
+  HEALING,
+  POWERING,
+  ON_FOUNTAIN
 }
