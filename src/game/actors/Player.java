@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.DrinkBottleAction;
+import game.actions.DrinkWaterAction;
 import game.ground.Buffable;
 import game.items.Bottle;
 import game.reset.Resettable;
@@ -83,7 +83,7 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
     if (!Bottle.getInstance().getBottleContent().isEmpty()&& this.hasCapability(Status.HAS_BOTTLE)){
-      actions.add(new DrinkBottleAction());
+      actions.add(new DrinkWaterAction());
     }
     if (this.hasCapability(Status.POWER_UP)){
       increaseCounter();

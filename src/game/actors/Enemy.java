@@ -7,7 +7,7 @@ import game.*;
 import game.actions.AttackAction;
 import game.actions.FireAttackAction;
 import game.behaviours.*;
-import game.ground.Fountain;
+import game.ground.Buffable;
 import game.reset.Resettable;
 
 import java.util.HashMap;
@@ -21,13 +21,13 @@ import java.util.Map;
  * @see game.actors.Goomba
  * @see game.actors.Koopa
  */
-public abstract class Enemy extends Actor implements Resettable {
+public abstract class Enemy extends Actor implements Resettable, Buffable {
   /**
    * A hash map that is used to store the possible behaviours for characters of this  class
    */
   protected final Map<Integer, Behaviour> behaviours = new HashMap<>();
-  private Fountain fountain;
   protected Monologue monologue;
+  private  int powerBuffCounter ;
 
   /**
    * Constructor.
@@ -40,7 +40,8 @@ public abstract class Enemy extends Actor implements Resettable {
   public Enemy(String name, char displayChar, int hitPoints) {
     super(name, displayChar, hitPoints);
     this.behaviours.put(10, new WanderBehaviour());
-    this.behaviours.put(11, new DrinkBehaviour(fountain));
+    this.behaviours.put(9, new DrinkBehaviour());
+    this.powerBuffCounter =0;
     this.registerInstance();
   }
 
@@ -65,7 +66,6 @@ public abstract class Enemy extends Actor implements Resettable {
       inRange = true;
     }
     else if (otherActor.hasCapability(Status.SHOOTING_FIRE) && otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-        //actions.remove(attackAction);
         actions.add(fireAttackAction);
         inRange = true;
       }
@@ -86,4 +86,16 @@ public abstract class Enemy extends Actor implements Resettable {
   public void resetInstance() {
     this.addCapability(Status.RESET);
   }
+
+  @Override
+  public int getCounter() {
+    return powerBuffCounter;
+  }
+
+  @Override
+  public int increaseCounter() {
+    this.removeCapability(Status.POWER_UP);
+    return powerBuffCounter+=1;
+  }
+
 }

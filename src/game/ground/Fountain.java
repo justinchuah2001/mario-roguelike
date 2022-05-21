@@ -11,7 +11,6 @@ import game.actions.FillBottleAction;
 public abstract class Fountain extends Ground {
   private int availableWater;
   private int refillTimer;
-  private boolean isDepleted;
 
   /**
    * Constructor.
@@ -20,17 +19,15 @@ public abstract class Fountain extends Ground {
    */
   public Fountain(char displayChar) {
     super(displayChar);
-    this.isDepleted = false;
     this.availableWater = 10;
     this.refillTimer = 5;
     this.addCapability(Status.ON_FOUNTAIN);
-
   }
 
   @Override
   public ActionList allowableActions(Actor actor, Location location, String direction) {
     ActionList actions = new ActionList();
-    if (actor.hasCapability(Status.HOSTILE_TO_ENEMY) &&  (location.containsAnActor()) &&(!this.isDepleted)) {
+    if (actor.hasCapability(Status.HOSTILE_TO_ENEMY) &&  (location.containsAnActor()) &&(!this.hasCapability(Status.IS_DEPLETED))) {
       actions.add(new FillBottleAction(location,this.availableWater));
     }
     return actions;
@@ -38,17 +35,22 @@ public abstract class Fountain extends Ground {
 
   @Override
   public void tick(Location location) {
-    if (this.isDepleted && this.refillTimer>0){
+    if (this.hasCapability(Status.IS_DEPLETED) && this.refillTimer>0){
       this.refillTimer-=1;
       if (this.refillTimer==0){
-        this.isDepleted = false;
+        this.removeCapability(Status.IS_DEPLETED);
         refreshedFountain();
       }
-    } else if (!this.isDepleted && this.hasCapability(Status.WAS_COLLECTED)){
-      this.availableWater -= 1;
-      this.removeCapability(Status.WAS_COLLECTED);
+    } else if (!this.hasCapability(Status.IS_DEPLETED)){
+      if (this.hasCapability(Status.WAS_COLLECTED)){
+        this.availableWater -= 1;
+        this.removeCapability(Status.WAS_COLLECTED);
+      } else if (this.hasCapability(Status.DRANK_FROM)){
+        this.availableWater -= 1;
+        this.removeCapability(Status.DRANK_FROM);
+      }
       if (this.availableWater==0){
-        this.isDepleted = true;
+        this.addCapability(Status.IS_DEPLETED);
       }
     }
   }
@@ -56,7 +58,6 @@ public abstract class Fountain extends Ground {
     this.refillTimer = 5;
     this.availableWater = 10;
   }
-
 
 
 }

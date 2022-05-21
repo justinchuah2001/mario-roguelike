@@ -53,7 +53,8 @@ public class Goomba extends Enemy {
    */
   @Override
   protected IntrinsicWeapon getIntrinsicWeapon() {
-    return new IntrinsicWeapon(10, "kicks");
+    int baseDamage = 10;
+    return new IntrinsicWeapon(baseDamage + getAttackIncrease(),"kicks");
   }
 
   /**
@@ -67,6 +68,9 @@ public class Goomba extends Enemy {
     if (suicide() || this.hasCapability(Status.RESET)) {
       map.removeActor(this);
       return new DoNothingAction();
+    }
+    if (this.hasCapability(Status.POWER_UP)){
+      increaseCounter();
     }
     //Return the action for this actor at end of the turn
     for (game.behaviours.Behaviour Behaviour : behaviours.values()) {

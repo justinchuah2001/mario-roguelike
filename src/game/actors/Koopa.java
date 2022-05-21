@@ -10,7 +10,9 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.*;
 import game.actions.BreakShellAction;
 import game.behaviours.Behaviour;
+import game.behaviours.DrinkBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.ground.Buffable;
 import game.items.SuperMushroom;
 
 /**
@@ -19,7 +21,7 @@ import game.items.SuperMushroom;
  * @author Justin Chuah
  * @version 1.0
  */
-public abstract class Koopa extends Enemy {
+public abstract class Koopa extends Enemy implements Buffable {
   private final static String[] sentences = {"Never gonna make you cry!",
           "Koopi koopi koopii~!"};
 
@@ -31,20 +33,13 @@ public abstract class Koopa extends Enemy {
   public Koopa(String name, char displayChar, int hitPoints) {
     super(name, displayChar, hitPoints);
     this.behaviours.put(10, new WanderBehaviour());
+    this.behaviours.put(9, new DrinkBehaviour());
     this.addItemToInventory(new SuperMushroom());
     this.addCapability(Status.PRE_DORMANT);
     this.monologue = new Monologue(this, sentences);
   }
 
-  /**
-   * Method for which the Koopa attacks another actor
-   *
-   * @return damage value of his attacks and the key phrase for it
-   */
-  @Override
-  protected IntrinsicWeapon getIntrinsicWeapon() {
-    return new IntrinsicWeapon(30, "punches");
-  }
+
 
   /**
    * This function returns a list of actions that other player is allowed to interact with the Koopa.
@@ -81,6 +76,9 @@ public abstract class Koopa extends Enemy {
    */
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+    if (this.hasCapability(Status.POWER_UP)){
+      increaseCounter();
+    }
     //If user chooses to reset game, remove from map
     if (this.hasCapability(Status.RESET)) {
       map.removeActor(this);
@@ -92,11 +90,18 @@ public abstract class Koopa extends Enemy {
       ////Return the action for this actor at end of the turn
       for (Behaviour Behaviour : behaviours.values()) {
         Action action = Behaviour.getAction(this, map);
-        if (action != null)
+        if (action != null){
           return action;
+        }
       }
     }
     this.monologue.show(display);
     return new DoNothingAction();
+  }
+
+  @Override
+  protected IntrinsicWeapon getIntrinsicWeapon() {
+    int baseDamage = 30;
+    return new IntrinsicWeapon(baseDamage + getAttackIncrease(),"punches");
   }
 }
