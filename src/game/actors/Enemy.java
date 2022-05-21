@@ -27,6 +27,9 @@ public abstract class Enemy extends Actor implements Resettable {
    */
   protected final Map<Integer, Behaviour> behaviours = new HashMap<>();
   private Fountain fountain;
+  /**
+   * Monologue of Enemy.
+   */
   protected Monologue monologue;
 
   /**

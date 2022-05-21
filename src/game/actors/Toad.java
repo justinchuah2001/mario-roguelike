@@ -22,8 +22,13 @@ import game.items.SuperMushroom;
  * @version 1.0
  */
 public class Toad extends Actor {
+  /**
+   * Monologue of Toad.
+   */
   private Monologue monologue;
-
+  /**
+   * Sentences said by Toad.
+   */
   private final static String[] sentences = {"You might need a wrench to smash Koopa's hard shells.",
           "You better get back to finding the Power Stars.",
           "The Princess is depending on you! You are our only hope.",

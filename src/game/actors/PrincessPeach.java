@@ -11,8 +11,13 @@ import game.Status;
 import game.actions.SavePrincessAction;
 
 public class PrincessPeach extends Actor {
+  /**
+   * Monologue of PrincessPeach.
+   */
   private Monologue monologue;
-
+  /**
+   * Sentences said by PrincessPeach.
+   */
   private final static String[] sentences = {"Dear Mario, I'll be waiting for you...",
           "Never gonna give you up!",
           "Release me, or I will kick you!"};
