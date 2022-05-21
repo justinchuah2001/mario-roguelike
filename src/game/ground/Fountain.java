@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 import game.actions.FillBottleAction;
 
+
 public abstract class Fountain extends Ground {
   private int availableWater;
   private int refillTimer;
@@ -23,13 +24,14 @@ public abstract class Fountain extends Ground {
     this.availableWater = 10;
     this.refillTimer = 5;
     this.addCapability(Status.ON_FOUNTAIN);
+
   }
 
   @Override
   public ActionList allowableActions(Actor actor, Location location, String direction) {
     ActionList actions = new ActionList();
     if (actor.hasCapability(Status.HOSTILE_TO_ENEMY) &&  (location.containsAnActor()) &&(!this.isDepleted)) {
-      actions.add(new FillBottleAction());
+      actions.add(new FillBottleAction(location,this.availableWater));
     }
     return actions;
   }
@@ -44,6 +46,7 @@ public abstract class Fountain extends Ground {
       }
     } else if (!this.isDepleted && this.hasCapability(Status.WAS_COLLECTED)){
       this.availableWater -= 1;
+      this.removeCapability(Status.WAS_COLLECTED);
       if (this.availableWater==0){
         this.isDepleted = true;
       }
@@ -53,4 +56,7 @@ public abstract class Fountain extends Ground {
     this.refillTimer = 5;
     this.availableWater = 10;
   }
+
+
+
 }
