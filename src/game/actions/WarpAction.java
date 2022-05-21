@@ -24,11 +24,11 @@ public class WarpAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        return warpable.warp(actor, source, sourceMap, destination, destinationName);
+        return this.warpable.warp(actor, this.source, this.sourceMap, this.destination, this.destinationName);
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " warps to " + destinationName;
+        return actor + " warps to " + this.destinationName;
     }
 }

@@ -47,7 +47,7 @@ public class Goomba extends Enemy {
    */
   public boolean suicide() {
     final int SUICIDE = 1;
-    return (randomInt.nextInt(10)) <= SUICIDE;
+    return (this.randomInt.nextInt(10)) <= SUICIDE;
   }
 
   /**

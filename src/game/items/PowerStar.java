@@ -60,12 +60,12 @@ public class PowerStar extends Consumables implements Buyable {
    */
   @Override
   public void tick(Location currentLocation) {
-    if (counter == LIFESPAN) {
+    if (this.counter == LIFESPAN) {
       currentLocation.removeItem(this);
       resetCounter();
       System.out.println("Power Star has expired and removed. ");
     } else {
-      counter -= 1;
+      this.counter -= 1;
     }
   }
 
@@ -75,7 +75,7 @@ public class PowerStar extends Consumables implements Buyable {
    * @return Price of PowerStar.
    */
   public int getPrice() {
-    return price;
+    return this.price;
   }
 
   @Override
@@ -85,10 +85,10 @@ public class PowerStar extends Consumables implements Buyable {
 
   @Override
   public void tick(Location currentLocation, Actor actor) {
-    if (counter == LIFESPAN) {
+    if (this.counter == LIFESPAN) {
       actor.removeItemFromInventory(this);
     } else {
-      counter -= 1;
+      this.counter -= 1;
     }
   }
 
@@ -106,7 +106,7 @@ public class PowerStar extends Consumables implements Buyable {
    */
   @Override
   public String toString() {
-    return "Power Star - " + counter + " turns remaining";
+    return "Power Star - " + this.counter + " turns remaining";
   }
 
 }

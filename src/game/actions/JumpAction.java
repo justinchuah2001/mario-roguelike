@@ -36,14 +36,16 @@ public class JumpAction extends Action {
 
   @Override
   public String execute(Actor actor, GameMap map) {
-    return jumpable.jump(actor, jumpableLocation);
+    return this.jumpable.jump(actor, this.jumpableLocation);
   }
 
   @Override
   public String menuDescription(Actor actor) {
     if (actor.hasCapability(Status.INVINCIBLE)) {
-      return actor + " runs through the " + jumpable.toString() + "(" + jumpableLocation.x() + ", " + jumpableLocation.y() + ") to the " + direction;
+      return actor + " runs through the " + this.jumpable.toString() + "(" + this.jumpableLocation.x() + ", "
+              + this.jumpableLocation.y() + ") to the " + this.direction;
     }
-    return actor + " jumps onto the " + jumpable.toString() + "(" + jumpableLocation.x() + ", " + jumpableLocation.y() + ") to the " + direction;
+    return actor + " jumps onto the " + this.jumpable.toString() + "(" + this.jumpableLocation.x() + ", "
+            + this.jumpableLocation.y() + ") to the " + this.direction;
   }
 }

@@ -61,11 +61,11 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
     this.addCapability(Status.TALK_TO_TOAD);
     this.registerInstance();
     this.worldList = worldList;
-    powerBuffCounter = 0;
+    this.powerBuffCounter = 0;
 
     for (GameMap map: worldList.values()){
       Location defaultWarp = map.at(0,0);
-      previousWarpPoints.put(map, defaultWarp);
+      this.previousWarpPoints.put(map, defaultWarp);
     }
   }
 
@@ -156,15 +156,15 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
    * @param display the display for the game
    */
   public void countdownStatus(Display display) {
-    for (Status i : timedStatusHashMap.keySet()) {
-      int temp = timedStatusHashMap.get(i);
+    for (Status i : this.timedStatusHashMap.keySet()) {
+      int temp = this.timedStatusHashMap.get(i);
       temp -= 1;
       if (temp == 0) {
         display.println(removeStatus(i));
-        timedStatusHashMap.remove(i);
+        this.timedStatusHashMap.remove(i);
 
       } else {
-        timedStatusHashMap.replace(i, timedStatusHashMap.get(i), temp);
+        this.timedStatusHashMap.replace(i, this.timedStatusHashMap.get(i), temp);
         display.println(displayStatus(i));
       }
     }
