@@ -5,6 +5,12 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 
+/**
+ * Burning hot lava instead of solid ground, best not to touch it, will probably hurt. A lot.
+ *
+ * @author Caelan Kao
+ * @version 1.1
+ */
 public class Lava extends Ground {
   /**
    * A Constructor for the lava class.
@@ -13,6 +19,10 @@ public class Lava extends Ground {
     super('L');
   }
 
+  /**
+   * Burns any actor on this Lava every turn
+   * @param location The location of the Ground
+   */
   @Override
   public void tick(Location location) {
     if (location.containsAnActor()) {
@@ -24,6 +34,11 @@ public class Lava extends Ground {
     }
   }
 
+  /**
+   * only allow actors with HOSTILE_TO_ENEMY to walk
+   * @param actor the Actor to check
+   * @return boolean if the actor can walk on this ground
+   */
   @Override
   public boolean canActorEnter(Actor actor) {
     return actor.hasCapability(Status.HOSTILE_TO_ENEMY);

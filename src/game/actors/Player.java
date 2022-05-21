@@ -46,7 +46,9 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
    * List of worlds.
    */
   private final HashMap<String, GameMap> worldList;
-
+  /**
+   * Tracker for which locations the actor was at last when warping, used to return the actor to the WARP_POINT used
+   */
   private ConcurrentHashMap<GameMap, Location> previousWarpPoints = new ConcurrentHashMap<>();
 
 
@@ -205,17 +207,26 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
     timedStatusHashMap.put(status, timer);
 
   }
-
+  /**
+   * a getter for the worldList hashmap
+   * @return a HashMap containing the names and GameMaps of the game maps
+   */
   @Override
   public HashMap<String, GameMap> getWorldList() {
     return worldList;
   }
-
+  /**
+   * a getter for the concurrentHashMap for previous warp points
+   * @return a ConcurrentHashMap containing the last used location that the warper was in the respective gameMaps
+   */
   @Override
   public ConcurrentHashMap<GameMap, Location> getPreviousWarpPoint() {
     return previousWarpPoints;
   }
-
+  /**
+   * a setter for the previous warp point ConcurrentHashMap
+   * @param updatedWarpPoints the updated HashMap
+   */
   @Override
   public void setPreviousWarpPoint(ConcurrentHashMap<GameMap, Location> updatedWarpPoints) {
     this.previousWarpPoints = updatedWarpPoints;
