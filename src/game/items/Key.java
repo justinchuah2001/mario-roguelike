@@ -13,7 +13,7 @@ public class Key extends Item {
    * Constructor
    */
   public Key() {
-    super("Key", 'k', false);
+    super("Key", 'k', true);
     this.addCapability(Status.HAS_KEY);
   }
 }
