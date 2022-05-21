@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.*;
 import game.actions.BreakShellAction;
+import game.actions.DrinkWaterAction;
 import game.behaviours.Behaviour;
 import game.behaviours.DrinkBehaviour;
 import game.behaviours.WanderBehaviour;
@@ -37,6 +38,7 @@ public abstract class Koopa extends Enemy implements Buffable {
     this.addItemToInventory(new SuperMushroom());
     this.addCapability(Status.PRE_DORMANT);
     this.monologue = new Monologue(this, sentences);
+
   }
 
 
@@ -91,6 +93,13 @@ public abstract class Koopa extends Enemy implements Buffable {
       for (Behaviour Behaviour : behaviours.values()) {
         Action action = Behaviour.getAction(this, map);
         if (action != null){
+          if (Behaviour.equals(this.behaviours.get(10))){
+            this.behaviours.remove(9);
+            this.behaviours.put(9, new DrinkBehaviour());
+          }else if (Behaviour.equals(this.behaviours.get(9))){
+            this.behaviours.remove(9);
+            this.behaviours.put(11, new DrinkBehaviour());
+          }
           return action;
         }
       }

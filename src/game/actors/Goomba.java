@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Monologue;
 import game.Status;
+import game.behaviours.DrinkBehaviour;
 
 import java.util.Random;
 
@@ -78,8 +79,17 @@ public class Goomba extends Enemy {
     //Return the action for this actor at end of the turn
     for (game.behaviours.Behaviour Behaviour : behaviours.values()) {
       Action action = Behaviour.getAction(this, map);
-      if (action != null)
+      if (action != null){
+        if (Behaviour.equals(this.behaviours.get(10))){
+          this.behaviours.remove(9);
+          this.behaviours.put(9, new DrinkBehaviour());
+        }else if (Behaviour.equals(this.behaviours.get(9))){
+          this.behaviours.remove(9);
+          this.behaviours.put(11, new DrinkBehaviour());
+        }
         return action;
+      }
+
     }
     this.monologue.show(display);
     return new DoNothingAction();
