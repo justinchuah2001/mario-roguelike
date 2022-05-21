@@ -23,5 +23,7 @@ public enum Status {
   HAS_BOTTLE,
   HEALING,
   POWERING,
-  ON_FOUNTAIN
+  ON_FOUNTAIN,
+  WAS_COLLECTED,
+  DRANK_FROM
 }

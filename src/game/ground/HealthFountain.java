@@ -11,7 +11,7 @@ public class HealthFountain extends Fountain {
 
    */
   public HealthFountain() {
-    super('H',new HealingWater());
+    super('H');
     this.addCapability(Status.HEALING);
   }
 

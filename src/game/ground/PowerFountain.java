@@ -10,7 +10,7 @@ public class PowerFountain extends Fountain {
 
    */
   public PowerFountain() {
-    super('A', new PowerWater());
+    super('A');
     this.addCapability(Status.POWERING);
   }
 

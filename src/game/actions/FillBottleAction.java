@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
-import game.ground.PowerFountain;
 import game.items.Bottle;
 import game.items.HealingWater;
 import game.items.PowerWater;
@@ -21,6 +20,7 @@ public class FillBottleAction extends Action {
         }else if (map.locationOf(actor).getGround().hasCapability(Status.POWERING)){
             Bottle.getInstance().fillBottle(new PowerWater());
         }
+        map.locationOf(actor).getGround().addCapability(Status.WAS_COLLECTED);
         return actor + " has filled the bottle with water from the fountain! ";
     }
 
