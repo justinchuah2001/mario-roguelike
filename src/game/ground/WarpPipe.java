@@ -29,10 +29,10 @@ public class WarpPipe extends Ground implements Jumpable{
 
     @Override
     public void tick(Location location) {
-        turnsActive++;
-        if (turnsActive >= 1 && !piranhaPlantSpawned && !location.containsAnActor()){
+      this.turnsActive++;
+        if (this.turnsActive >= 1 && !this.piranhaPlantSpawned && !location.containsAnActor()){
             location.addActor(new PiranhaPlant());
-            piranhaPlantSpawned = true; //on reset, reset the boolean to false so plants can respawn
+          this.piranhaPlantSpawned = true; //on reset, reset the boolean to false so plants can respawn
         }
     }
 

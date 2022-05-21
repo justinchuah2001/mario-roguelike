@@ -18,17 +18,17 @@ public class FireAttackAction extends Action {
   @Override
   public String execute(Actor actor, GameMap map) {
     if (actor.hasCapability(Status.SHOOTING_FIRE)) {
-      map.locationOf(target).addItem(new Fire());
+      map.locationOf(this.target).addItem(new Fire());
       if (actor.hasCapability(Status.INVINCIBLE)){
-        map.removeActor(target);
+        map.removeActor(this.target);
       }
-      return actor + " sets fire on " + target;
+      return actor + " sets fire on " + this.target;
     }
     return "Mario cant shoot fire! .....yet";
   }
 
   @Override
   public String menuDescription(Actor actor) {
-    return actor + " set fire to " + target + " at " + direction;
+    return actor + " set fire to " + this.target + " at " + this.direction;
   }
 }

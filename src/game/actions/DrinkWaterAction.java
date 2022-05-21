@@ -23,21 +23,21 @@ public class DrinkWaterAction extends Action {
         if (actor.hasCapability(Status.HAS_BOTTLE)) {
             ArrayList<Water> bottleContent = Bottle.getInstance().getBottleContent();
             if (!bottleContent.isEmpty()) {
-                water = bottleContent.get(bottleContent.size() - 1);
-                water.waterEffect(actor);
+                this.water = bottleContent.get(bottleContent.size() - 1);
+                this.water.waterEffect(actor);
                 bottleContent.remove(bottleContent.size() - 1);
             }
         }else if (!actor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             if(map.locationOf(actor).getGround().hasCapability(Status.HEALING)){
-                water = new HealingWater();
+                this.water = new HealingWater();
 
             }else if (map.locationOf(actor).getGround().hasCapability(Status.POWERING)){
-                water = new PowerWater();
+                this.water = new PowerWater();
             }
-            water.waterEffect(actor);
+            this.water.waterEffect(actor);
             map.locationOf(actor).getGround().addCapability(Status.DRANK_FROM);
         }
-        return actor + " drank " + water;
+        return actor + " drank " + this.water;
     }
 
     @Override

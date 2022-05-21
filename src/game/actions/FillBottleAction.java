@@ -28,19 +28,19 @@ public class FillBottleAction extends Action {
             Bottle.getInstance().fillBottle(new PowerWater());
         }
         map.locationOf(actor).getGround().addCapability(Status.WAS_COLLECTED);
-        return actor + " has filled the bottle with " + waterType;
+        return actor + " has filled the bottle with " + this.waterType;
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " fill bottle with " + waterType + " ("+ remainingWater + "/10) ";
+        return actor + " fill bottle with " + this.waterType + " ("+ this.remainingWater + "/10) ";
     }
 
     public void getWaterType(){
-        if (location.getGround().hasCapability(Status.HEALING)){
-            waterType = new HealingWater();
-        } else if (location.getGround().hasCapability(Status.POWERING)){
-            waterType = new PowerWater();
+        if (this.location.getGround().hasCapability(Status.HEALING)){
+            this.waterType = new HealingWater();
+        } else if (this.location.getGround().hasCapability(Status.POWERING)){
+            this.waterType = new PowerWater();
         }
     }
 }

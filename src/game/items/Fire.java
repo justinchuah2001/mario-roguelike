@@ -22,8 +22,8 @@ public class Fire extends Item {
         currentLocation.map().removeActor(currentLocation.getActor());
       }
     }
-    duration -= 1;
-    if (duration == 0) {
+    this.duration -= 1;
+    if (this.duration == 0) {
       currentLocation.removeItem(this);
     }
   }
