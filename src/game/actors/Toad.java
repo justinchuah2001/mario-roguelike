@@ -5,10 +5,10 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Monologue;
 import game.Status;
+import game.actions.GetBottleFromToadAction;
 import game.items.Wrench;
 import game.actions.BuyItemAction;
 import game.actions.TalkToToadAction;
@@ -64,6 +64,9 @@ public class Toad extends Actor {
       if (!otherActor.hasCapability(Status.HAS_WRENCH)) {
         actions.add(BuyItemAction.getInstance(new Wrench()));
       }
+    }
+    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && !otherActor.hasCapability(Status.HAS_BOTTLE)){
+      actions.add(new GetBottleFromToadAction());
     }
     return actions;
   }
