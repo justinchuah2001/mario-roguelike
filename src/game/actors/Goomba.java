@@ -20,6 +20,9 @@ import java.util.Random;
  * @version 1.0
  */
 public class Goomba extends Enemy {
+  /**
+   * Sentences said by Goomba.
+   */
   private final static String[] sentences = {"Rah, rah-ah-ah-ah!",
           "Ugha ugha... (Never gonna run around and desert you...)",
           "Roma, roma-ma!"};

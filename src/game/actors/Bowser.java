@@ -13,6 +13,9 @@ import game.items.Key;
 import game.reset.Resettable;
 
 public class Bowser extends Enemy implements Resettable {
+  /**
+   * Sentences said by Bowser.
+   */
   private final static String[] sentences = {"What was that sound? Oh, just a fire.",
           "Princess Peach! You are formally invited... to the creation of my new kingdom!",
           "Never gonna let you down!",
