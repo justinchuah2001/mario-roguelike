@@ -3,11 +3,17 @@ package game.items;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 
+/**
+ * A patch of fire on the ground, probably shouldn't touch this either.
+ *
+ * @author Caelan Kao
+ * @version 1.1
+ */
 public class Fire extends Item {
   private int duration = 3;
 
   /***
-   * Constructor.
+   * Constructor for a fire item.
    */
   public Fire() {
     super("Fire", 'v', false);

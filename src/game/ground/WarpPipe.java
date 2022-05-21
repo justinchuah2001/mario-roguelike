@@ -11,6 +11,12 @@ import game.actions.WarpAction;
 import game.actors.PiranhaPlant;
 import game.actors.Warpable;
 
+/**
+ * A Warp Pipe, used to travel between areas, home to Piranha Plants.
+ *
+ * @author Caelan Kao
+ * @version 1.1
+ */
 public class WarpPipe extends Ground implements Jumpable{
     private int turnsActive = 0;
     private boolean piranhaPlantSpawned = false;
@@ -19,14 +25,21 @@ public class WarpPipe extends Ground implements Jumpable{
      */
     public WarpPipe() {
         super('C');
-        this.addCapability(Status.WARP_POINT);
 
   }
 
-  public String toString() {
+    /**
+     * Overriding the toString class
+     * @return name of the Ground
+     */
+    public String toString() {
     return "Warp Pipe";
   }
 
+    /**
+     * Spawns a Piranha Plant on turn 2, and immediately whenever the game is reset
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
       this.turnsActive++;

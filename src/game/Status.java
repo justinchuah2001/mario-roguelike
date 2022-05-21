@@ -13,12 +13,11 @@ public enum Status {
   TALK_TO_TOAD,     // use this status to show that the Player can talk to Toad
   PRE_DORMANT,      // use this status to show that the Koopa is able to enter dormant state(is conscious).
   INVINCIBLE,       // use this status to show that the Player is now under the effects of PowerStar
-  RESET,         // use this status to show that the Item is resettable
+  RESET,            // use this status to show that the Item is resettable
   HAS_KEY,          // use this status to show that the Player now wields the Key to save the Princess
   FLYING,           // use this status to show that the actor is capable of flying across certain types of ground
   FINAL_BOSS,       // use this status to show that Bowser is the Final boss of the game
-  SHOOTING_FIRE,    // actor's attack spawns fire
-  WARP_POINT,
+  SHOOTING_FIRE,    // use this status to show that the actor's attack spawns fire
   POWER_UP,         // use this status to show that the actor is under the effects of Power Water
   HAS_BOTTLE,       // use this status to show that the actor has the bottle in the inventory
   HEALING,          // use this status to show that the ground is Healing Fountain
