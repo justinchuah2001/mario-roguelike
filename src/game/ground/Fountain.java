@@ -27,7 +27,7 @@ public abstract class Fountain extends Ground {
   @Override
   public ActionList allowableActions(Actor actor, Location location, String direction) {
     ActionList actions = new ActionList();
-    if (actor.hasCapability(Status.HOSTILE_TO_ENEMY) &&  (location.containsAnActor()) &&(!this.hasCapability(Status.IS_DEPLETED))) {
+    if (actor.hasCapability(Status.HAS_BOTTLE) &&  (location.containsAnActor()) &&(!this.hasCapability(Status.IS_DEPLETED))) {
       actions.add(new FillBottleAction(location,this.availableWater));
     }
     return actions;

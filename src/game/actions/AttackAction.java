@@ -17,7 +17,7 @@ import game.reset.Resettable;
  * Special Action for attacking other Actors.
  *
  * @author Justin Chuah
- * @version 1.0
+ * @version 1.1
  */
 public class AttackAction extends Action {
 
@@ -64,7 +64,7 @@ public class AttackAction extends Action {
     }
 
     int damage;
-    if (actor.hasCapability(Status.FINAL_BOSS)) {
+    if (actor.hasCapability(Status.FINAL_BOSS)) { // If actor is Bowser, sets fire on floor of target
       map.locationOf(target).addItem(new Fire());
     }
 
