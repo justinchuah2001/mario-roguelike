@@ -9,7 +9,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.*;
 import game.actions.BreakShellAction;
-import game.actions.DrinkWaterAction;
 import game.behaviours.Behaviour;
 import game.behaviours.DrinkBehaviour;
 import game.behaviours.WanderBehaviour;
@@ -17,10 +16,10 @@ import game.ground.Buffable;
 import game.items.SuperMushroom;
 
 /**
- * A little turtle who is hostile to the player when in range.
+ * Basic turtle characteristics, hostile to the player when in range.
  *
  * @author Justin Chuah
- * @version 1.0
+ * @version 1.1
  */
 public abstract class Koopa extends Enemy implements Buffable {
   private final static String[] sentences = {"Never gonna make you cry!",
@@ -78,7 +77,7 @@ public abstract class Koopa extends Enemy implements Buffable {
    */
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-    if (this.hasCapability(Status.POWER_UP)){
+    if (this.hasCapability(Status.POWER_UP)){ // If under effects of power water, increase buff counter.
       increaseCounter();
     }
     //If user chooses to reset game, remove from map
@@ -93,7 +92,7 @@ public abstract class Koopa extends Enemy implements Buffable {
       for (Behaviour Behaviour : behaviours.values()) {
         Action action = Behaviour.getAction(this, map);
         if (action != null){
-          if (Behaviour.equals(this.behaviours.get(10))){
+          if (Behaviour.equals(this.behaviours.get(10))){ // Can't drink twice in a row!
             this.behaviours.remove(9);
             this.behaviours.put(9, new DrinkBehaviour());
           }else if (Behaviour.equals(this.behaviours.get(9))){
@@ -108,9 +107,14 @@ public abstract class Koopa extends Enemy implements Buffable {
     return new DoNothingAction();
   }
 
+  /**
+   * Weapon of choice for Koopa, it can get stronger through buffs!
+   * @return The weapon damage of koopa, affected by buffs!
+   */
   @Override
   protected IntrinsicWeapon getIntrinsicWeapon() {
     int baseDamage = 30;
     return new IntrinsicWeapon(baseDamage + getAttackIncrease(),"punches");
   }
+
 }

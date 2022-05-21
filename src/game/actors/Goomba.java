@@ -18,7 +18,7 @@ import java.util.Random;
  * A little fungus guy who is hostile to the player when in range.
  *
  * @author Justin Chuah
- * @version 1.0
+ * @version 1.1
  */
 public class Goomba extends Enemy {
   /**
@@ -51,8 +51,8 @@ public class Goomba extends Enemy {
   }
 
   /**
-   * Method for which the Goomba attacks another actor
-   *
+   * Method for which the Goomba attacks another actor.
+   * Takes into account if it comes under the effects of power water!
    * @return damage value of his attacks and the key phrase for it
    */
   @Override
@@ -79,7 +79,7 @@ public class Goomba extends Enemy {
     //Return the action for this actor at end of the turn
     for (game.behaviours.Behaviour Behaviour : behaviours.values()) {
       Action action = Behaviour.getAction(this, map);
-      if (action != null){
+      if (action != null){ // If it drinks this turn, it cannot drink again next turn!
         if (Behaviour.equals(this.behaviours.get(10))){
           this.behaviours.remove(9);
           this.behaviours.put(9, new DrinkBehaviour());

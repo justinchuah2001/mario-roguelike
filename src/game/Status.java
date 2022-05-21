@@ -14,17 +14,17 @@ public enum Status {
   PRE_DORMANT,      // use this status to show that the Koopa is able to enter dormant state(is conscious).
   INVINCIBLE,       // use this status to show that the Player is now under the effects of PowerStar
   RESET,         // use this status to show that the Item is resettable
-  HAS_KEY,
-  FLYING,
-  FINAL_BOSS,
+  HAS_KEY,          // use this status to show that the Player now wields the Key to save the Princess
+  FLYING,           // use this status to show that the actor is capable of flying across certain types of ground
+  FINAL_BOSS,       // use this status to show that Bowser is the Final boss of the game
   SHOOTING_FIRE,    // actor's attack spawns fire
   WARP_POINT,
-  POWER_UP,
-  HAS_BOTTLE,
-  HEALING,
-  POWERING,
-  IS_DEPLETED,
-  ON_FOUNTAIN,
-  WAS_COLLECTED,
-  DRANK_FROM
+  POWER_UP,         // use this status to show that the actor is under the effects of Power Water
+  HAS_BOTTLE,       // use this status to show that the actor has the bottle in the inventory
+  HEALING,          // use this status to show that the ground is Healing Fountain
+  POWERING,         // use this status to show that the ground is Power Fountain
+  IS_DEPLETED,      // use this status to show that the fountain's water has been depleted
+  ON_FOUNTAIN,      // use this status to show that the actor is currently on a fountain
+  WAS_COLLECTED,    // use this status to show that the fountain's was collected by the player using a bottle
+  DRANK_FROM        // use this status to show that an actor aside from Player has drank the fountain's water
 }

@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Class representing the Player.
  *
  * @author Justin Chuah, Chan Jia Zheng
- * @version 1.0
+ * @version 1.1
  */
 public class Player extends Actor implements Resettable, Warpable, Buffable {
   /**
@@ -38,11 +38,14 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
    */
   private int wallet = 0;
 
+  /**
+   * Counter to track the number of times the player has been buffed by the effects of power water.
+   */
   private int powerBuffCounter;
-
-  private final int baseDamage = 5;
-
-  private HashMap<String, GameMap> worldList;
+  /**
+   * List of worlds.
+   */
+  private final HashMap<String, GameMap> worldList;
 
   private ConcurrentHashMap<GameMap, Location> previousWarpPoints = new ConcurrentHashMap<>();
 
@@ -81,10 +84,11 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
    */
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+    // If player has bottle, and bottle is not empty, let the player drink from the bottle
     if (!Bottle.getInstance().getBottleContent().isEmpty()&& this.hasCapability(Status.HAS_BOTTLE)){
       actions.add(new DrinkWaterAction());
     }
-    if (this.hasCapability(Status.POWER_UP)){
+    if (this.hasCapability(Status.POWER_UP)){ //Signifies that the player is under the effects of Power Water, increases the counter by 1
       increaseCounter();
     }
     // Handle multi-turn Actions
@@ -217,19 +221,32 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
     this.previousWarpPoints = updatedWarpPoints;
   }
 
+  /**
+   * Gets the number of times the player has come under the effects of Power Water.
+   * @return Number of times the player has come under the effects of Power Water.
+   */
   @Override
   public int getCounter() {
     return powerBuffCounter;
   }
 
+  /**
+   * Increase the number of times the player has come under the effects of Power Water by 1.
+   */
   @Override
-  public int increaseCounter() {
-    this.removeCapability(Status.POWER_UP);
-    return powerBuffCounter+=1;
+  public void increaseCounter() {
+    this.removeCapability(Status.POWER_UP); // Effect fades after buffing!
+    powerBuffCounter += 1;
   }
 
+  /**
+   * The way of choice that the player makes when attacking other enemies, if he does not have a weapon.
+   * The attack damage can be buffed through effects of power water!¬
+   * @return Weapon that is used by Player to damage other enemies.
+   */
   @Override
   protected IntrinsicWeapon getIntrinsicWeapon() {
+    int baseDamage = 5;
     return new IntrinsicWeapon(baseDamage + getAttackIncrease(),"punches");
   }
 }

@@ -1,13 +1,14 @@
 package game.ground;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import game.Status;
-import game.items.HealingWater;
 
+import game.Status;
+
+/**
+ * A fountain that heals the actor who drinks from it
+ */
 public class HealthFountain extends Fountain {
   /**
    * Constructor.
-   *
 
    */
   public HealthFountain() {

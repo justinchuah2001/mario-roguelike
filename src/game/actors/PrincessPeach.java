@@ -10,6 +10,9 @@ import game.Monologue;
 import game.Status;
 import game.actions.SavePrincessAction;
 
+/**
+ * The princess who was trapped and is now being kidnapped by Bowser. Save her! .... or not.
+ */
 public class PrincessPeach extends Actor {
   /**
    * Monologue of PrincessPeach.
@@ -30,16 +33,31 @@ public class PrincessPeach extends Actor {
     this.monologue = new Monologue(this, sentences);
   }
 
+  /**
+   * Actions that can be taken on by the player to this actor
+   * @param otherActor the Actor that might be performing attack
+   * @param direction  String representing the direction of the other Actor
+   * @param map        current GameMap
+   * @return Possible actions that can be acted upon this actor.
+   */
   @Override
   public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
     ActionList actions = new ActionList();
-    if (otherActor.hasCapability(Status.HAS_KEY)) {
+    if (otherActor.hasCapability(Status.HAS_KEY)) { // If player gets the key from Bowser, ends the game!
       actions.add(new SavePrincessAction(this));
 
     }
     return actions;
   }
 
+  /**
+   * Determine what action to take for the turn
+   * @param actions    collection of possible Actions for this Actor
+   * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+   * @param map        the map containing the Actor
+   * @param display    the I/O object to which messages may be written
+   * @return Princess can't do anything as she is trapped, so does nothing!
+   */
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
     this.monologue.show(display);

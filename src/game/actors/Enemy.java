@@ -17,7 +17,7 @@ import java.util.Map;
  * An abstract class that contains generic hostile character traits
  *
  * @author Justin Chuah, CaelanKao , Chan Jia Zheng
- * @version 1.0
+ * @version 1.1
  * @see game.actors.Goomba
  * @see game.actors.Koopa
  */
@@ -26,7 +26,13 @@ public abstract class Enemy extends Actor implements Resettable, Buffable {
    * A hash map that is used to store the possible behaviours for characters of this  class
    */
   protected final Map<Integer, Behaviour> behaviours = new HashMap<>();
+  /**
+   * Stuff that enemies says
+   */
   protected Monologue monologue;
+  /**
+   * To track how many times this character's base attack was increased
+   */
   private  int powerBuffCounter ;
 
   /**
@@ -58,13 +64,13 @@ public abstract class Enemy extends Actor implements Resettable, Buffable {
     ActionList actions = new ActionList();
     AttackAction attackAction = new AttackAction(this, direction);
     FireAttackAction fireAttackAction = new FireAttackAction(this,direction);
-    boolean inRange = false;
+    boolean inRange = false; //Updates the behaviour of the enemies when in ranage of player.
 
     // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
     if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)&& !otherActor.hasCapability(Status.SHOOTING_FIRE)) {
       actions.add(attackAction);
       inRange = true;
-    }
+    }// If other actor, in this case player is under Fire Flower's effects, allows him to set fire to this actor!
     else if (otherActor.hasCapability(Status.SHOOTING_FIRE) && otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
         actions.add(fireAttackAction);
         inRange = true;
@@ -87,15 +93,22 @@ public abstract class Enemy extends Actor implements Resettable, Buffable {
     this.addCapability(Status.RESET);
   }
 
+  /**
+   * Gets the number of times a character was buffed.
+   * @return Number of times a character was buffed.
+   */
   @Override
   public int getCounter() {
     return powerBuffCounter;
   }
 
+  /**
+   * Increase the buff counter by 1 if under the effects of power water.
+   */
   @Override
-  public int increaseCounter() {
+  public void increaseCounter() {
     this.removeCapability(Status.POWER_UP);
-    return powerBuffCounter+=1;
+    powerBuffCounter += 1;
   }
 
 }
