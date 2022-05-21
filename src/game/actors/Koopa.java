@@ -12,7 +12,6 @@ import game.actions.BreakShellAction;
 import game.behaviours.Behaviour;
 import game.behaviours.DrinkBehaviour;
 import game.behaviours.WanderBehaviour;
-import game.ground.Buffable;
 import game.items.SuperMushroom;
 
 /**

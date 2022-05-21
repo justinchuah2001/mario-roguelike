@@ -6,9 +6,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 import game.items.Bottle;
-import game.items.HealingWater;
-import game.items.PowerWater;
-import game.items.Water;
+import game.water.HealingWater;
+import game.water.PowerWater;
+import game.water.Water;
 
 /**
  * This action allows to fill the bottle with water from the fountain

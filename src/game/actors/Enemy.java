@@ -7,7 +7,6 @@ import game.*;
 import game.actions.AttackAction;
 import game.actions.FireAttackAction;
 import game.behaviours.*;
-import game.ground.Buffable;
 import game.reset.Resettable;
 
 import java.util.HashMap;

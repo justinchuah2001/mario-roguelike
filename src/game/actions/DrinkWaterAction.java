@@ -5,9 +5,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
 import game.items.Bottle;
-import game.items.HealingWater;
-import game.items.PowerWater;
-import game.items.Water;
+import game.water.HealingWater;
+import game.water.PowerWater;
+import game.water.Water;
 import java.util.ArrayList;
 
 /**

@@ -1,4 +1,4 @@
-package game.ground;
+package game.actors;
 
 /**
  * Buffable interface os applied on actors that can come under the effects that increases their damage.

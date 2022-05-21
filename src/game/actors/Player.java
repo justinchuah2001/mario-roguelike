@@ -9,7 +9,6 @@ import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.DrinkWaterAction;
-import game.ground.Buffable;
 import game.items.Bottle;
 import game.reset.Resettable;
 import game.Status;

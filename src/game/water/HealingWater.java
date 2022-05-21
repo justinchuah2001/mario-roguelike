@@ -1,4 +1,4 @@
-package game.items;
+package game.water;
 
 import edu.monash.fit2099.engine.actors.Actor;
 
