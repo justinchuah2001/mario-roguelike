@@ -54,7 +54,12 @@ public class PiranhaPlant extends Enemy implements Resettable {
 
     }
     //behaviour that allows this actor to attack the other actor as a possible choice of action
+    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
     this.behaviours.put(1, new AttackBehaviour(otherActor, direction));
+    } else{
+      this.behaviours.remove(1);
+    }
+
     return actions;
   }
 
