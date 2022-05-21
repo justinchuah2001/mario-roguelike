@@ -59,7 +59,6 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
     this.addCapability(Status.HOSTILE_TO_ENEMY);
     this.addCapability(Status.BUY_FROM_TOAD);
     this.addCapability(Status.TALK_TO_TOAD);
-    this.addItemToInventory(new Bottle());
     this.registerInstance();
     this.worldList = worldList;
     powerBuffCounter = 0;
