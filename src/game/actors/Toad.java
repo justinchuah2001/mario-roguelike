@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Monologue;
-import game.Status;
+import game.Status.PermanentStatus;
 import game.actions.GetBottleFromToadAction;
 import game.items.Wrench;
 import game.actions.BuyItemAction;
@@ -55,17 +55,17 @@ public class Toad extends Actor {
   public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
     ActionList actions = new ActionList();
 
-    if (otherActor.hasCapability(Status.TALK_TO_TOAD)) {           // it can be talked to only by the TALK_TO_TOAD actor
+    if (otherActor.hasCapability(PermanentStatus.TALK_TO_TOAD)) {           // it can be talked to only by the TALK_TO_TOAD actor
       actions.add(new TalkToToadAction(otherActor));
     }
-    if (otherActor.hasCapability(Status.BUY_FROM_TOAD)) {   // only TALK_TO_TOAD actor can buy from the Toad
+    if (otherActor.hasCapability(PermanentStatus.BUY_FROM_TOAD)) {   // only TALK_TO_TOAD actor can buy from the Toad
       actions.add(BuyItemAction.getInstance(new SuperMushroom()));
       actions.add(BuyItemAction.getInstance(new PowerStar()));
-      if (!otherActor.hasCapability(Status.HAS_WRENCH)) {
+      if (!otherActor.hasCapability(PermanentStatus.HAS_WRENCH)) {
         actions.add(BuyItemAction.getInstance(new Wrench()));
       }
     }
-    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && !otherActor.hasCapability(Status.HAS_BOTTLE)) {
+    if (otherActor.hasCapability(PermanentStatus.HOSTILE_TO_ENEMY) && !otherActor.hasCapability(PermanentStatus.HAS_BOTTLE)) {
       actions.add(new GetBottleFromToadAction());
     }
     return actions;

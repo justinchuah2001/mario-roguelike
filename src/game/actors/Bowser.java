@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Monologue;
-import game.Status;
+import game.Status.PermanentStatus;
 import game.items.Key;
 import game.reset.Resettable;
 
@@ -37,7 +37,7 @@ public class Bowser extends Enemy implements Resettable {
     this.behaviours.remove(10); // Removes the capability of wandering
     this.addItemToInventory(new Key()); // Key that is required to end the game
     this.registerInstance();
-    this.addCapability(Status.FINAL_BOSS);
+    this.addCapability(PermanentStatus.FINAL_BOSS);
   }
 
   /**
@@ -62,7 +62,7 @@ public class Bowser extends Enemy implements Resettable {
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
     this.monologue.show(display);
-    if (this.hasCapability(Status.RESET)) {
+    if (this.hasCapability(PermanentStatus.RESET)) {
       this.increaseMaxHp(0);
     }
     for (game.behaviours.Behaviour Behaviour : this.behaviours.values()) {
@@ -78,6 +78,6 @@ public class Bowser extends Enemy implements Resettable {
    */
   @Override
   public void resetInstance() {
-    this.addCapability(Status.RESET);
+    this.addCapability(PermanentStatus.RESET);
   }
 }

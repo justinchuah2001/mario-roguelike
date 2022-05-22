@@ -4,7 +4,8 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
+import game.Status.PermanentStatus;
+import game.Status.TempStatus;
 import game.items.Bottle;
 import game.water.HealingWater;
 import game.water.PowerWater;
@@ -52,12 +53,12 @@ public class FillBottleAction extends Action {
    */
   @Override
   public String execute(Actor actor, GameMap map) {
-    if (map.locationOf(actor).getGround().hasCapability(Status.HEALING)) { // If fountain is healing fountain, store healing water
+    if (map.locationOf(actor).getGround().hasCapability(PermanentStatus.HEALING)) { // If fountain is healing fountain, store healing water
       Bottle.getInstance().fillBottle(new HealingWater());
-    } else if (map.locationOf(actor).getGround().hasCapability(Status.POWERING)) { // If fountain is power fountain, store power water
+    } else if (map.locationOf(actor).getGround().hasCapability(PermanentStatus.POWERING)) { // If fountain is power fountain, store power water
       Bottle.getInstance().fillBottle(new PowerWater());
     }
-    map.locationOf(actor).getGround().addCapability(Status.WAS_COLLECTED); // Indicate that the fountain's water was collected
+    map.locationOf(actor).getGround().addCapability(TempStatus.WAS_COLLECTED); // Indicate that the fountain's water was collected
     return actor + " has filled the bottle with " + waterType;
   }
 
@@ -76,9 +77,9 @@ public class FillBottleAction extends Action {
    * Gets the type of water of the fountain.
    */
   public void getWaterType() {
-    if (location.getGround().hasCapability(Status.HEALING)) {
+    if (location.getGround().hasCapability(PermanentStatus.HEALING)) {
       waterType = new HealingWater();
-    } else if (location.getGround().hasCapability(Status.POWERING)) {
+    } else if (location.getGround().hasCapability(PermanentStatus.POWERING)) {
       waterType = new PowerWater();
     }
   }

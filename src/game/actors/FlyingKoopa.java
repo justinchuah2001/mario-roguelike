@@ -1,7 +1,7 @@
 package game.actors;
 
 
-import game.Status;
+import game.Status.PermanentStatus;
 
 /**
  * The same old Koopa.... except it flies now!
@@ -16,7 +16,7 @@ public class FlyingKoopa extends Koopa {
    */
   public FlyingKoopa() {
     super("Flying Koopa", 'F', 150);
-    this.addCapability(Status.FLYING);
+    this.addCapability(PermanentStatus.FLYING);
     this.monologue.addSentence("Pam pam pam!");
   }
 }

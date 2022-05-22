@@ -8,6 +8,8 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.*;
+import game.Status.PermanentStatus;
+import game.Status.TempStatus;
 import game.actions.BreakShellAction;
 import game.behaviours.Behaviour;
 import game.behaviours.DrinkBehaviour;
@@ -34,7 +36,7 @@ public abstract class Koopa extends Enemy implements Buffable {
     this.behaviours.put(10, new WanderBehaviour());
     this.behaviours.put(9, new DrinkBehaviour());
     this.addItemToInventory(new SuperMushroom());
-    this.addCapability(Status.PRE_DORMANT);
+    this.addCapability(PermanentStatus.PRE_DORMANT);
     this.monologue = new Monologue(this, sentences);
 
   }
@@ -53,10 +55,10 @@ public abstract class Koopa extends Enemy implements Buffable {
     ActionList actions = new ActionList();
     // If Koopa is currently in dormant state(in shell ) and other actor wields a wrench,
     // allow the other actor to destroy the shell which drops a mushroom at the location
-    if (this.hasCapability(Status.DORMANT) && otherActor.hasCapability(Status.HAS_WRENCH)) {
+    if (this.hasCapability(PermanentStatus.DORMANT) && otherActor.hasCapability(PermanentStatus.HAS_WRENCH)) {
       actions.add(new BreakShellAction(this, direction));
       this.behaviours.clear(); //Koopa in dormant state is not allowed to move or attack
-    } else if (this.hasCapability(Status.DORMANT)) {
+    } else if (this.hasCapability(PermanentStatus.DORMANT)) {
       actions.clear(); ////Koopa in dormant state is not allowed to move or attack
     } else {
       actions.add(super.allowableActions(otherActor, direction, map));
@@ -76,14 +78,14 @@ public abstract class Koopa extends Enemy implements Buffable {
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
     this.monologue.show(display);
-    if (this.hasCapability(Status.POWER_UP)) { // If under effects of power water, increase buff counter.
+    if (this.hasCapability(TempStatus.POWER_UP)) { // If under effects of power water, increase buff counter.
       this.increaseCounter();
     }
     //If user chooses to reset game, remove from map
-    if (this.hasCapability(Status.RESET)) {
+    if (this.hasCapability(PermanentStatus.RESET)) {
       map.removeActor(this);
-    } else if (this.hasCapability(Status.DORMANT)) { //If status of koopa is dormant, can no longer be pre-dormant
-      this.removeCapability(Status.PRE_DORMANT);
+    } else if (this.hasCapability(PermanentStatus.DORMANT)) { //If status of koopa is dormant, can no longer be pre-dormant
+      this.removeCapability(PermanentStatus.PRE_DORMANT);
       this.setDisplayChar('D');
       actions.clear(); //Dormant koopa is not allowed to move or attack
     } else {

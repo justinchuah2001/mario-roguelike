@@ -8,11 +8,11 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Monologue;
-import game.Status;
+import game.Status.PermanentStatus;
+import game.Status.TempStatus;
 import game.actions.AttackAction;
 import game.actions.FireAttackAction;
 import game.behaviours.AttackBehaviour;
-import game.behaviours.FollowBehaviour;
 import game.reset.Resettable;
 
 /**
@@ -66,15 +66,15 @@ public class PiranhaPlant extends Enemy implements Resettable {
     FireAttackAction fireAttackAction = new FireAttackAction(this, direction);
 
     // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && !otherActor.hasCapability(Status.SHOOTING_FIRE)) {
+    if (otherActor.hasCapability(PermanentStatus.HOSTILE_TO_ENEMY) && !otherActor.hasCapability(TempStatus.SHOOTING_FIRE)) {
       actions.add(attackAction);
     } // It allows the player to set this actor on fire if he is under the efffects of Fire Flower.
-    else if (otherActor.hasCapability(Status.SHOOTING_FIRE) && otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+    else if (otherActor.hasCapability(TempStatus.SHOOTING_FIRE) && otherActor.hasCapability(PermanentStatus.HOSTILE_TO_ENEMY)) {
       actions.add(fireAttackAction);
 
     }
     //Behaviour that only allows this actor to attack the player.
-    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+    if (otherActor.hasCapability(PermanentStatus.HOSTILE_TO_ENEMY)) {
       this.behaviours.put(1, new AttackBehaviour(otherActor, direction));
     } else {
       this.behaviours.remove(1);
@@ -95,7 +95,7 @@ public class PiranhaPlant extends Enemy implements Resettable {
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
     this.monologue.show(display);
-    if (this.hasCapability(Status.RESET)) { // This actor only gets stronger after resetting the game instance.
+    if (this.hasCapability(PermanentStatus.RESET)) { // This actor only gets stronger after resetting the game instance.
       this.increaseMaxHp(50);
     }
     for (game.behaviours.Behaviour Behaviour : this.behaviours.values()) {
@@ -112,6 +112,6 @@ public class PiranhaPlant extends Enemy implements Resettable {
    */
   @Override
   public void resetInstance() {
-    this.addCapability(Status.RESET);
+    this.addCapability(PermanentStatus.RESET);
   }
 }

@@ -1,7 +1,8 @@
 package game.water;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import game.Status;
+import game.Status.PermanentStatus;
+import game.Status.TempStatus;
 
 /**
  * Water that can be found at the Power Fountain, its makes the consumer stronger!
@@ -24,6 +25,6 @@ public class PowerWater extends Water {
    */
   @Override
   public void waterEffect(Actor actor) {
-    actor.addCapability(Status.POWER_UP);
+    actor.addCapability(TempStatus.POWER_UP);
   }
 }

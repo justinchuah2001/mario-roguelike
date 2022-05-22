@@ -4,7 +4,8 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
+import game.Status.PermanentStatus;
+import game.Status.TempStatus;
 import game.ground.Jumpable;
 
 /**
@@ -41,7 +42,7 @@ public class JumpAction extends Action {
 
   @Override
   public String menuDescription(Actor actor) {
-    if (actor.hasCapability(Status.INVINCIBLE)) {
+    if (actor.hasCapability(TempStatus.INVINCIBLE)) {
       return actor + " runs through the " + this.jumpable.toString() + "(" + this.jumpableLocation.x() + ", "
               + this.jumpableLocation.y() + ") to the " + this.direction;
     }

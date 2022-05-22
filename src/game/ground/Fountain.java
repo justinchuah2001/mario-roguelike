@@ -4,7 +4,8 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
+import game.Status.PermanentStatus;
+import game.Status.TempStatus;
 import game.actions.FillBottleAction;
 
 /**
@@ -32,7 +33,7 @@ public abstract class Fountain extends Ground {
     super(displayChar);
     this.availableWater = 10;
     this.refillTimer = 5;
-    this.addCapability(Status.ON_FOUNTAIN);
+    this.addCapability(TempStatus.ON_FOUNTAIN);
   }
 
   /**
@@ -47,7 +48,7 @@ public abstract class Fountain extends Ground {
   public ActionList allowableActions(Actor actor, Location location, String direction) {
     ActionList actions = new ActionList();
     // If Player is on the fountain, has bottle and fountain is not depleted, allows player to fill bottle with water from fountain
-    if (actor.hasCapability(Status.HAS_BOTTLE) && (location.containsAnActor()) && (!this.hasCapability(Status.IS_DEPLETED))) {
+    if (actor.hasCapability(PermanentStatus.HAS_BOTTLE) && (location.containsAnActor()) && (!this.hasCapability(TempStatus.IS_DEPLETED))) {
       actions.add(new FillBottleAction(location, this.availableWater));
     }
     return actions;
@@ -60,22 +61,22 @@ public abstract class Fountain extends Ground {
    */
   @Override
   public void tick(Location location) {
-    if (this.hasCapability(Status.IS_DEPLETED) && this.refillTimer > 0) { // If depleted, refill timer decrease
+    if (this.hasCapability(TempStatus.IS_DEPLETED) && this.refillTimer > 0) { // If depleted, refill timer decrease
       this.refillTimer -= 1;
       if (this.refillTimer == 0) { //If timer is done, refresh the Fountain
-        this.removeCapability(Status.IS_DEPLETED);
+        this.removeCapability(TempStatus.IS_DEPLETED);
         refreshedFountain();
       }
-    } else if (!this.hasCapability(Status.IS_DEPLETED)) { //If fountain is not depleted.
-      if (this.hasCapability(Status.WAS_COLLECTED)) { //... then check if it was filled using bottle by the player
+    } else if (!this.hasCapability(TempStatus.IS_DEPLETED)) { //If fountain is not depleted.
+      if (this.hasCapability(TempStatus.WAS_COLLECTED)) { //... then check if it was filled using bottle by the player
         this.availableWater -= 1; //Reduce available water.
-        this.removeCapability(Status.WAS_COLLECTED);
-      } else if (this.hasCapability(Status.DRANK_FROM)) { //... then check if it was drank by other actors
+        this.removeCapability(TempStatus.WAS_COLLECTED);
+      } else if (this.hasCapability(TempStatus.DRANK_FROM)) { //... then check if it was drank by other actors
         this.availableWater -= 1; //Reduce available water
-        this.removeCapability(Status.DRANK_FROM);
+        this.removeCapability(TempStatus.DRANK_FROM);
       }
       if (this.availableWater == 0) { //If no water remains, fountain is now depleted, refill timer begins.
-        this.addCapability(Status.IS_DEPLETED);
+        this.addCapability(TempStatus.IS_DEPLETED);
       }
     }
   }

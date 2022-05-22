@@ -2,7 +2,7 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.Status;
+import game.Status.PermanentStatus;
 
 /**
  * A weapon that can be used by an actor.
@@ -38,6 +38,6 @@ public class Wrench extends WeaponItem implements Buyable {
   @Override
   public void buy(Actor actor) {
     actor.addItemToInventory(this);
-    actor.addCapability(Status.HAS_WRENCH);
+    actor.addCapability(PermanentStatus.HAS_WRENCH);
   }
 }

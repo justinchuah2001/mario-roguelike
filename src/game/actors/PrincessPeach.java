@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Monologue;
-import game.Status;
+import game.Status.PermanentStatus;
 import game.actions.SavePrincessAction;
 
 /**
@@ -44,7 +44,7 @@ public class PrincessPeach extends Actor {
   @Override
   public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
     ActionList actions = new ActionList();
-    if (otherActor.hasCapability(Status.HAS_KEY)) { // If player gets the key from Bowser, ends the game!
+    if (otherActor.hasCapability(PermanentStatus.HAS_KEY)) { // If player gets the key from Bowser, ends the game!
       actions.add(new SavePrincessAction(this));
 
     }

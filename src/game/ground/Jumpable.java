@@ -2,7 +2,8 @@ package game.ground;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
+import game.Status.PermanentStatus;
+import game.Status.TempStatus;
 import game.items.Coin;
 
 import java.util.Random;
@@ -26,14 +27,14 @@ public interface Jumpable {
    * @param actor    the actor jumping
    * @param location the location of the jumpable object
    * @return String that describes if the actor succeeds or fails in Jumping onto the object
-   * @see Status
+   * @see PermanentStatus
    */
   default String jump(Actor actor, Location location) {
 
-    if (actor.hasCapability(Status.INVINCIBLE)) {
+    if (actor.hasCapability(TempStatus.INVINCIBLE)) {
       return destroy(actor, location) + getFlavourDestroy() + "A coin appeared!";
 
-    } else if (actor.hasCapability(Status.TALL)) {
+    } else if (actor.hasCapability(TempStatus.TALL)) {
       return jumpMovement(actor, location) + " easily! " + getFlavourJump();
 
     } else if (r.nextInt(100) < getJumpSuccessRate()) {

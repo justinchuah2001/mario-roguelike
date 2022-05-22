@@ -3,7 +3,8 @@ package game.behaviours;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Status;
+import game.Status.PermanentStatus;
+import game.Status.TempStatus;
 import game.actions.DrinkWaterAction;
 
 /**
@@ -31,7 +32,7 @@ public class DrinkBehaviour implements Behaviour {
    */
   @Override
   public Action getAction(Actor actor, GameMap map) {
-    if (!map.locationOf(actor).getGround().hasCapability(Status.IS_DEPLETED) && map.locationOf(actor).getGround().hasCapability(Status.ON_FOUNTAIN)) {
+    if (!map.locationOf(actor).getGround().hasCapability(TempStatus.IS_DEPLETED) && map.locationOf(actor).getGround().hasCapability(TempStatus.ON_FOUNTAIN)) {
       return new DrinkWaterAction();
     } else {
       return null;

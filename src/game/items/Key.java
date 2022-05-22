@@ -1,7 +1,7 @@
 package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
-import game.Status;
+import game.Status.PermanentStatus;
 
 /**
  * An item that is needed to save the princess. Get it from Bowser!
@@ -15,6 +15,6 @@ public class Key extends Item {
    */
   public Key() {
     super("Key", 'k', true);
-    this.addCapability(Status.HAS_KEY);
+    this.addCapability(PermanentStatus.HAS_KEY);
   }
 }

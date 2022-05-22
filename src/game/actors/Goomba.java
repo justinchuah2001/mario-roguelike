@@ -9,7 +9,8 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Monologue;
-import game.Status;
+import game.Status.PermanentStatus;
+import game.Status.TempStatus;
 import game.behaviours.DrinkBehaviour;
 
 import java.util.Random;
@@ -70,11 +71,11 @@ public class Goomba extends Enemy {
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
     // If the 10% chance for suicide occurs or reset is inputted by user, remove from map
-    if (suicide() || this.hasCapability(Status.RESET)) {
+    if (suicide() || this.hasCapability(PermanentStatus.RESET)) {
       map.removeActor(this);
       return new DoNothingAction();
     }
-    if (this.hasCapability(Status.POWER_UP)) {
+    if (this.hasCapability(TempStatus.POWER_UP)) {
       increaseCounter();
     }
     //Return the action for this actor at end of the turn

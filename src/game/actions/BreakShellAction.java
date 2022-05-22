@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Status;
+import game.Status.PermanentStatus;
 
 /**
  * This action allows the Player to destroy a Koopa Shell(Dormant state koopa)
@@ -28,7 +28,7 @@ public class BreakShellAction extends Action {
    * Constructor
    *
    * @param target    Koopa shell that is being targeted
-   * @param direction
+   * @param direction The direction the shell is relative to the actor
    */
   public BreakShellAction(Actor target, String direction) {
     this.target = target;
@@ -46,7 +46,7 @@ public class BreakShellAction extends Action {
   public String execute(Actor actor, GameMap map) {
 
     // Check whether it is a Koopa shell
-    if (target.hasCapability(Status.DORMANT)) {
+    if (target.hasCapability(PermanentStatus.DORMANT)) {
       ActionList dropActions = new ActionList();
       // drop all items
       for (Item item : target.getInventory())

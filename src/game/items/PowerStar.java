@@ -2,7 +2,8 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
+import game.Status.PermanentStatus;
+import game.Status.TempStatus;
 import game.actors.Player;
 
 /**
@@ -48,8 +49,8 @@ public class PowerStar extends Consumables implements Buyable {
   @Override
   public void consumedEffect(Actor actor) {
     actor.heal(200);
-    actor.addCapability(Status.INVINCIBLE);
-    ((Player) actor).addTimedStatus(Status.INVINCIBLE, 10);
+    actor.addCapability(TempStatus.INVINCIBLE);
+    ((Player) actor).addTimedStatus(TempStatus.INVINCIBLE, 10);
 
   }
 

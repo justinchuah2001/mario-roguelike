@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.items.PickUpItemAction;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.PickUpCoinAction;
 import game.reset.Resettable;
-import game.Status;
+import game.Status.PermanentStatus;
 
 /**
  * A class that represents a coin, the currency for this game that allows the player to buy items.
@@ -44,7 +44,7 @@ public class Coin extends Item implements Resettable {
    */
   @Override
   public void resetInstance() {
-    this.addCapability(Status.RESET);
+    this.addCapability(PermanentStatus.RESET);
   }
 
   /**
@@ -54,7 +54,7 @@ public class Coin extends Item implements Resettable {
    */
   @Override
   public void tick(Location currentLocation) {
-    if (this.hasCapability(Status.RESET)) {
+    if (this.hasCapability(PermanentStatus.RESET)) {
       currentLocation.removeItem(this);
     }
   }

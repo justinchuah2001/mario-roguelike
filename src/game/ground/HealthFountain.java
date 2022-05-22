@@ -1,7 +1,7 @@
 package game.ground;
 
 
-import game.Status;
+import game.Status.PermanentStatus;
 
 /**
  * A fountain that heals the actor who drinks from it
@@ -12,7 +12,7 @@ public class HealthFountain extends Fountain {
    */
   public HealthFountain() {
     super('H');
-    this.addCapability(Status.HEALING);
+    this.addCapability(PermanentStatus.HEALING);
   }
 
 }

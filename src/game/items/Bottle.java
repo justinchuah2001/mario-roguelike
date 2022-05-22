@@ -1,7 +1,7 @@
 package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
-import game.Status;
+import game.Status.PermanentStatus;
 import game.water.Water;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class Bottle extends Item {
    */
   public Bottle() {
     super("Bottle", 'b', false);
-    this.addCapability(Status.HAS_BOTTLE);
+    this.addCapability(PermanentStatus.HAS_BOTTLE);
   }
 
   /**

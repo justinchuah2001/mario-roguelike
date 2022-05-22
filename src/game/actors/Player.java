@@ -8,10 +8,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Status.TempStatus;
 import game.actions.DrinkWaterAction;
 import game.items.Bottle;
 import game.reset.Resettable;
-import game.Status;
+import game.Status.PermanentStatus;
 
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,7 +27,7 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
   /**
    * List of timed statuses that are active on the player
    */
-  private ConcurrentHashMap<Status, Integer> timedStatusHashMap = new ConcurrentHashMap<>();
+  private ConcurrentHashMap<TempStatus, Integer> timedStatusHashMap = new ConcurrentHashMap<>();
 
   /**
    * Menu
@@ -60,9 +61,9 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
    */
   public Player(String name, char displayChar, int hitPoints, HashMap<String, GameMap> worldList) {
     super(name, displayChar, hitPoints);
-    this.addCapability(Status.HOSTILE_TO_ENEMY);
-    this.addCapability(Status.BUY_FROM_TOAD);
-    this.addCapability(Status.TALK_TO_TOAD);
+    this.addCapability(PermanentStatus.HOSTILE_TO_ENEMY);
+    this.addCapability(PermanentStatus.BUY_FROM_TOAD);
+    this.addCapability(PermanentStatus.TALK_TO_TOAD);
     this.registerInstance();
     this.worldList = worldList;
     this.powerBuffCounter = 0;
@@ -86,10 +87,10 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
     // If player has bottle, and bottle is not empty, let the player drink from the bottle
-    if (!Bottle.getInstance().getBottleContent().isEmpty() && this.hasCapability(Status.HAS_BOTTLE)) {
+    if (!Bottle.getInstance().getBottleContent().isEmpty() && this.hasCapability(PermanentStatus.HAS_BOTTLE)) {
       actions.add(new DrinkWaterAction());
     }
-    if (this.hasCapability(Status.POWER_UP)) { //Signifies that the player is under the effects of Power Water, increases the counter by 1
+    if (this.hasCapability(TempStatus.POWER_UP)) { //Signifies that the player is under the effects of Power Water, increases the counter by 1
       increaseCounter();
     }
     // Handle multi-turn Actions
@@ -113,7 +114,7 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
    */
   @Override
   public char getDisplayChar() {
-    return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()) : super.getDisplayChar();
+    return this.hasCapability(TempStatus.TALL) ? Character.toUpperCase(super.getDisplayChar()) : super.getDisplayChar();
   }
 
   /**
@@ -122,9 +123,9 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
   @Override
   public void resetInstance() {
     this.heal(this.getMaxHp());
-    this.removeCapability(Status.TALL);
-    this.removeCapability(Status.INVINCIBLE);
-    this.removeCapability(Status.SHOOTING_FIRE);
+    this.removeCapability(TempStatus.TALL);
+    this.removeCapability(TempStatus.INVINCIBLE);
+    this.removeCapability(TempStatus.SHOOTING_FIRE);
   }
 
   /**
@@ -161,7 +162,7 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
    * @param display the display for the game
    */
   public void countdownStatus(Display display) {
-    for (Status i : this.timedStatusHashMap.keySet()) {
+    for (TempStatus i : this.timedStatusHashMap.keySet()) {
       int temp = this.timedStatusHashMap.get(i);
       temp -= 1;
       if (temp == 0) {
@@ -181,7 +182,7 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
    * @param status The active status
    * @return a string that displays the remaining duration for a timed status
    */
-  public String displayStatus(Status status) {
+  public String displayStatus(TempStatus status) {
     return this + " is " + status.name() + "! - " + timedStatusHashMap.get(status) + " turns remain";
   }
 
@@ -191,7 +192,7 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
    * @param status The status being removed
    * @return A string that informs the user that the status has worn off
    */
-  public String removeStatus(Status status) {
+  public String removeStatus(TempStatus status) {
     this.removeCapability(status);
     return this + " is no longer " + status.name().toLowerCase();
   }
@@ -202,7 +203,7 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
    * @param status the status being added
    * @param timer  the duration of the status
    */
-  public void addTimedStatus(Status status, int timer) {
+  public void addTimedStatus(TempStatus status, int timer) {
     timedStatusHashMap.put(status, timer);
 
   }
@@ -252,7 +253,7 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
    */
   @Override
   public void increaseCounter() {
-    this.removeCapability(Status.POWER_UP); // Effect fades after buffing!
+    this.removeCapability(TempStatus.POWER_UP); // Effect fades after buffing!
     powerBuffCounter += 1;
   }
 

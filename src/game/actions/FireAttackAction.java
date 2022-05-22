@@ -3,7 +3,8 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Status;
+import game.Status.PermanentStatus;
+import game.Status.TempStatus;
 import game.items.Fire;
 
 /**
@@ -44,9 +45,9 @@ public class FireAttackAction extends Action {
    */
   @Override
   public String execute(Actor actor, GameMap map) {
-    if (actor.hasCapability(Status.SHOOTING_FIRE)) { //If player under the power of Fire Flower, sets fire to the target's ground
+    if (actor.hasCapability(TempStatus.SHOOTING_FIRE)) { //If player under the power of Fire Flower, sets fire to the target's ground
       map.locationOf(target).addItem(new Fire());
-      if (actor.hasCapability(Status.INVINCIBLE)) { //If player under effect of Power Star and Fire Flower, kills target after setting fire
+      if (actor.hasCapability(TempStatus.INVINCIBLE)) { //If player under effect of Power Star and Fire Flower, kills target after setting fire
         map.removeActor(target);
       }
       return actor + " sets fire on " + target;

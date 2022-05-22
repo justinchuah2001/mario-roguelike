@@ -1,7 +1,8 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import game.Status;
+import game.Status.PermanentStatus;
+import game.Status.TempStatus;
 
 /**
  * A magical mushroom that increases the maximum health points of the consumer while also providing some bonus effects!
@@ -32,7 +33,7 @@ public class SuperMushroom extends Consumables implements Buyable {
   @Override
   public void consumedEffect(Actor actor) {
     actor.increaseMaxHp(50);
-    actor.addCapability(Status.TALL);
+    actor.addCapability(TempStatus.TALL);
   }
 
   /**

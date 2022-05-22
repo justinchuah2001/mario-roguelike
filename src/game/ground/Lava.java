@@ -3,7 +3,7 @@ package game.ground;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
+import game.Status.PermanentStatus;
 
 /**
  * Burning hot lava instead of solid ground, best not to touch it, will probably hurt. A lot.
@@ -43,6 +43,6 @@ public class Lava extends Ground {
    */
   @Override
   public boolean canActorEnter(Actor actor) {
-    return actor.hasCapability(Status.HOSTILE_TO_ENEMY);
+    return actor.hasCapability(PermanentStatus.HOSTILE_TO_ENEMY);
   }
 }

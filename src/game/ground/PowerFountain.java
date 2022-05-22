@@ -1,7 +1,7 @@
 package game.ground;
 
 
-import game.Status;
+import game.Status.PermanentStatus;
 
 /**
  * A fountain that increases the attack of actor who drinks from it.
@@ -12,7 +12,7 @@ public class PowerFountain extends Fountain {
    */
   public PowerFountain() {
     super('A');
-    this.addCapability(Status.POWERING);
+    this.addCapability(PermanentStatus.POWERING);
   }
 
 }

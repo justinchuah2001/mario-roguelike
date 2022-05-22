@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.items.FireFlower;
 import game.reset.Resettable;
-import game.Status;
+import game.Status.PermanentStatus;
 import game.actions.JumpAction;
 
 import java.util.Random;
@@ -58,7 +58,7 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
 
   @Override
   public boolean canActorEnter(Actor actor) {
-    return actor.hasCapability(Status.FLYING);
+    return actor.hasCapability(PermanentStatus.FLYING);
   }
 
   /**
@@ -69,7 +69,7 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
    */
   @Override
   public void tick(Location location) {
-    if (this.hasCapability(Status.RESET)) {
+    if (this.hasCapability(PermanentStatus.RESET)) {
       if (r.nextInt(100) < 50) {
         location.setGround(new Dirt());
       }
@@ -121,7 +121,7 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
 
   @Override
   public void resetInstance() {
-    this.addCapability(Status.RESET);
+    this.addCapability(PermanentStatus.RESET);
   }
 
   public int getAge() {

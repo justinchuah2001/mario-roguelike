@@ -8,7 +8,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.Weapon;
-import game.Status;
+import game.Status.PermanentStatus;
+import game.Status.TempStatus;
 import game.items.Fire;
 import game.reset.ResetManager;
 import game.reset.Resettable;
@@ -64,15 +65,15 @@ public class AttackAction extends Action {
     }
 
     int damage;
-    if (actor.hasCapability(Status.FINAL_BOSS)) { // If actor is Bowser, sets fire on floor of target
+    if (actor.hasCapability(PermanentStatus.FINAL_BOSS)) { // If actor is Bowser, sets fire on floor of target
       map.locationOf(target).addItem(new Fire());
     }
 
-    if (target.hasCapability(Status.INVINCIBLE)) { //If target of attack action is invincible, deal no damage
+    if (target.hasCapability(TempStatus.INVINCIBLE)) { //If target of attack action is invincible, deal no damage
       damage = 0;
       target.hurt(damage);
 
-    } else if (actor.hasCapability(Status.INVINCIBLE)) { //If current person attack is invincible, kill enemy target instantly
+    } else if (actor.hasCapability(TempStatus.INVINCIBLE)) { //If current person attack is invincible, kill enemy target instantly
       damage = 999999;
       target.hurt(damage);
     } else {
@@ -80,8 +81,8 @@ public class AttackAction extends Action {
       target.hurt(damage);
     }
     String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
-    if (target.hasCapability(Status.TALL)) { //If actor with tall status is damaged, remove tall status
-      target.removeCapability(Status.TALL);
+    if (target.hasCapability(TempStatus.TALL)) { //If actor with tall status is damaged, remove tall status
+      target.removeCapability(TempStatus.TALL);
     }
     if (!target.isConscious()) {
       ActionList dropActions = new ActionList();
@@ -91,13 +92,13 @@ public class AttackAction extends Action {
       for (Action drop : dropActions)
         drop.execute(target, map);
       // remove actor if he does not possess PRE_DORMANT status
-      if (!target.hasCapability(Status.PRE_DORMANT)) {
+      if (!target.hasCapability(PermanentStatus.PRE_DORMANT)) {
         map.removeActor(target);
         if (target instanceof Resettable) {
           ResetManager.getInstance().cleanUp((Resettable) target);
         }
       } else {
-        target.addCapability(Status.DORMANT); //Give actor with PRE_DORMANT status DORMANT status if unconscious
+        target.addCapability(PermanentStatus.DORMANT); //Give actor with PRE_DORMANT status DORMANT status if unconscious
       }
       result += System.lineSeparator() + target + " is killed.";
     }

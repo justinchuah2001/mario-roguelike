@@ -4,6 +4,8 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.*;
+import game.Status.PermanentStatus;
+import game.Status.TempStatus;
 import game.actions.AttackAction;
 import game.actions.FireAttackAction;
 import game.behaviours.*;
@@ -66,11 +68,11 @@ public abstract class Enemy extends Actor implements Resettable, Buffable {
     boolean inRange = false; //Updates the behaviour of the enemies when in ranage of player.
 
     // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && !otherActor.hasCapability(Status.SHOOTING_FIRE)) {
+    if (otherActor.hasCapability(PermanentStatus.HOSTILE_TO_ENEMY) && !otherActor.hasCapability(TempStatus.SHOOTING_FIRE)) {
       actions.add(attackAction);
       inRange = true;
     }// If other actor, in this case player is under Fire Flower's effects, allows him to set fire to this actor!
-    else if (otherActor.hasCapability(Status.SHOOTING_FIRE) && otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+    else if (otherActor.hasCapability(TempStatus.SHOOTING_FIRE) && otherActor.hasCapability(PermanentStatus.HOSTILE_TO_ENEMY)) {
       actions.add(fireAttackAction);
       inRange = true;
     }
@@ -89,7 +91,7 @@ public abstract class Enemy extends Actor implements Resettable, Buffable {
    */
   @Override
   public void resetInstance() {
-    this.addCapability(Status.RESET);
+    this.addCapability(PermanentStatus.RESET);
   }
 
   /**
@@ -107,7 +109,7 @@ public abstract class Enemy extends Actor implements Resettable, Buffable {
    */
   @Override
   public void increaseCounter() {
-    this.removeCapability(Status.POWER_UP);
+    this.removeCapability(TempStatus.POWER_UP);
     powerBuffCounter += 1;
   }
 

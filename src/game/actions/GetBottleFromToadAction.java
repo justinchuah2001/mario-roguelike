@@ -3,7 +3,7 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Status;
+import game.Status.PermanentStatus;
 import game.items.Bottle;
 
 /**
@@ -24,7 +24,7 @@ public class GetBottleFromToadAction extends Action {
    */
   @Override
   public String execute(Actor actor, GameMap map) {
-    if (!actor.hasCapability(Status.HAS_BOTTLE)) { //If Player does not have bottle, give him the bottle.
+    if (!actor.hasCapability(PermanentStatus.HAS_BOTTLE)) { //If Player does not have bottle, give him the bottle.
       actor.addItemToInventory(new Bottle());
     }
     return actor + " gets Bottle from Toad!";
