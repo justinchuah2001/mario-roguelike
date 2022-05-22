@@ -25,7 +25,7 @@ public class GetBottleFromToadAction extends Action {
   @Override
   public String execute(Actor actor, GameMap map) {
     if (!actor.hasCapability(PermanentStatus.HAS_BOTTLE)) { //If Player does not have bottle, give him the bottle.
-      actor.addItemToInventory(new Bottle());
+      actor.addItemToInventory(Bottle.getInstance());
     }
     return actor + " gets Bottle from Toad!";
   }

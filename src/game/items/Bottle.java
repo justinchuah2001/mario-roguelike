@@ -25,9 +25,9 @@ public class Bottle extends Item {
 
   /**
    * Constructor.
-   * Adds the action that allows the actor to consume the consumable
+   * Adds the capability of showing that the actor(Player) currently holds the bottle.
    */
-  public Bottle() {
+  private Bottle() {
     super("Bottle", 'b', false);
     this.addCapability(PermanentStatus.HAS_BOTTLE);
   }
@@ -52,7 +52,7 @@ public class Bottle extends Item {
   }
 
   /**
-   * Gets the instance of bottle.
+   * Creates a bottle if bottle doesn't exist. Otherwise, retrieves the current instance of bottle
    *
    * @return instance of bottle
    */
