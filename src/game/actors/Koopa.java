@@ -88,13 +88,13 @@ public abstract class Koopa extends Enemy implements Buffable {
       actions.clear(); //Dormant koopa is not allowed to move or attack
     } else {
       ////Return the action for this actor at end of the turn
-      for (Behaviour Behaviour : behaviours.values()) {
-        Action action = Behaviour.getAction(this, map);
+      for (Behaviour behaviour : behaviours.values()) {
+        Action action = behaviour.getAction(this, map);
         if (action != null) {
-          if (Behaviour.equals(this.behaviours.get(10))) { // Can't drink twice in a row!
+          if (behaviour.equals(this.behaviours.get(10))) { // Can't drink twice in a row!
             this.behaviours.remove(9);
             this.behaviours.put(9, new DrinkBehaviour());
-          } else if (Behaviour.equals(this.behaviours.get(9))) {
+          } else if (behaviour.equals(this.behaviours.get(9))) {
             this.behaviours.remove(9);
             this.behaviours.put(11, new DrinkBehaviour());
           }
