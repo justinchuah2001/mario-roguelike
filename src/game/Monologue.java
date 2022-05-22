@@ -18,7 +18,7 @@ import java.util.Random;
  */
 public class Monologue {
   /**
-   * Will be used to generate random number that decide whether the Actor should talk in first round.
+   * Will be used to generate random number for making decisions.
    */
   private final static Random rand = new Random();
   /**
@@ -44,7 +44,6 @@ public class Monologue {
     this.sentences = new ArrayList<>(Arrays.asList(sentences));
     this.turnToTalk = rand.nextInt(2) == 1;
     this.actor = actor;
-
   }
 
   /**
