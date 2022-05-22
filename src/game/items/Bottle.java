@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 /**
  * Bottle that is obtained through interaction with Toad.
+ *
  * @author Justin Chuah
  * @version 1.0
  * @see game.actors.Toad
@@ -33,27 +34,30 @@ public class Bottle extends Item {
 
   /**
    * Method of adding water into the bottle.
+   *
    * @param water Type of water added
    */
-  public void fillBottle(Water water){
+  public void fillBottle(Water water) {
     bottleContent.add(water);
   }
 
   /**
    * Gets the entire array list of water stored in the bottle
+   *
    * @return array list of water in the bottle
    */
-  public ArrayList<Water> getBottleContent(){
+  public ArrayList<Water> getBottleContent() {
     return bottleContent;
 
   }
 
   /**
    * Gets the instance of bottle.
+   *
    * @return instance of bottle
    */
-  public static Bottle getInstance(){
-    if(instance == null){
+  public static Bottle getInstance() {
+    if (instance == null) {
       instance = new Bottle();
     }
     return instance;
@@ -61,6 +65,7 @@ public class Bottle extends Item {
 
   /**
    * Prints the content of the bottle.
+   *
    * @return Content of bottle
    */
   @Override

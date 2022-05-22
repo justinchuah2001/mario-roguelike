@@ -67,8 +67,8 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
     this.worldList = worldList;
     this.powerBuffCounter = 0;
 
-    for (GameMap map: worldList.values()){
-      Location defaultWarp = map.at(0,0);
+    for (GameMap map : worldList.values()) {
+      Location defaultWarp = map.at(0, 0);
       this.previousWarpPoints.put(map, defaultWarp);
     }
   }
@@ -86,10 +86,10 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
     // If player has bottle, and bottle is not empty, let the player drink from the bottle
-    if (!Bottle.getInstance().getBottleContent().isEmpty()&& this.hasCapability(Status.HAS_BOTTLE)){
+    if (!Bottle.getInstance().getBottleContent().isEmpty() && this.hasCapability(Status.HAS_BOTTLE)) {
       actions.add(new DrinkWaterAction());
     }
-    if (this.hasCapability(Status.POWER_UP)){ //Signifies that the player is under the effects of Power Water, increases the counter by 1
+    if (this.hasCapability(Status.POWER_UP)) { //Signifies that the player is under the effects of Power Water, increases the counter by 1
       increaseCounter();
     }
     // Handle multi-turn Actions
@@ -206,24 +206,30 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
     timedStatusHashMap.put(status, timer);
 
   }
+
   /**
    * a getter for the worldList hashmap
+   *
    * @return a HashMap containing the names and GameMaps of the game maps
    */
   @Override
   public HashMap<String, GameMap> getWorldList() {
     return worldList;
   }
+
   /**
    * a getter for the concurrentHashMap for previous warp points
+   *
    * @return a ConcurrentHashMap containing the last used location that the warper was in the respective gameMaps
    */
   @Override
   public ConcurrentHashMap<GameMap, Location> getPreviousWarpPoint() {
     return previousWarpPoints;
   }
+
   /**
    * a setter for the previous warp point ConcurrentHashMap
+   *
    * @param updatedWarpPoints the updated HashMap
    */
   @Override
@@ -233,6 +239,7 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
 
   /**
    * Gets the number of times the player has come under the effects of Power Water.
+   *
    * @return Number of times the player has come under the effects of Power Water.
    */
   @Override
@@ -252,11 +259,12 @@ public class Player extends Actor implements Resettable, Warpable, Buffable {
   /**
    * The way of choice that the player makes when attacking other enemies, if he does not have a weapon.
    * The attack damage can be buffed through effects of power water!¬
+   *
    * @return Weapon that is used by Player to damage other enemies.
    */
   @Override
   protected IntrinsicWeapon getIntrinsicWeapon() {
     int baseDamage = 5;
-    return new IntrinsicWeapon(baseDamage + getAttackIncrease(),"punches");
+    return new IntrinsicWeapon(baseDamage + getAttackIncrease(), "punches");
   }
 }

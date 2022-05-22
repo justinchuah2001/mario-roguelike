@@ -13,6 +13,7 @@ import game.reset.Resettable;
 
 /**
  * The final boss of the game. Defeat him to save the Princess!
+ *
  * @author Justin Chuah, Jia Zheng
  * @version 1.0
  */
@@ -41,6 +42,7 @@ public class Bowser extends Enemy implements Resettable {
 
   /**
    * Weapon used by Bowser, since he is already so strong he can't be buffed!
+   *
    * @return Weapon of choice of Bowser.
    */
   @Override
@@ -50,6 +52,7 @@ public class Bowser extends Enemy implements Resettable {
 
   /**
    * Figure out what to do next
+   *
    * @param actions    collection of possible Actions for this Actor
    * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
    * @param map        the map containing the Actor
@@ -59,7 +62,7 @@ public class Bowser extends Enemy implements Resettable {
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
     this.monologue.show(display);
-    if(this.hasCapability(Status.RESET)){
+    if (this.hasCapability(Status.RESET)) {
       this.increaseMaxHp(0);
     }
     for (game.behaviours.Behaviour Behaviour : this.behaviours.values()) {

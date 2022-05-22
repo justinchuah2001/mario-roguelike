@@ -40,7 +40,6 @@ public abstract class Koopa extends Enemy implements Buffable {
   }
 
 
-
   /**
    * This function returns a list of actions that other player is allowed to interact with the Koopa.
    *
@@ -77,7 +76,7 @@ public abstract class Koopa extends Enemy implements Buffable {
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
     this.monologue.show(display);
-    if (this.hasCapability(Status.POWER_UP)){ // If under effects of power water, increase buff counter.
+    if (this.hasCapability(Status.POWER_UP)) { // If under effects of power water, increase buff counter.
       this.increaseCounter();
     }
     //If user chooses to reset game, remove from map
@@ -91,11 +90,11 @@ public abstract class Koopa extends Enemy implements Buffable {
       ////Return the action for this actor at end of the turn
       for (Behaviour Behaviour : behaviours.values()) {
         Action action = Behaviour.getAction(this, map);
-        if (action != null){
-          if (Behaviour.equals(this.behaviours.get(10))){ // Can't drink twice in a row!
+        if (action != null) {
+          if (Behaviour.equals(this.behaviours.get(10))) { // Can't drink twice in a row!
             this.behaviours.remove(9);
             this.behaviours.put(9, new DrinkBehaviour());
-          }else if (Behaviour.equals(this.behaviours.get(9))){
+          } else if (Behaviour.equals(this.behaviours.get(9))) {
             this.behaviours.remove(9);
             this.behaviours.put(11, new DrinkBehaviour());
           }
@@ -108,12 +107,13 @@ public abstract class Koopa extends Enemy implements Buffable {
 
   /**
    * Weapon of choice for Koopa, it can get stronger through buffs!
+   *
    * @return The weapon damage of koopa, affected by buffs!
    */
   @Override
   protected IntrinsicWeapon getIntrinsicWeapon() {
     int baseDamage = 30;
-    return new IntrinsicWeapon(baseDamage + getAttackIncrease(),"punches");
+    return new IntrinsicWeapon(baseDamage + getAttackIncrease(), "punches");
   }
 
 }

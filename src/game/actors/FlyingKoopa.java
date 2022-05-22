@@ -5,6 +5,7 @@ import game.Status;
 
 /**
  * The same old Koopa.... except it flies now!
+ *
  * @author Justin Chuah, Jia Zheng
  * @version 1.0
  */

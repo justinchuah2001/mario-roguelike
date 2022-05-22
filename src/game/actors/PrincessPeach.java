@@ -35,6 +35,7 @@ public class PrincessPeach extends Actor {
 
   /**
    * Actions that can be taken on by the player to this actor
+   *
    * @param otherActor the Actor that might be performing attack
    * @param direction  String representing the direction of the other Actor
    * @param map        current GameMap
@@ -52,6 +53,7 @@ public class PrincessPeach extends Actor {
 
   /**
    * Determine what action to take for the turn
+   *
    * @param actions    collection of possible Actions for this Actor
    * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
    * @param map        the map containing the Actor

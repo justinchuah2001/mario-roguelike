@@ -65,7 +65,7 @@ public class Toad extends Actor {
         actions.add(BuyItemAction.getInstance(new Wrench()));
       }
     }
-    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && !otherActor.hasCapability(Status.HAS_BOTTLE)){
+    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && !otherActor.hasCapability(Status.HAS_BOTTLE)) {
       actions.add(new GetBottleFromToadAction());
     }
     return actions;

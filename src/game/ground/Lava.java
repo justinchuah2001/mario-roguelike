@@ -21,6 +21,7 @@ public class Lava extends Ground {
 
   /**
    * Burns any actor on this Lava every turn
+   *
    * @param location The location of the Ground
    */
   @Override
@@ -36,6 +37,7 @@ public class Lava extends Ground {
 
   /**
    * only allow actors with HOSTILE_TO_ENEMY to walk
+   *
    * @param actor the Actor to check
    * @return boolean if the actor can walk on this ground
    */

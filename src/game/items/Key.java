@@ -5,6 +5,7 @@ import game.Status;
 
 /**
  * An item that is needed to save the princess. Get it from Bowser!
+ *
  * @author Justin Chuah
  * @version 1.0
  */

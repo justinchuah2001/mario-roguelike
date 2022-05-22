@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
  * This action allows the player to end the game if he talks to the princess after picking up the key from bowser.
+ *
  * @author Justin Chuah
  * @version 1.0
  * @see game.actors.PrincessPeach
@@ -18,6 +19,7 @@ public class SavePrincessAction extends Action {
 
   /**
    * Saves the princess and ends the game!
+   *
    * @param target PrincessPeach
    */
   public SavePrincessAction(Actor target) {
@@ -26,8 +28,9 @@ public class SavePrincessAction extends Action {
 
   /**
    * This function lets the Player saves the Princess
+   *
    * @param actor The actor performing the action.
-   * @param map The map the actor is on.
+   * @param map   The map the actor is on.
    * @return A text that signifies the game is over.
    */
   @Override
@@ -38,6 +41,7 @@ public class SavePrincessAction extends Action {
 
   /**
    * This function returns the menu description of the action.
+   *
    * @param actor The actor performing the action.
    * @return Menu description of action
    */

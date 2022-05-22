@@ -32,7 +32,7 @@ public abstract class Enemy extends Actor implements Resettable, Buffable {
   /**
    * To track how many times this character's base attack was increased
    */
-  private  int powerBuffCounter ;
+  private int powerBuffCounter;
 
   /**
    * Constructor.
@@ -46,7 +46,7 @@ public abstract class Enemy extends Actor implements Resettable, Buffable {
     super(name, displayChar, hitPoints);
     this.behaviours.put(10, new WanderBehaviour());
     this.behaviours.put(9, new DrinkBehaviour());
-    this.powerBuffCounter =0;
+    this.powerBuffCounter = 0;
     this.registerInstance();
   }
 
@@ -62,20 +62,20 @@ public abstract class Enemy extends Actor implements Resettable, Buffable {
   public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
     ActionList actions = new ActionList();
     AttackAction attackAction = new AttackAction(this, direction);
-    FireAttackAction fireAttackAction = new FireAttackAction(this,direction);
+    FireAttackAction fireAttackAction = new FireAttackAction(this, direction);
     boolean inRange = false; //Updates the behaviour of the enemies when in ranage of player.
 
     // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)&& !otherActor.hasCapability(Status.SHOOTING_FIRE)) {
+    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && !otherActor.hasCapability(Status.SHOOTING_FIRE)) {
       actions.add(attackAction);
       inRange = true;
     }// If other actor, in this case player is under Fire Flower's effects, allows him to set fire to this actor!
     else if (otherActor.hasCapability(Status.SHOOTING_FIRE) && otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-        actions.add(fireAttackAction);
-        inRange = true;
-      }
+      actions.add(fireAttackAction);
+      inRange = true;
+    }
 
-    if (inRange){
+    if (inRange) {
       //behaviour that allows this actor to attack the other actor as a possible choice of action
       this.behaviours.put(2, new AttackBehaviour(otherActor, direction));
       //behaviour that allows this actor to follower the other actor as a possible choice of action
@@ -94,6 +94,7 @@ public abstract class Enemy extends Actor implements Resettable, Buffable {
 
   /**
    * Gets the number of times a character was buffed.
+   *
    * @return Number of times a character was buffed.
    */
   @Override

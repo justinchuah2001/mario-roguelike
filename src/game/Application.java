@@ -79,14 +79,14 @@ public class Application {
     world.addPlayer(mario, gameMap.at(42, 10));
 
     gameMap.addActor(new Toad(), gameMap.at(46, 10));
-    lavaGameMap.addActor( new Bowser(), lavaGameMap.at(63, 16));
+    lavaGameMap.addActor(new Bowser(), lavaGameMap.at(63, 16));
     lavaGameMap.addActor(new PrincessPeach(), lavaGameMap.at(64, 16));
 
     gameMap.at(42, 11).addItem(new SuperMushroom());
     gameMap.at(42, 9).addItem(new PowerStar());
     gameMap.at(43, 9).addItem(new Wrench());
     gameMap.at(43, 8).addItem(new Fire());
-    gameMap.at(42,10).addItem(new FireFlower());
+    gameMap.at(42, 10).addItem(new FireFlower());
 
     world.run();
 

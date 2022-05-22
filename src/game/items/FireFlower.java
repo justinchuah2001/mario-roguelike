@@ -21,11 +21,12 @@ public class FireFlower extends Consumables {
 
   /**
    * Grants the actor consuming the fire flower the SHOOTING_FIRE status
+   *
    * @param actor Actor consuming
    */
   @Override
   public void consumedEffect(Actor actor) {
     actor.addCapability(Status.SHOOTING_FIRE);
-    ((Player) actor).addTimedStatus(Status.SHOOTING_FIRE,20);
+    ((Player) actor).addTimedStatus(Status.SHOOTING_FIRE, 20);
   }
 }

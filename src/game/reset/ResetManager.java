@@ -82,7 +82,7 @@ public class ResetManager {
    * Remove a Resettable instance from the list
    *
    * @param resettable resettable object
-   *                   FIXME: it does nothing, you need to implement it :)
+   *                                     FIXME: it does nothing, you need to implement it :)
    */
   public void cleanUp(Resettable resettable) {
     this.resettableList.remove(resettable);

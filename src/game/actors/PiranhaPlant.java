@@ -17,6 +17,7 @@ import game.reset.Resettable;
 
 /**
  * A plant that is somehow always angry towards the Player, how does it live in the Pipe?
+ *
  * @author Justin Chuah, Jia Zheng
  * @version 1.0
  * @see game.ground.WarpPipe
@@ -42,6 +43,7 @@ public class PiranhaPlant extends Enemy implements Resettable {
 
   /**
    * Weapon of choice for a PiranhaPlant, it uses its sharp teeth!
+   *
    * @return Weapon used to damage other actors(Player).
    */
   @Override
@@ -51,6 +53,7 @@ public class PiranhaPlant extends Enemy implements Resettable {
 
   /**
    * Determine what actions can be taken onto the piranha plant.
+   *
    * @param otherActor The actor that might be performing the actions.
    * @param direction  String representing the direction of the other Actor
    * @param map        Current game map
@@ -60,20 +63,20 @@ public class PiranhaPlant extends Enemy implements Resettable {
   public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
     ActionList actions = new ActionList();
     AttackAction attackAction = new AttackAction(this, direction);
-    FireAttackAction fireAttackAction = new FireAttackAction(this,direction);
+    FireAttackAction fireAttackAction = new FireAttackAction(this, direction);
 
     // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)&& !otherActor.hasCapability(Status.SHOOTING_FIRE)) {
+    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && !otherActor.hasCapability(Status.SHOOTING_FIRE)) {
       actions.add(attackAction);
     } // It allows the player to set this actor on fire if he is under the efffects of Fire Flower.
-    else if (otherActor.hasCapability(Status.SHOOTING_FIRE) && otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+    else if (otherActor.hasCapability(Status.SHOOTING_FIRE) && otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
       actions.add(fireAttackAction);
 
     }
     //Behaviour that only allows this actor to attack the player.
-    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-    this.behaviours.put(1, new AttackBehaviour(otherActor, direction));
-    } else{
+    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+      this.behaviours.put(1, new AttackBehaviour(otherActor, direction));
+    } else {
       this.behaviours.remove(1);
     }
 
@@ -82,6 +85,7 @@ public class PiranhaPlant extends Enemy implements Resettable {
 
   /**
    * Determine what action to take.
+   *
    * @param actions    collection of possible Actions for this Actor
    * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
    * @param map        the map containing the Actor
@@ -91,14 +95,14 @@ public class PiranhaPlant extends Enemy implements Resettable {
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
     this.monologue.show(display);
-    if (this.hasCapability(Status.RESET)){ // This actor only gets stronger after resetting the game instance.
+    if (this.hasCapability(Status.RESET)) { // This actor only gets stronger after resetting the game instance.
       this.increaseMaxHp(50);
     }
     for (game.behaviours.Behaviour Behaviour : this.behaviours.values()) {
       Action action = Behaviour.getAction(this, map);
       if (action != null)
         return action;
-      }
+    }
 
     return new DoNothingAction();
   }

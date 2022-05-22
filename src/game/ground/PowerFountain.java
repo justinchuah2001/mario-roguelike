@@ -9,7 +9,6 @@ import game.Status;
 public class PowerFountain extends Fountain {
   /**
    * Constructor.
-
    */
   public PowerFountain() {
     super('A');

@@ -36,7 +36,8 @@ public class Monologue {
 
   /**
    * Constructor.
-   * @param actor Actor who will use this Monologue.
+   *
+   * @param actor     Actor who will use this Monologue.
    * @param sentences Collection of sentences that we want to add for the Actor to talk.
    */
   public Monologue(Actor actor, String[] sentences) {
@@ -48,6 +49,7 @@ public class Monologue {
 
   /**
    * This function adds a sentence to the collection of the sentences that the Actor can talk.
+   *
    * @param sentence Sentence that we want to add for the Actor to talk.
    */
   public void addSentence(String sentence) {
@@ -56,6 +58,7 @@ public class Monologue {
 
   /**
    * This function randomly prints a sentence on the Display in alternative turn.
+   *
    * @param display The Display to show the sentence.
    */
   public void show(Display display) {
