@@ -76,8 +76,9 @@ public abstract class Koopa extends Enemy implements Buffable {
    */
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+    this.monologue.show(display);
     if (this.hasCapability(Status.POWER_UP)){ // If under effects of power water, increase buff counter.
-      increaseCounter();
+      this.increaseCounter();
     }
     //If user chooses to reset game, remove from map
     if (this.hasCapability(Status.RESET)) {
@@ -102,7 +103,6 @@ public abstract class Koopa extends Enemy implements Buffable {
         }
       }
     }
-    this.monologue.show(display);
     return new DoNothingAction();
   }
 

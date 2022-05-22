@@ -90,10 +90,10 @@ public class PiranhaPlant extends Enemy implements Resettable {
    */
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+    this.monologue.show(display);
     if (this.hasCapability(Status.RESET)){ // This actor only gets stronger after resetting the game instance.
       this.increaseMaxHp(50);
     }
-    this.monologue.show(display);
     for (game.behaviours.Behaviour Behaviour : this.behaviours.values()) {
       Action action = Behaviour.getAction(this, map);
       if (action != null)

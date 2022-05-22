@@ -58,10 +58,10 @@ public class Bowser extends Enemy implements Resettable {
    */
   @Override
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+    this.monologue.show(display);
     if(this.hasCapability(Status.RESET)){
       this.increaseMaxHp(0);
     }
-    this.monologue.show(display);
     for (game.behaviours.Behaviour Behaviour : this.behaviours.values()) {
       Action action = Behaviour.getAction(this, map);
       if (action != null)
