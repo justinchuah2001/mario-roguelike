@@ -64,7 +64,7 @@ public class WarpPipe extends Ground implements Jumpable {
 
           GameMap map = warpableActor.getWorldList().get(mapName);
 
-          return new ActionList(new WarpAction(((Warpable) actor), location, location.map(),
+          return new ActionList(new WarpAction(warpableActor, location, location.map(),
                   warpableActor.getPreviousWarpPoint().get(map), mapName));
         }
     }
